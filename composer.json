@@ -1,0 +1,24 @@
+{
+    "name": "hp/p5",
+    "description": "Projet 5",
+    "authors": [
+        {
+            "name": "TiguerchaD",
+            "email": "tiguercha.pro@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "OpenFram\\": "src/lib/OpenFram/",
+            "App\\Frontend\\": "src/App/Frontend/"
+        }
+    },
+    "require": {
+        "psr/http-message": "^1.0",
+        "guzzlehttp/psr7": "^1.6",
+        "http-interop/response-sender": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.3"
+    }
+}
