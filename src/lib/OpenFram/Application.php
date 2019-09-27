@@ -23,6 +23,8 @@ abstract class Application
      */
     protected $name;
 
+    protected $currentUser;
+
     /**
      * Application constructor.
      */
@@ -53,5 +55,15 @@ abstract class Application
     public function setRequest(): void
     {
         $this->request =  ServerRequest::fromGlobals();
+    }
+
+    public function getCurrentUser()
+    {
+        return $this->currentUser;
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 }
