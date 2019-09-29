@@ -8,6 +8,7 @@ use phpDocumentor\Reflection\Types\Boolean;
 
 /**
  * Class Route
+ *
  * @package OpenFram\Routing
  */
 class Route
@@ -35,10 +36,10 @@ class Route
     }
 
     /**
-     * @param String $url
+     * @param  String $url
      * @return bool|array
      */
-    public function match(String $url)
+    public function match(string $url)
     {
         if (preg_match('`^' . $this->url . '$`', $url, $matches)) {
             return $matches;
@@ -127,6 +128,4 @@ class Route
     {
         $this->vars = $vars;
     }
-
 }
-

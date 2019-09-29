@@ -14,7 +14,7 @@ class FrontendApplication extends Application
     public function __construct()
     {
         parent::__construct();
-        $this->name = 'FrontEnd';
+        $this->name = 'Frontend';
     }
 
     /**
@@ -22,12 +22,10 @@ class FrontendApplication extends Application
      */
     public function run(): void
     {
-        echo $this->request->getUri()->getPath();
-        send($this->response->withBody(stream_for("<h1> Hello from FrontendApplication</h1>")));
-        $route = new Route('/post-([0-9]+)\.html', 'post', 'show', ['id']);
-        var_dump($route->match('/post-1.html'));
-        $router = new Router();
-        $router->addRoute($route);
-        var_dump($router->getRoute('/post-1.html'));
+        $controller = $this->getController($this->request->getUri()->getPath());
+        $controller->execute();
+        $page = $controller->getPage()->getGeneratedPage();
+        send($this->response->withBody(stream_for($page)));
+
     }
 }

@@ -13,7 +13,8 @@ class ApplicationComponent
         $this->app = $app;
     }
 
-    public function getApp(){
+    public function getApp()
+    {
         return $this->app;
     }
 

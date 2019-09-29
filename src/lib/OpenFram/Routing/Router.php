@@ -25,18 +25,16 @@ class Router
     public function getRoute(string $url)
     {
         foreach ($this->routes as $route) {
-
             if (($varsValues = $route->match($url)) !== false) {
                 if ($route->hasVars()) {
                     $varsNames = $route->getVarsNames();
                     $listVars = [];
                     foreach ($varsValues as $key => $value) {
                         if ($key !== 0) {
-                            $listVars[$varsNames[$key-1]] = $value;
+                            $listVars[$varsNames[$key - 1]] = $value;
                         }
                     }
                     $route->setVars($listVars);
-
                 }
                 return $route;
             }

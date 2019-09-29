@@ -11,7 +11,9 @@
         "psr-4": {
             "OpenFram\\": "src/lib/OpenFram/",
             "OpenFram\\Routing\\": "src/lib/OpenFram/Routing/",
-            "App\\Frontend\\": "src/App/Frontend/"
+            "App\\Frontend\\": "src/App/Frontend/",
+            "Model\\": "src/lib/Model/",
+            "Entity\\": "src/lib/Entity/"
         }
     },
     "require": {
