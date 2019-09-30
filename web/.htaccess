@@ -1,4 +1,4 @@
-RewriteBase /
+# RewriteBase /
 RewriteEngine On
 
 # Si le fichier auquel on tente d'accéder existe (si on veut accéder à une image par exemple).

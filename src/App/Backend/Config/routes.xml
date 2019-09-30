@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<routes>
+    <route url="/admin/" module="Post" action="Index" />
+    <route url="/admin/post-insert\.html" module="Post" action="Insert" />
+    <route url="/admin/post-update-([0-9]+)\.html" module="Post" action="Update" vars="id"/>
+    <route url="/admin/post-delete-([0-9]+)\.html" module="Post" action="Delete" vars="id"/>
+    <route url="/admin/post-show-([0-9]+)\.html" module="Post" action="Show" vars="id"/>
+    <route url="/admin/post-preview-([0-9]+)\.html" module="Post" action="Preview" vars="id"/>
+
+
+
+
+    <route url="/admin/logout/" module="Connexion" action="Logout" />
+    <route url="/admin/permissions/" module="Permission" action="Index" />
+
+    <route url="/admin/roles/" module="Role" action="Index" />
+    <route url="/admin/role-([0-9]+)\.html" module="Role" action="Show" vars="id"/>
+
+
+    <route url="/admin/users/" module="User" action="Index" />
+</routes>
+

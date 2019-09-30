@@ -22,10 +22,12 @@ class FrontendApplication extends Application
      */
     public function run(): void
     {
+
         $controller = $this->getController($this->request->getUri()->getPath());
         $controller->execute();
         $page = $controller->getPage()->getGeneratedPage();
         send($this->response->withBody(stream_for($page)));
+
 
     }
 }

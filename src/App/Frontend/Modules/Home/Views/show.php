@@ -1,11 +1,16 @@
 <div class="page-header header-filter clear-filter purple-filter" data-parallax="true"
-     style="background-image: url('./assets/img/bg2.jpg');">
+     style="background-image: url('./assets/img/bg2.jpg');  background-position: center;">
     <div class="container">
         <div class="row">
             <div class="col-md-8 ml-auto mr-auto">
                 <div class="brand text-center">
                     <h1>Future Developpeur php Symfony</h1>
                     <h3>En apprentissage intensif à OpenClassrooms</h3>
+
+                        <a class="btn btn-primary btn-lg btn-round" href="docs/cv.pdf" download>
+                            <i class="material-icons">cloud_download</i> Télécharger mon CV
+                        </a>
+
                 </div>
             </div>
         </div>
@@ -60,7 +65,7 @@
                             <div class="card-body">
 
                                 <p style="height:100px; overflow-y: hidden"><?= $post->getSubTitle() ?></p>
-                                <a href="#" class="btn btn-primary">Lire</a>
+                                <a href="/post-<?= $post->getId() ?>.html" class="btn btn-primary">Lire</a>
 
                                 <p class="float-right pt-3">Publié par <a href="#"
                                                                           class="font-italic"> <?= $post->getUser()->getUserName() ?> </a>
