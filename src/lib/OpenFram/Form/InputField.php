@@ -131,7 +131,7 @@ class InputField extends field
     /**
      * @return mixed
      */
-    public function getAutocomplete()
+    public function getAutocomplete(): string
     {
         return $this->autocomplete;
     }
@@ -139,7 +139,7 @@ class InputField extends field
     /**
      * @param mixed $autocomplete
      */
-    public function setAutocomplete($autocomplete): void
+    public function setAutocomplete(string $autocomplete): void
     {
         $this->autocomplete = $autocomplete;
     }
@@ -147,7 +147,7 @@ class InputField extends field
     /**
      * @return mixed
      */
-    public function getAutofocus()
+    public function getAutofocus(): string
     {
         return $this->autofocus;
     }
@@ -155,7 +155,7 @@ class InputField extends field
     /**
      * @param mixed $autofocus
      */
-    public function setAutofocus($autofocus): void
+    public function setAutofocus(string $autofocus): void
     {
         $this->autofocus = $autofocus;
     }
@@ -163,7 +163,7 @@ class InputField extends field
     /**
      * @return mixed
      */
-    public function getDisabled()
+    public function getDisabled(): string
     {
         return $this->disabled;
     }
@@ -171,7 +171,7 @@ class InputField extends field
     /**
      * @param mixed $disabled
      */
-    public function setDisabled($disabled): void
+    public function setDisabled(string $disabled): void
     {
         $this->disabled = $disabled;
     }
@@ -179,7 +179,7 @@ class InputField extends field
     /**
      * @return mixed
      */
-    public function getForm()
+    public function getForm(): string
     {
         return $this->form;
     }
@@ -187,7 +187,7 @@ class InputField extends field
     /**
      * @param mixed $form
      */
-    public function setForm($form): void
+    public function setForm(string $form): void
     {
         $this->form = $form;
     }
@@ -195,7 +195,7 @@ class InputField extends field
     /**
      * @return mixed
      */
-    public function getList()
+    public function getList(): string
     {
         return $this->list;
     }
@@ -203,7 +203,7 @@ class InputField extends field
     /**
      * @param mixed $list
      */
-    public function setList($list): void
+    public function setList(string $list): void
     {
         $this->list = $list;
     }
@@ -212,7 +212,7 @@ class InputField extends field
     /**
      * @return mixed
      */
-    public function getRequired()
+    public function getRequired(): string
     {
         return $this->required;
     }
@@ -220,7 +220,7 @@ class InputField extends field
     /**
      * @param mixed $required
      */
-    public function setRequired($required): void
+    public function setRequired(string $required): void
     {
         $this->required = $required;
     }
@@ -228,7 +228,7 @@ class InputField extends field
     /**
      * @return mixed
      */
-    public function getTabindex()
+    public function getTabindex(): string
     {
         return $this->tabindex;
     }
@@ -236,7 +236,7 @@ class InputField extends field
     /**
      * @param mixed $tabindex
      */
-    public function setTabindex($tabindex): void
+    public function setTabindex(string $tabindex): void
     {
         $this->tabindex = $tabindex;
     }
@@ -261,7 +261,7 @@ class InputField extends field
     /**
      * @return mixed
      */
-    public function getMinlength()
+    public function getMinlength(): string
     {
         return $this->minlength;
     }
@@ -269,7 +269,7 @@ class InputField extends field
     /**
      * @param mixed $minlength
      */
-    public function setMinlength($minlength): void
+    public function setMinlength(string $minlength): void
     {
         $this->minlength = $minlength;
     }
@@ -277,7 +277,7 @@ class InputField extends field
     /**
      * @return mixed
      */
-    public function getMaxlength()
+    public function getMaxlength(): string
     {
         return $this->maxlength;
     }
@@ -285,7 +285,7 @@ class InputField extends field
     /**
      * @param mixed $maxlength
      */
-    public function setMaxlength($maxlength): void
+    public function setMaxlength(string $maxlength): void
     {
         $this->maxlength = $maxlength;
     }
@@ -293,7 +293,7 @@ class InputField extends field
     /**
      * @return mixed
      */
-    public function getPattern()
+    public function getPattern(): string
     {
         return $this->pattern;
     }
@@ -301,7 +301,7 @@ class InputField extends field
     /**
      * @param mixed $pattern
      */
-    public function setPattern($pattern): void
+    public function setPattern(string $pattern): void
     {
         $this->pattern = $pattern;
     }
@@ -309,7 +309,7 @@ class InputField extends field
     /**
      * @return mixed
      */
-    public function getPlaceholder()
+    public function getPlaceholder(): string
     {
         return $this->placeholder;
     }
@@ -317,7 +317,7 @@ class InputField extends field
     /**
      * @param mixed $placeholder
      */
-    public function setPlaceholder($placeholder): void
+    public function setPlaceholder(string $placeholder): void
     {
         $this->placeholder = $placeholder;
     }
@@ -325,7 +325,7 @@ class InputField extends field
     /**
      * @return mixed
      */
-    public function getSize()
+    public function getSize(): string
     {
         return $this->size;
     }
@@ -333,7 +333,7 @@ class InputField extends field
     /**
      * @param mixed $size
      */
-    public function setSize($size): void
+    public function setSize(string $size): void
     {
         $this->size = $size;
     }
@@ -341,7 +341,7 @@ class InputField extends field
     /**
      * @return mixed
      */
-    public function getChecked()
+    public function getChecked(): string
     {
         return $this->checked;
     }
@@ -349,7 +349,7 @@ class InputField extends field
     /**
      * @param mixed $checked
      */
-    public function setChecked($checked): void
+    public function setChecked(string $checked): void
     {
         $this->checked = $checked;
     }
@@ -357,7 +357,7 @@ class InputField extends field
     /**
      * @return mixed
      */
-    public function getReadonly()
+    public function getReadonly(): string
     {
         return $this->readonly;
     }
@@ -365,7 +365,7 @@ class InputField extends field
     /**
      * @param mixed $readonly
      */
-    public function setReadonly($readonly): void
+    public function setReadonly(string $readonly): void
     {
         $this->readonly = $readonly;
     }
@@ -373,7 +373,7 @@ class InputField extends field
     /**
      * @return mixed
      */
-    public function getSpellcheck(): ?string
+    public function getSpellcheck(): string
     {
         return $this->spellcheck;
     }
@@ -381,7 +381,7 @@ class InputField extends field
     /**
      * @param mixed $spellcheck
      */
-    public function setSpellcheck(?string $spellcheck): void
+    public function setSpellcheck(string $spellcheck): void
     {
         $this->spellcheck = $spellcheck;
     }
