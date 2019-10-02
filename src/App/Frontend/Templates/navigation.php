@@ -58,22 +58,20 @@
 
                 <?php if ($currentUser->hasAttribute('user')) { ?>
 
-
                     <li class="dropdown nav-item">
-                        <a href="" class="profile-photo dropdown-toggle nav-link mt-3 ml-3 m-md-0" data-toggle="dropdown"
-                           aria-expanded="false">
-                            <div class="profile-photo-small">
-                                <img src="images/logo-1.jpg" alt="Circle Image"
-                                     class="rounded-circle img-fluid">
-                            </div>
-                            <div class="ripple-container"></div>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right hiding">
-                            <h6 class="dropdown-header"><?= $currentUser->getAttribute('user')->getUserName() ?></h6>
-                            <a href="/admin/logout/" class="dropdown-item">Se déconnecter</a>
+                        <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
+                            <img src="images/logo-1.jpg" alt="Circle Image" class="rounded-circle img-fluid" style="height: 25px">
+                            <?= $currentUser->getAttribute('user')->getUserName() ?>
+                            <div class="ripple-container"></div></a>
+                        <div class="dropdown-menu dropdown-with-icons">
+                            <a href="/admin/logout/" class="dropdown-item">
+                                <i class="material-icons">power_settings_new</i> Se déconnecter
+                            </a>
+                            <a href="" class="dropdown-item">
+                                <i class="material-icons">content_paste</i> Profile
+                            </a>
                         </div>
                     </li>
-
 
                 <?php } else { ?>
 

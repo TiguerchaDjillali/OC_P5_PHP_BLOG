@@ -10,7 +10,6 @@ use OpenFram\Form\TextAreaField;
 
 class CommentFormBuilder extends FormBuilder
 {
-
     public function build()
     {
         // TODO: Implement build() method.

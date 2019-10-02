@@ -33,7 +33,7 @@ class TextAreaField extends Field
         $widget .= '</textarea>';
 
         if(!empty($this->errorMessage)){
-            $widget .= '<small>'.$this->errorMessage . '</small></div>';
+            $widget .= '<small class = "text-danger"> * '.$this->errorMessage . '</small></div>';
         } else {
             $widget .='</div>';
         }

@@ -24,6 +24,7 @@ class Form
     public function add(Field $field)
     {
         $attr = 'get'.ucfirst($field->getName());
+
         $field->setValue($this->entity->$attr());
 
         $this->fields[] = $field;

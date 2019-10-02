@@ -5,3 +5,6 @@
 .small-header .page-header{
     height: 50vh;
 }
+.dropdown-toggle:after {
+    display: none;
+}

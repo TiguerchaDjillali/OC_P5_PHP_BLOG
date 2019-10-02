@@ -75,7 +75,7 @@ abstract class Application
 
         } catch (\RuntimeException $e) {
             if ($e->getCode() == Router::NO_ROUTE) {
-                exit(send($this->response->withStatus('404')->withBody(stream_for('<h1>Error 404</h1>'))));
+                $this->redirect('/');
             }
         }
 

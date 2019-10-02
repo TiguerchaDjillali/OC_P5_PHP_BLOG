@@ -13,11 +13,11 @@ class InputTextField extends Field
         $widget = '';
 
 
-
-        $widget .= '<div>';
-        $widget .= '<label id="$this->name">' . $this->label . '</label > ';
+        $widget .= $this->getOpeningGroupTags();
+        $widget .= '<div class="form-group">';
+        $widget .= '<label id="$this->name" class="bmd-label-floating">' . $this->label . '</label > ';
         $widget .= '<input type="text" name="' . $this->name . '"   id="'.$this->name.'" ';
-
+        $widget .= ' class="form-control" ';
         if(!empty($this->value)){
             $widget .= ' value="'.htmlspecialchars($this->value).'" ';
         }
@@ -29,11 +29,11 @@ class InputTextField extends Field
         $widget .= '/> ';
 
         if (!empty($this->errorMessage)) {
-            $widget .='<small>'. $this->errorMessage . '</small>';
+            $widget .= '<small class = "text-danger"> * '.$this->errorMessage . '</small></div>';
         }
         $widget.= '</div>';
 
-
+        $widget .= $this->getClosingGroupTags();
 
         return $widget;
     }

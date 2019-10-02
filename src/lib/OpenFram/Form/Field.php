@@ -15,6 +15,8 @@ abstract class Field
     protected $name;
     protected $value;
     protected $length;
+    protected $openingGroupTags = '';
+    protected $closingGroupTags = '';
     protected $validators = [];
 
     public function __construct(array $options = [])
@@ -129,6 +131,39 @@ abstract class Field
             }
         }
     }
+
+    /**
+     * @return string
+     */
+    public function getOpeningGroupTags(): string
+    {
+        return $this->openingGroupTags;
+    }
+
+    /**
+     * @param string $openingGroupTags
+     */
+    public function setOpeningGroupTags(string $openingGroupTags): void
+    {
+        $this->openingGroupTags = $openingGroupTags;
+    }
+
+    /**
+     * @return string
+     */
+    public function getClosingGroupTags(): string
+    {
+        return $this->closingGroupTags;
+    }
+
+    /**
+     * @param string $closingGroupTags
+     */
+    public function setClosingGroupTags(string $closingGroupTags): void
+    {
+        $this->closingGroupTags = $closingGroupTags;
+    }
+
 
 
 }
