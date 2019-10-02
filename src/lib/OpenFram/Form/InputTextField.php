@@ -30,8 +30,9 @@ class InputTextField extends Field
 
         if (!empty($this->errorMessage)) {
             $widget .= '<small class = "text-danger"> * '.$this->errorMessage . '</small></div>';
-        }
+        } else {
         $widget.= '</div>';
+        }
 
         $widget .= $this->getClosingGroupTags();
 
@@ -49,6 +50,5 @@ class InputTextField extends Field
         }else {
             throw new \RuntimeException('La longueur maximale doit être un nombre supérieur à zéro ');
         }
-
     }
 }

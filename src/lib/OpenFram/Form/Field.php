@@ -11,10 +11,14 @@ abstract class Field
     use Hydrator;
 
     protected $errorMessage;
+    protected $success;
     protected $label;
+
+
     protected $name;
     protected $value;
-    protected $length;
+
+
     protected $openingGroupTags = '';
     protected $closingGroupTags = '';
     protected $validators = [];
@@ -33,17 +37,19 @@ abstract class Field
         foreach ($this->validators as $validator) {
             if (!$validator->isValid($this->value)) {
                 $this->errorMessage = $validator->getErrorMessage();
-                return false;
+
+                return  $this->success = false;
             }
         }
-        return true;
+
+        return  $this->success = true;
     }
 
 
     /**
      * @return mixed
      */
-    public function getLabel()
+    public function getLabel(): string
     {
         return $this->label;
     }
@@ -51,17 +57,16 @@ abstract class Field
     /**
      * @param mixed $label
      */
-    public function setLabel($label)
+    public function setLabel(string $label)
     {
-        if (is_string($label)) {
             $this->label = $label;
-        }
+
     }
 
     /**
      * @return mixed
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -69,29 +74,12 @@ abstract class Field
     /**
      * @param mixed $name
      */
-    public function setName($name)
+    public function setName(string $name)
     {
-        if (is_string($name)) {
             $this->name = $name;
-        }
+
     }
 
-    /**
-     * @return mixed
-     */
-    public function getLength()
-    {
-        return $this->length;
-    }
-
-    public function setLength($length)
-    {
-        $length = (int)$length;
-
-        if ($length > 0) {
-            $this->length = $length;
-        }
-    }
 
 
     /**
@@ -105,11 +93,10 @@ abstract class Field
     /**
      * @param mixed $value
      */
-    public function setValue($value)
+    public function setValue(?string $value)
     {
-        if (is_string($value)) {
             $this->value = $value;
-        }
+
     }
 
     /**

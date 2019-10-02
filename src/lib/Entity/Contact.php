@@ -9,12 +9,18 @@ use OpenFram\Entity;
 class Contact extends Entity
 {
     protected $firstName;
-    protected $mail;
+    protected $email;
+    protected $object;
     protected $message;
+
+    const FIRST_NAME_INVALID = 1;
+    const EMAIL_INVALID= 2;
+    const OBJECT_INVALID= 3;
+    const MESSAGE_INVALID= 4;
 
     public function isValid()
     {
-        return !(isEmpty($this->firstName) || isEmpty($this->mail) || isEmpty($this->message));
+        return !(empty($this->firstName) || empty($this->email) || empty($this->message) || empty($this->object));
     }
 
     /**
@@ -30,23 +36,29 @@ class Contact extends Entity
      */
     public function setFirstName($firstName): void
     {
+        if(empty($firstName || !is_string($firstName))){
+            $this->errors[] = self::FIRST_NAME_INVALID;
+        }
         $this->firstName = $firstName;
     }
 
     /**
      * @return mixed
      */
-    public function getMail()
+    public function getEmail()
     {
-        return $this->mail;
+        return $this->email;
     }
 
     /**
-     * @param mixed $mail
+     * @param mixed $email
      */
-    public function setMail($mail): void
+    public function setEmail($email): void
     {
-        $this->mail = $mail;
+        if(empty($email || !is_string($email))){
+            $this->errors[] = self::EMAIL_INVALID;
+        }
+        $this->email = $email;
     }
 
     /**
@@ -62,9 +74,29 @@ class Contact extends Entity
      */
     public function setMessage($message): void
     {
+        if(empty($message || !is_string($message))){
+            $this->errors[] = self::MESSAGE_INVALID;
+        }
         $this->message = $message;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getObject()
+    {
+        return $this->object;
+    }
 
+    /**
+     * @param mixed $object
+     */
+    public function setObject($object): void
+    {
+        if(empty($object || !is_string($object))){
+            $this->errors[] = self::OBJECT_INVALID;
+        }
+        $this->object = $object;
+    }
 
 }

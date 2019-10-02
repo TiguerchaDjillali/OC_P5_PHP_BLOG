@@ -5,6 +5,7 @@ use Entity\Contact;
 use FormBuilder\ContactFormBuilder;
 use GuzzleHttp\Psr7\Request;
 use OpenFram\BackController;
+use OpenFram\Form\FormHandler;
 use OpenFram\Managers;
 
 class HomeController extends BackController
@@ -27,7 +28,16 @@ class HomeController extends BackController
 
         if($request->getMethod()=='POST'){
 
-            echo 'Il faut traiter le formaulaire + redirection';
+
+            $contact = new Contact(
+                [
+                    'firstName'=>$this->app->getRequest()->getParsedBody()['firstName'],
+                    'email'=>$this->app->getRequest()->getParsedBody()['email'],
+                    'object'=>$this->app->getRequest()->getParsedBody()['object'],
+                    'message'=>$this->app->getRequest()->getParsedBody()['message']
+                ]
+            );
+
 
         }else{
             $contact = new Contact();
@@ -35,8 +45,16 @@ class HomeController extends BackController
 
         $formBuilder = new ContactFormBuilder($contact);
         $formBuilder->build();
-
         $form = $formBuilder->getFrom();
+        $formHandler = new FormHandler($form, $manager, $request);
+
+        if ($formHandler->process()) {
+            $this->app->getCurrentUser()->setFlash('Votre Message a bien été envoyé , merci!');
+            $this->app->redirect('/#contactSection');
+        }
+
+
+
         $this->page->addVar('form', $form->createView());
     }
 

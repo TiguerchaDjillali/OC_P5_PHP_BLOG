@@ -29,6 +29,7 @@ class FormHandler
     public function process(){
         if($this->request->getMethod() == 'POST' && $this->form->isValid()){
             $this->manager->save($this->form->getEntity());
+
             return true;
         }
         return false;

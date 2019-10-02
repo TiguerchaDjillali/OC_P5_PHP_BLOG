@@ -7,9 +7,9 @@
                     <h1>Future Developpeur php Symfony</h1>
                     <h3>En apprentissage intensif à OpenClassrooms</h3>
 
-                        <a class="btn btn-primary btn-lg btn-round" href="docs/cv.pdf" download>
-                            <i class="material-icons">cloud_download</i> Télécharger mon CV
-                        </a>
+                    <a class="btn btn-primary btn-lg btn-round" href="docs/cv.pdf" download>
+                        <i class="material-icons">cloud_download</i> Télécharger mon CV
+                    </a>
 
                 </div>
             </div>
@@ -55,7 +55,7 @@
 
                 <?php foreach ($postsList as $post) { ?>
 
-                    <div class="col-md-6" >
+                    <div class="col-md-6">
                         <div class="card">
                             <div class="card-header card-header-text card-header-primary">
                                 <div class="card-text">
@@ -87,14 +87,32 @@
     </div>
 
 
+    <div id="contactSection" class="section section-contacts px-3">
+
+        <?php if ($currentUser->hasFlash()) { ?>
+
+            <div class="alert alert-success">
+                <div class="container">
+                    <div class="alert-icon">
+                        <i class="material-icons">check</i>
+                    </div>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                    </button>
+                    <b>Success Alert:</b> <?= $currentUser->getFlash() ?>
+                </div>
+            </div>
+
+        <?php } ?>
 
 
-    <div class="section section-contacts px-3">
         <div class="row">
             <div class="col-md-8 ml-auto mr-auto">
                 <h2 class="text-center title">Contactez moi</h2>
-                <h4 class="text-center description">Divide details about your product or agency work into parts. Write a few lines about each one and contact us about any further collaboration. We will responde get back to you in a couple of hours.</h4>
-                <form class="contact-form" action="." method="post">
+                <h4 class="text-center description">Divide details about your product or agency work into parts. Write a
+                    few lines about each one and contact us about any further collaboration. We will responde get back
+                    to you in a couple of hours.</h4>
+                <form class="contact-form" action=".#contactSection" method="post">
 
                     <?= $form ?>
 
@@ -107,15 +125,8 @@
                     </div>
                 </form>
 
-
-
-
-
-
             </div>
         </div>
     </div>
 </div>
-
-
 

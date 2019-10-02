@@ -3,7 +3,7 @@
 
     <?php if ($currentUser->hasFlash()) echo '<p class = "text-info offset-md-4">', $currentUser->getFlash(), '</p>' ?>
 
-    <form name="sentMessage" id="comment#Form" action="post-<?= $post->getId() ?>.html#commentForm"
+    <form name="sentMessage" id="commentForm" action="post-<?= $post->getId() ?>.html#commentForm"
           method="post" class="col-12">
 
 
