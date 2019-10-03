@@ -5,6 +5,7 @@ namespace Model;
 
 
 use Entity\Contact;
+use Exception;
 use http\Exception\RuntimeException;
 use OpenFram\Manager;
 
@@ -18,7 +19,7 @@ class ContactManager extends Manager
             $this->sendMessage($contact);
 
         } else {
-            throw new RuntimeException('Le message doit être valide pour être envoyé');
+            throw new Exception('Le message doit être valide pour être envoyé');
         }
     }
 

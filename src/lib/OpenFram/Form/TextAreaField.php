@@ -14,16 +14,25 @@ class TextAreaField extends Field
         $widget = '';
 
 
-        $widget .= '<div class="form-group">';
-        $widget .= '<label id=" $this->name">' . $this->label . '</label > ';
-        $widget .= '<textarea name="' . $this->name . '"  id="'. $this->name .'" class="form-control" ';
+        $widget .= '<div class="form-group label-floating ';
 
-        if(!empty($this->cols)){
-            $widget .= 'cols="'.$this->cols.'" ';
+        if ($this->success === true) {
+
+            $widget .= 'has-success';
         }
 
-        if(!empty($this->rows)){
-            $widget .= 'rows="'.$this->rows.'" ';
+        if (!empty($this->errorMessage)) {
+
+            $widget .= 'has-danger';
+        }
+
+        $widget .= ' ">';
+
+        $widget .= '<label id="'. $this->attributes['name'] .'" class="bmd-label-floating">' . $this->label . '</label > ';
+        $widget .= '<textarea name="' . $this->attributes['name']. '"  id="'. $this->attributes['name'] .'" class="form-control" ';
+
+        foreach($this->attributes as $attribute=>$value){
+            $widget .= $attribute . ' = "' . $value . '" ';
         }
 
         $widget .= ' />';
@@ -32,34 +41,18 @@ class TextAreaField extends Field
         }
         $widget .= '</textarea>';
 
-        if(!empty($this->errorMessage)){
-            $widget .= '<small class = "text-danger"> * '.$this->errorMessage . '</small></div>';
+        if (!empty($this->errorMessage)) {
+
+            $widget .= '<span class="material-icons form-control-feedback">clear</span>';
+            $widget .= '<small class = "text-danger"> * ' . $this->errorMessage . '</small></div>';
+        } elseif ($this->success) {
+
+            $widget .= '<span class="form-control-feedback"> <i class="material-icons">done</i></span></div>';
+
         } else {
-            $widget .='</div>';
+            $widget .= '</div>';
         }
+
         return $widget;
     }
-
-    /**
-     * @param mixed $cols
-     */
-    public function setCols($cols)
-    {
-        $cols = (int) $cols;
-        if($cols>0){
-            $this->cols = $cols;
-        }
-    }
-
-    /**
-     * @param mixed $rows
-     */
-    public function setRows($rows)
-    {
-        $rows = (int) $rows;
-        if($rows > 0){
-            $this->rows = $rows;
-        }
-    }
-
 }

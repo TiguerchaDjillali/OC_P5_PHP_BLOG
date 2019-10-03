@@ -1,7 +1,7 @@
 <?php
 
 
-namespace OpenFram\Form;
+namespace OpenFram\Form\Validators;
 
 
 abstract class Validator

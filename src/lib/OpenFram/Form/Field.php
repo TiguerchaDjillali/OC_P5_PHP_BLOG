@@ -4,6 +4,7 @@
 namespace OpenFram\Form;
 
 
+use OpenFram\Form\Validators\Validator;
 use OpenFram\Hydrator;
 
 abstract class Field
@@ -13,10 +14,8 @@ abstract class Field
     protected $errorMessage;
     protected $success;
     protected $label;
-
-
-    protected $name;
     protected $value;
+    protected $attributes = [];
 
 
     protected $openingGroupTags = '';
@@ -31,6 +30,7 @@ abstract class Field
     }
 
     abstract public function buildWidget();
+
 
     public function isValid()
     {
@@ -66,25 +66,6 @@ abstract class Field
     /**
      * @return mixed
      */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param mixed $name
-     */
-    public function setName(string $name)
-    {
-            $this->name = $name;
-
-    }
-
-
-
-    /**
-     * @return mixed
-     */
     public function getValue()
     {
         return $this->value;
@@ -93,11 +74,15 @@ abstract class Field
     /**
      * @param mixed $value
      */
-    public function setValue(?string $value)
+    public function setValue($value): void
     {
-            $this->value = $value;
-
+        $this->value = $value;
     }
+
+
+
+
+
 
     /**
      * @return array
@@ -149,6 +134,26 @@ abstract class Field
     public function setClosingGroupTags(string $closingGroupTags): void
     {
         $this->closingGroupTags = $closingGroupTags;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAttributes(): array
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * @param array $attributes
+     */
+    public function setAttributes(array $attributes): void
+    {
+        foreach ($attributes as $attribute => $value){
+            if(is_string($attribute) && is_string($value)){
+                $this->attributes[$attribute] =  $value;
+            }
+        }
     }
 
 

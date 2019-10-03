@@ -1,32 +1,33 @@
 {
-    "name": "hp/p5",
-    "description": "Projet 5",
-    "authors": [
-        {
-            "name": "TiguerchaD",
-            "email": "tiguercha.pro@gmail.com"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "OpenFram\\": "src/lib/OpenFram/",
-            "OpenFram\\Routing\\": "src/lib/OpenFram/Routing/",
-            "App\\Frontend\\": "src/App/Frontend/",
-            "App\\Backend\\": "src/App/Backend/",
-            "Model\\": "src/lib/Model/",
-            "Entity\\": "src/lib/Entity/",
-            "FormBuilder\\": "src/lib/FormBuilder/",
-            "OpenFram\\Form\\": "src/lib/OpenFram/Form/"
-        }
-    },
-    "require": {
-        "psr/http-message": "^1.0",
-        "guzzlehttp/psr7": "^1.6",
-        "http-interop/response-sender": "^1.0",
-        "ext-pdo": "*",
-      "ext-http": "*"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^8.3"
+  "name": "hp/p5",
+  "description": "Projet 5",
+  "authors": [
+    {
+      "name": "TiguerchaD",
+      "email": "tiguercha.pro@gmail.com"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "OpenFram\\": "src/lib/OpenFram/",
+      "OpenFram\\Routing\\": "src/lib/OpenFram/Routing/",
+      "App\\Frontend\\": "src/App/Frontend/",
+      "App\\Backend\\": "src/App/Backend/",
+      "Model\\": "src/lib/Model/",
+      "Entity\\": "src/lib/Entity/",
+      "FormBuilder\\": "src/lib/FormBuilder/",
+      "OpenFram\\Form\\": "src/lib/OpenFram/Form/",
+      "OpenFram\\Form\\Validators\\": "src/lib/OpenFram/Form/Validators/"
+    }
+  },
+  "require": {
+    "psr/http-message": "^1.0",
+    "guzzlehttp/psr7": "^1.6",
+    "http-interop/response-sender": "^1.0",
+    "ext-pdo": "*",
+    "ext-http": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8.3"
+  }
 }

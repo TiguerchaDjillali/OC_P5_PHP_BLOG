@@ -23,7 +23,7 @@ class Form
 
     public function add(Field $field)
     {
-        $attr = 'get'.ucfirst($field->getName());
+        $attr = 'get'.ucfirst($field->getAttributes()['name']);
 
         $field->setValue($this->entity->$attr());
 
