@@ -24,7 +24,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/post">
+                    <a class="nav-link" href="/posts">
                         <i class="material-icons">view_list</i> Articles
                     </a>
                 </li>

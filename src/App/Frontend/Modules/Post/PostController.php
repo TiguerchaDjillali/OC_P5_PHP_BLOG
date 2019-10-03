@@ -11,23 +11,31 @@ use OpenFram\BackController;
 use OpenFram\Form\Form;
 use OpenFram\Form\FormHandler;
 use GuzzleHttp\Psr7\Response;
-use OpenFram\Form\MaxLengthValidator;
-use OpenFram\Form\NotNullValidator;
-use OpenFram\Form\StringField;
-use OpenFram\Form\TextField;
+
 
 class PostController extends BackController
 {
     public function executeIndex(Request $request)
     {
 
-        $postsNumber = 4; //$this->app->getConfig()->get('postsNumber');
-        $this->page->addVar('title', 'Liste des ' . $postsNumber . ' derniers articles');
+        $limit = 2;
+        $offset = 0;
+        $page = 1;
+        if (isset($request->getQueryPArams()['page'])) {
+            $page = $request->getQueryPArams()['page'];
+            $offset = (($page - 1) * $limit);
+        }
+
+        $this->page->addVar('title', 'Liste des  articles');
         $manager = $this->managers->getManagerOf('Post');
 
-        $PostsList = $manager->getList(['offset' => 0, 'limit' => $postsNumber, 'visible' => 1]);
+        $postsList = $manager->getList(['offset' => $offset, 'limit' => $limit, 'visible' => 1]);
+        $postsNumber = $manager->count(['visible' => 1]);
 
-        $this->page->addVar('postsList', $PostsList);
+        $this->page->addVar('limit', $limit);
+        $this->page->addVar('activePage', $page);
+        $this->page->addVar('postsNumber', $postsNumber);
+        $this->page->addVar('postsList', $postsList);
         $this->page->addVar('pageType', 'index-page small-header');
     }
 
@@ -93,7 +101,8 @@ class PostController extends BackController
             $comment = new Comment(
                 [
                     'content' => $request->getParsedBody()['content'],
-                    'post' => $this->managers->getManagerOf('Post')->getByAttribute('id', $request->getQueryParams('GET')['id']),
+                    'post' => $this->managers->getManagerOf('Post')->getByAttribute('id',
+                        $request->getQueryParams('GET')['id']),
                     'user' => $this->app->getCurrentUser()->getAttribute('user')
                 ]
             );
@@ -116,7 +125,7 @@ class PostController extends BackController
 
         if ($formHandler->process()) {
             $this->app->getCurrentUser()->setFlash('Votre commentaitre a bien été ajouté, merci!');
-            $this->app->redirect('post-' .$request->getQueryParams('GET')['id'] . '.html#commentForm');
+            $this->app->redirect('post-' . $request->getQueryParams('GET')['id'] . '.html#commentForm');
 
         }
 

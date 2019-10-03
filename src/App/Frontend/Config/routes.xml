@@ -2,7 +2,9 @@
 <routes>
     <route url="/" module="home" action="show"/>
 
-    <route url="/post" module="Post" action="index"/>
+    <route url="/posts" module="Post" action="index"/>
+    <route url="/posts-([0-9]+)\.html" module="Post" action="index" vars="page"/>
+
     <route url="/post-([0-9]+)\.html" module="post" action="show" vars="id"/>
 
 </routes>
