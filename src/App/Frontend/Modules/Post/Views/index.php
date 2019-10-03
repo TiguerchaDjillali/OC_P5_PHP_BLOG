@@ -15,11 +15,16 @@
 
 <article class="main main-raised">
 
+
     <div class="section section-tabs">
         <div class="container">
             <div class="row">
 
-                <h2 class="text-center title col-12">Derniers articles</h2>
+                <h2 class="text-center title col-12">Articles</h2>
+                <div class="col-12">
+                    <?php include 'pagination.php'; ?>
+                    <hr>
+                </div>
 
                 <?php foreach ($postsList as $post) { ?>
 
@@ -48,16 +53,14 @@
                     </div>
 
                 <?php } ?>
+                <div class="col-12">
+                    <hr>
+                    <?php include 'pagination.php'; ?>
+                </div>
 
 
             </div>
         </div>
     </div>
-
-<div class="section">
-
-            <?php include 'pagination.php'; ?>
-
-</div>
 
 </article>

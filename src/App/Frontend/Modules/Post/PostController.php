@@ -18,7 +18,7 @@ class PostController extends BackController
     public function executeIndex(Request $request)
     {
 
-        $limit = 2;
+        $limit = 1;
         $offset = 0;
         $page = 1;
         if (isset($request->getQueryPArams()['page'])) {
