@@ -18,13 +18,11 @@ class PostController extends BackController
     public function executeIndex(Request $request)
     {
 
-        $limit = 1;
-        $offset = 0;
-        $page = 1;
-        if (isset($request->getQueryPArams()['page'])) {
-            $page = $request->getQueryPArams()['page'];
-            $offset = (($page - 1) * $limit);
-        }
+        $limit = 4;
+
+        $page = $request->getQueryPArams()['page'];
+        $offset = (($page - 1) * $limit);
+
 
         $this->page->addVar('title', 'Liste des  articles');
         $manager = $this->managers->getManagerOf('Post');
@@ -38,6 +36,7 @@ class PostController extends BackController
         $this->page->addVar('postsList', $postsList);
         $this->page->addVar('pageType', 'index-page small-header');
     }
+
 
     public function executeShow(Request $request)
     {

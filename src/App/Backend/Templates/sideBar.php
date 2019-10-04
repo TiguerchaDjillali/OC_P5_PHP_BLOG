@@ -24,24 +24,31 @@
 
             <li class="nav-item ">
                 <a class="nav-link" href="/admin/">
+                    <i class="material-icons">Profil</i>
+                    <p>Profil</p>
+                </a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="nav-link" href="/admin/posts">
                     <i class="material-icons">Posts</i>
                     <p>posts</p>
                 </a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="/admin/users/">
+                <a class="nav-link" href="/admin/users">
                     <i class="material-icons">User</i>
                     <p>Users</p>
                 </a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="/admin/roles/">
+                <a class="nav-link" href="/admin/roles">
                     <i class="material-icons">Roles</i>
                     <p>Roles</p>
                 </a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link" href="/admin/permissions/">
+                <a class="nav-link" href="/admin/permissions">
                     <i class="material-icons">Permissions</i>
                     <p>Permissions</p>
                 </a>

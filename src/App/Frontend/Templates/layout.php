@@ -1,53 +1,61 @@
-
-
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>
         <?= $title ?>
     </title>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+          name='viewport'/>
     <!-- Extra details for Live View on GitHub Pages -->
     <!-- Canonical SEO -->
-    <link rel="canonical" href="https://www.creative-tim.com/product/material-kit" />
+    <link rel="canonical" href="https://www.creative-tim.com/product/material-kit"/>
     <!--  Social tags      -->
-    <meta name="keywords" content="creative tim, creativetim, bootstrap 4, bootstrap 4 ui kit, bootstrap 4 kit, material, material kit, material template, creative tim, html kit, html css template, web template, bootstrap, bootstrap 4, css3 template, frontend, responsive bootstrap template, bootstrap ui kit, responsive ui kit">
-    <meta name="description" content="Start Your Development With A Badass Bootstrap 4 UI Kit inspired by Material Design.">
+    <meta name="keywords"
+          content="creative tim, creativetim, bootstrap 4, bootstrap 4 ui kit, bootstrap 4 kit, material, material kit, material template, creative tim, html kit, html css template, web template, bootstrap, bootstrap 4, css3 template, frontend, responsive bootstrap template, bootstrap ui kit, responsive ui kit">
+    <meta name="description"
+          content="Start Your Development With A Badass Bootstrap 4 UI Kit inspired by Material Design.">
     <!-- Schema.org markup for Google+ -->
     <meta itemprop="name" content="Material Kit by Creative Tim">
-    <meta itemprop="description" content="Start Your Development With A Badass Bootstrap 4 UI Kit inspired by Material Design.">
-    <meta itemprop="image" content="https://s3.amazonaws.com/creativetim_bucket/products/38/original/opt_mk_thumbnail.jpg">
+    <meta itemprop="description"
+          content="Start Your Development With A Badass Bootstrap 4 UI Kit inspired by Material Design.">
+    <meta itemprop="image"
+          content="https://s3.amazonaws.com/creativetim_bucket/products/38/original/opt_mk_thumbnail.jpg">
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="product">
     <meta name="twitter:site" content="@creativetim">
     <meta name="twitter:title" content="Material Kit by Creative Tim">
-    <meta name="twitter:description" content="Start Your Development With A Badass Bootstrap 4 UI Kit inspired by Material Design.">
+    <meta name="twitter:description"
+          content="Start Your Development With A Badass Bootstrap 4 UI Kit inspired by Material Design.">
     <meta name="twitter:creator" content="@creativetim">
-    <meta name="twitter:image" content="https://s3.amazonaws.com/creativetim_bucket/products/38/original/opt_mk_thumbnail.jpg">
+    <meta name="twitter:image"
+          content="https://s3.amazonaws.com/creativetim_bucket/products/38/original/opt_mk_thumbnail.jpg">
     <!-- Open Graph data -->
     <meta property="fb:app_id" content="655968634437471">
-    <meta property="og:title" content="Material Kit by Creative Tim" />
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://demos.creative-tim.com/material-kit/index.html" />
-    <meta property="og:image" content="https://s3.amazonaws.com/creativetim_bucket/products/38/original/opt_mk_thumbnail.jpg" />
-    <meta property="og:description" content="Start Your Development With A Badass Bootstrap 4 UI Kit inspired by Material Design." />
-    <meta property="og:site_name" content="Creative Tim" />
+    <meta property="og:title" content="Material Kit by Creative Tim"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:url" content="https://demos.creative-tim.com/material-kit/index.html"/>
+    <meta property="og:image"
+          content="https://s3.amazonaws.com/creativetim_bucket/products/38/original/opt_mk_thumbnail.jpg"/>
+    <meta property="og:description"
+          content="Start Your Development With A Badass Bootstrap 4 UI Kit inspired by Material Design."/>
+    <meta property="og:site_name" content="Creative Tim"/>
     <!--     Fonts and icons     -->
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- CSS Files -->
-    <link href="../assets/css/material-kit.min.css?v=2.0.6" rel="stylesheet" />
-    <link href="../assets/css/home-page.css" rel="stylesheet" />
+    <link href="../assets/css/material-kit.min.css?v=2.0.6" rel="stylesheet"/>
+    <link href="../assets/css/home-page.css" rel="stylesheet"/>
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <!-- <link href="../assets/demo/demo.css" rel="stylesheet" /> -->
     <!-- Google Tag Manager -->
     <script>
-        (function(w, d, s, l, i) {
+        (function (w, d, s, l, i) {
             w[l] = w[l] || [];
             w[l].push({
                 'gtm.start': new Date().getTime(),
@@ -69,7 +77,8 @@
 <!-- Extra details for Live View on GitHub Pages -->
 <!-- Google Tag Manager (noscript) -->
 <noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKDMSK6" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKDMSK6" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe>
 </noscript>
 <!-- End Google Tag Manager (noscript) -->
 
@@ -80,7 +89,6 @@
 
 
 <?= $content ?>
-
 
 
 <footer class="footer footer-default">
@@ -113,7 +121,8 @@
             &copy;
             <script>
                 document.write(new Date().getFullYear())
-            </script>, made with <i class="material-icons">favorite</i> by
+            </script>
+            , made with <i class="material-icons">favorite</i> by
             Tiguercha Djillali
         </div>
     </div>
@@ -138,16 +147,16 @@
 <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
 <script src="../assets/js/material-kit.min.js?v=2.0.6" type="text/javascript"></script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
 
 
     });
 
 
     // Facebook Pixel Code Don't Delete
-    ! function(f, b, e, v, n, t, s) {
+    !function (f, b, e, v, n, t, s) {
         if (f.fbq) return;
-        n = f.fbq = function() {
+        n = f.fbq = function () {
             n.callMethod ?
                 n.callMethod.apply(n, arguments) : n.queue.push(arguments)
         };
@@ -173,7 +182,8 @@
     }
 </script>
 <noscript>
-    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=111649226022273&ev=PageView&noscript=1" />
+    <img height="1" width="1" style="display:none"
+         src="https://www.facebook.com/tr?id=111649226022273&ev=PageView&noscript=1"/>
 </noscript>
 </body>
 

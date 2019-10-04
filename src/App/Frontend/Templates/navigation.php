@@ -24,7 +24,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/posts">
+                    <a class="nav-link" href="/posts-1.html">
                         <i class="material-icons">view_list</i> Articles
                     </a>
                 </li>
@@ -64,10 +64,10 @@
                             <?= $currentUser->getAttribute('user')->getUserName() ?>
                             <div class="ripple-container"></div></a>
                         <div class="dropdown-menu dropdown-with-icons">
-                            <a href="/admin/logout/" class="dropdown-item">
+                            <a href="/logout" class="dropdown-item">
                                 <i class="material-icons">power_settings_new</i> Se déconnecter
                             </a>
-                            <a href="" class="dropdown-item">
+                            <a href="/admin/" class="dropdown-item">
                                 <i class="material-icons">content_paste</i> Profile
                             </a>
                         </div>
@@ -76,7 +76,7 @@
                 <?php } else { ?>
 
                     <li class="nav-item">
-                        <a class="nav-link btn btn-primary" href="/admin/login/">
+                        <a class="nav-link btn btn-primary" href="/connection">
                             <i class="material-icons">account_circle</i> Se connecter
                         </a>
                     </li>

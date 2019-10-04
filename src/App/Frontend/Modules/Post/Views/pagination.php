@@ -12,10 +12,29 @@
 
         <?php
         while ($page <= $pagesNumber) { ?>
+
             <?php $active = ($page == $activePage) ? ' active' : ''; ?>
+            <?php
 
 
-            <li class="page-item <?= $active ?>">
+            $display = ($page > 5) ? ' d-none' : '';
+
+            if ($activePage > 4) {
+
+                if ($activePage < $pagesNumber - 3) {
+
+                    $display = (abs($page - $activePage) > 2) ? ' d-none' : '';
+
+                }else {
+                    $display = ($page < $pagesNumber - 4) ? ' d-none' : '';
+                }
+
+            }
+
+            ?>
+
+
+            <li class="page-item <?= $active . ' ' . $display ?>">
                 <a class="page-link" href="/posts-<?= $page ?>.html">
                     <?= $page ?>
                     <?= ($page == $activePage) ? ' <span class="sr-only">(current)</span>' : ''; ?>
