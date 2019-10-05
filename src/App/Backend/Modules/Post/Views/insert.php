@@ -1,18 +1,17 @@
-<h1> La liste des variables envoyées </h1>
+<div class="col-md-8 ml-auto mr-auto">
+    <h2 class="text-center title">Ajouter </h2>
+    <form class="contact-form" action="" method="post">
 
-<?php
-$vars = get_defined_vars();
-foreach ($vars as $key => $value) {
-    echo $key . '******' . gettype($value) . '</br>';
-}
-?>
-<hr>
-<form action="" method="post" >
+        <?= $form ?>
 
-    <?= $form ?>
+        <div class="form-group">
+                <button type="submit" name="save" class="btn btn-primary" value="0">Enregistrer</button>
 
-    <button type="submit" name = "save" value="0">Enregistrer</button>
-    <button type="submit" name="save" value="1">Publier</button>
 
-</form>
+                <button type="submit" name="save" class="btn btn-primary" value="1">Publier</button>
+        </div>
+    </form>
+
+</div>
+
 

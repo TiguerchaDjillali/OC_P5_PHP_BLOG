@@ -17,6 +17,12 @@ class ConnectionController extends \OpenFram\BackController
             $userName = $request->getParsedBody()['userName'];
             $password = $request->getParsedBody()['password'];
 
+            $connection = new Connection([
+                'userName' => $userName,
+                'password' => $password
+            ]);
+
+
             $user = $this->managers->getManagerOf('User')->getByAttribute('userName', $userName);
             if($user !== null  &&  $user->verifyPassword($password)){
 
@@ -32,9 +38,11 @@ class ConnectionController extends \OpenFram\BackController
             }else{
                 $this->app->getCurrentUser()->setFlash('Le userName ou le mot de passe est incorrect');
             }
+        }else {
+
+            $connection = new Connection();
         }
 
-        $connection = new Connection();
         $formBuilder = new LoginFormBuilder($connection);
         $formBuilder->build();
         $form = $formBuilder->getFrom();
@@ -57,25 +65,4 @@ class ConnectionController extends \OpenFram\BackController
         $this->app->redirect('/');
     }
 
-
-
-    /*
-    public function executeIndex(HTTPRequest $request)
-    {
-        $this->page->addVar('title', 'Connexion');
-
-        if($request->postExists('login')){
-            $login = $request->postData('login');
-            $password = $request->postData('password');
-
-            if($login === $this->app->getConfig()->get('login') && $password === $this->app->getConfig()->get('password')){
-                $this->app->getCurrentUser()->setAuthenticated(true);
-                $this->app->getHttpResponse()->redirect('.');
-            }else{
-                $this->app->getCurrentUser()->setFlash('Le userName ou le mot de passe est incorrect');
-            }
-        }
-
-    }
-    */
 }

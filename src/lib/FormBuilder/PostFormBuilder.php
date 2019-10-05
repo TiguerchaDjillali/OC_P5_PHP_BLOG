@@ -5,38 +5,32 @@ namespace FormBuilder;
 
 
 use OpenFram\Form\FormBuilder;
+use OpenFram\Form\InputField;
 use OpenFram\Form\InputTextField;
 use OpenFram\Form\NotNullValidator;
 use OpenFram\Form\StringField;
 use OpenFram\Form\TextAreaField;
+use OpenFram\Form\Validators\HasLength;
+use OpenFram\Form\Validators\HasValidEmailFormat;
+use OpenFram\Form\Validators\IsNotBlank;
 
 class PostFormBuilder extends FormBuilder
 {
     public function build()
     {
-        // TODO: Implement build() method.
-        $this->form->add(new InputTextField([
-                    'label' => 'Titre',
+        $this->form->add(
+            new InputField([
+                'label' => 'Votre prénom',
+                'attributes' => [
                     'name' => 'title',
-                    'maxLength' => 60,
-                    'validators' => [
-                        new NotNullValidator('Le titre de l\'article ne doit pas etre null')
-                    ]
-                ]))->add(new TextAreaField([
-                'label' => 'Sous-titre',
-                'name' => 'subtitle',
-                'rows' => 7,
-                'cols' => 50,
+                    'type' => 'text',
+                    'maxlength' => '255',
+                    'minlength' => '2'
+                ],
                 'validators' => [
-                    new NotNullValidator('Le le sous-titre ne doit pas etre null')
-                ]
-            ]))->add(new TextAreaField([
-                'label' => 'Contenu',
-                'name' => 'content',
-                'rows' => 7,
-                'cols' => 50,
-                'validators' => [
-                    new NotNullValidator('Le contenu ne doit pas etre null')
+                    new IsNotBlank('Ce champs est obligatoire'),
+                    new HasLength('Le champ doit avoir  entre 2 et 255 caractères',
+                        ['min' => 2, 'max' => 255]),
                 ]
             ]));
     }

@@ -14,7 +14,8 @@ class Connection extends Entity
 
     public function isValid()
     {
-        return true;
+
+        return !(empty($this->userName) || empty($this->passWord) );
     }
 
     /**

@@ -83,23 +83,23 @@ class PostController extends BackController
         if ($request->getMethod() == 'POST') {
 
             $post = new Post([
-                'title' => $request->postData('title'),
-                'subtitle' => $request->postData('subtitle'),
-                'user' => $this->managers->getManagerOf('user')->getByAttribute('id', $request->postData('userId')),
-                'content' => $request->postData('content'),
-                'visible' => $request->postData('save'),
-                'publicationDate' => new \DateTime($request->postData('publicationDate')),
-                'modificationDate' => new \DateTime($request->postData('modificationDate'))
+                'title' => $request->getParsedBody()['title'],
+                'subtitle' => $request->getParsedBody()['subtitle'],
+                'user' => $this->managers->getManagerOf('user')->getByAttribute('id', $request->getParsedBody()['userId']),
+                'content' => $request->getParsedBody()['content'],
+                'visible' => $request->getParsedBody()['save'],
+                'publicationDate' => new \DateTime($request->getParsedBody()['publicationDate']),
+                'modificationDate' => new \DateTime($request->getParsedBody()['modificationDate'])
             ]);
 
 
-            if ($request->getExists('id')) {
-                $post->setId($request->getData('id'));
+            if (isset($request->getQueryParams()['id'])) {
+                $post->setId($request->getQueryParams()['id']);
             }
 
         } else {
-            if ($request->getExists('id')) {
-                $post = $this->managers->getManagerOf('post')->getByAttribute('id', $request->getData('id'));
+            if (isset($request->getQueryParams()['id'])) {
+                $post = $this->managers->getManagerOf('post')->getByAttribute('id', $request->getQueryParams()['id']);
             } else {
                 $post = new Post;
             }
@@ -113,7 +113,7 @@ class PostController extends BackController
 
         if ($formHandler->process()) {
             $this->app->getCurrentUser()->setFlash($post->isNew() ? 'L\'article a bien été ajouté' : 'L\'article a bien été mis à jour');
-            $this->app->getHttpResponse()->redirect('/admin/');
+            $this->app->getResponse()->redirect('/admin/');
         }
 
         $this->page->addVar('form', $form->createView());

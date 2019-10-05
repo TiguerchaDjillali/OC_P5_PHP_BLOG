@@ -1,10 +1,79 @@
-.profile-page .page-header{
+.profile-page .page-header {
     height: 100vh;
 }
 
-.small-header .page-header{
+.small-header .page-header {
     height: 50vh;
 }
+
 .dropdown-toggle:after {
     display: none;
+}
+
+/*Theme the Tabulator element*/
+#posts-table{
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,.14);
+    border: 0;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    color: #333;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border-radius: .25rem;
+    font-size: .875rem;
+    padding: 1rem;
+    overflow-x: scroll;
+
+}
+
+/*Theme the header*/
+#posts-table .tabulator-header {
+    border-radius: 3px;
+    margin-top: -20px;
+    padding: 15px;
+    box-shadow: 0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px rgba(156,39,176,.4);
+    background: linear-gradient(60deg,#ab47bc,#8e24aa);
+    z-index: 3!important;
+    position:relative;
+}
+
+
+#posts-table .tabulator-header .tabulator-headers {
+    display: flex;
+}
+#posts-table .tabulator-row {
+    display: flex;
+}
+
+#posts-table .tabulator-table {
+
+    position: relative;
+    padding: .9375rem 1.875rem;
+    flex: 1 1 auto;
+}
+
+
+/*Allow column header names to wrap lines*/
+#posts-table .tabulator-header .tabulator-col,
+#posts-table .tabulator-header .tabulator-col-row-handle {
+    white-space: normal;
+    display: inline;
+    width: 200px;
+}
+
+/*Color the table rows*/
+#posts-table .tabulator-tableHolder .tabulator-table .tabulator-row{
+
+
+}
+
+/*Color even rows*/
+#posts-table .tabulator-tableHolder .tabulator-table .tabulator-row:nth-child(even) {
+
 }

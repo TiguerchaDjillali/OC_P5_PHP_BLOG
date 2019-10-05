@@ -27,7 +27,7 @@ class Post extends Entity
     /**
      * @return mixed
      */
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }

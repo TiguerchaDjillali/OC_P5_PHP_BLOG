@@ -14,13 +14,12 @@
 
 
 
-    <route url="/admin/logout/" module="Connexion" action="Logout" />
-    <route url="/admin/permissions/" module="Permission" action="Index" />
+    <route url="/admin/permissions" module="Permission" action="Index" />
 
-    <route url="/admin/roles/" module="Role" action="Index" />
+    <route url="/admin/roles" module="Role" action="Index" />
     <route url="/admin/role-([0-9]+)\.html" module="Role" action="Show" vars="id"/>
 
 
-    <route url="/admin/users/" module="User" action="Index" />
+    <route url="/admin/users" module="User" action="Index" />
 </routes>
 
