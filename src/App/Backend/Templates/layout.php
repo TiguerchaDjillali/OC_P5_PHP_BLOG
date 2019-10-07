@@ -21,7 +21,7 @@
 
     <link href="../assets/css/material-dashboard.css?v=2.1.1" rel="stylesheet"/>
 
-    <link href="../assets/css/home-page.cs" rel="stylesheet"/>
+    <link href="../assets/css/home-page.css" rel="stylesheet"/>
 
 
     <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.4.3/dist/js/tabulator.min.js"></script>

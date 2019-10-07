@@ -4,9 +4,16 @@ namespace App\Backend\Modules\Post;
 
 use Entity\Post;
 use FormBuilder\PostFormBuilder;
+use GuzzleHttp\Psr7\LazyOpenStream;
+use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\ServerRequest;
+use GuzzleHttp\Psr7\UploadedFile;
+use http\Client;
+use http\Encoding\Stream;
 use OpenFram\BackController;
 use OpenFram\Form\FormHandler;
+use function GuzzleHttp\Psr7\stream_for;
 
 class PostController extends BackController
 {
@@ -17,6 +24,7 @@ class PostController extends BackController
         $this->app->getResponse()->redirect('/post-' . $id . '.html');
     }
 
+
     public function executeShow(Request $request)
     {
         $manager = $this->managers->getManagerOf('Post');
@@ -25,7 +33,7 @@ class PostController extends BackController
 
         if (empty($post)) {
 
-            $this->page->addVar('title','Erreur 404');
+            $this->page->addVar('title', 'Erreur 404');
             $this->app->redirect404();
 
         }
@@ -82,20 +90,33 @@ class PostController extends BackController
     {
         if ($request->getMethod() == 'POST') {
 
-            $post = new Post([
-                'title' => $request->getParsedBody()['title'],
-                'subtitle' => $request->getParsedBody()['subtitle'],
-                'user' => $this->managers->getManagerOf('user')->getByAttribute('id', $request->getParsedBody()['userId']),
-                'content' => $request->getParsedBody()['content'],
-                'visible' => $request->getParsedBody()['save'],
-                'publicationDate' => new \DateTime($request->getParsedBody()['publicationDate']),
-                'modificationDate' => new \DateTime($request->getParsedBody()['modificationDate'])
-            ]);
+            $file = $request->getUploadedFiles()["featuredImage"];
 
 
-            if (isset($request->getQueryParams()['id'])) {
-                $post->setId($request->getQueryParams()['id']);
+            if ($file->getError() !== 4) {
+                $post = new Post([
+                    'title' => $request->getParsedBody()['title'],
+                    'subtitle' => $request->getParsedBody()['subtitle'],
+                    'user' => $this->app->getCurrentUser()->getAttribute('user'),
+                    'content' => $request->getParsedBody()['content'],
+                    'visible' => $request->getParsedBody()['save'],
+                    'featuredImage' => $file
+                ]);
+            } else {
+                $post = new Post([
+                    'title' => $request->getParsedBody()['title'],
+                    'subtitle' => $request->getParsedBody()['subtitle'],
+                    'user' => $this->app->getCurrentUser()->getAttribute('user'),
+                    'content' => $request->getParsedBody()['content'],
+                    'visible' => $request->getParsedBody()['save'],
+                ]);
             }
+
+
+            //var_dump($file->getClientFileName());
+            //var_dump($file->getClientMediaType());
+            //var_dump($file->getSize());
+
 
         } else {
             if (isset($request->getQueryParams()['id'])) {
@@ -113,7 +134,7 @@ class PostController extends BackController
 
         if ($formHandler->process()) {
             $this->app->getCurrentUser()->setFlash($post->isNew() ? 'L\'article a bien été ajouté' : 'L\'article a bien été mis à jour');
-            $this->app->getResponse()->redirect('/admin/');
+            $this->app->redirect('/admin/posts');
         }
 
         $this->page->addVar('form', $form->createView());

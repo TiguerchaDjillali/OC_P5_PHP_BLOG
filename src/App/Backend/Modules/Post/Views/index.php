@@ -19,7 +19,8 @@ foreach ($postsList as $post) {
     id:' . $post->getId() . ', 
     title:"' . $post->getTitle() . '", 
     author:"' . $post->getUser()->getUserName() . '", 
-    visible:"' . $post->isVisible() . '", 
+    visible:"' . $post->isVisible() . '",
+    lastUpdate:"' . $post->getPublicationDate()->format('d/m/Y à H\hi\ ') . '",
     
     
     viewLink:"/post-' . $post->getId() . '.html",
@@ -67,6 +68,7 @@ echo '</script>';
                     }
                 }
             },
+            {title: "Mis à jour", field: "lastUpdate", width: 200},
             {
                 field: "viewLink",
                 width: 40,

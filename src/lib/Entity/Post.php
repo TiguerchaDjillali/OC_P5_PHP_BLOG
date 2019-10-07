@@ -14,6 +14,7 @@ class Post extends Entity
     protected $visible = 0;
     protected $publicationDate;
     protected $modificationDate;
+    protected $featuredImage = null;
 
 
     /**
@@ -21,7 +22,7 @@ class Post extends Entity
      */
     public function isValid(): bool
     {
-        return !(isEmpty(isEmpty($this->title) || isEmpty($this->user)));
+        return !(empty($this->title) || empty($this->user));
     }
 
     /**
@@ -45,7 +46,7 @@ class Post extends Entity
     /**
      * @return mixed
      */
-    public function getSubtitle(): string
+    public function getSubtitle(): ?string
     {
         return $this->subtitle;
     }
@@ -63,7 +64,7 @@ class Post extends Entity
     /**
      * @return mixed
      */
-    public function getContent(): string
+    public function getContent(): ?string
     {
         return $this->content;
     }
@@ -121,7 +122,7 @@ class Post extends Entity
     /**
      * @param mixed $publicationDate
      */
-    public function setPublicationDate(\DateTime $publicationDate)
+    public function setPublicationDate( $publicationDate)
     {
         $this->publicationDate = $publicationDate;
     }
@@ -137,9 +138,42 @@ class Post extends Entity
     /**
      * @param mixed $modificationDate
      */
-    public function setModificationDate(\DateTime $modificationDate)
+    public function setModificationDate( $modificationDate)
     {
         $this->modificationDate = $modificationDate;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param mixed $author
+     */
+    public function setAuthor($author): void
+    {
+        $this->author = $author;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFeaturedImage()
+    {
+        return $this->featuredImage;
+    }
+
+    /**
+     * @param mixed $featuredImage
+     */
+    public function setFeaturedImage($featuredImage): void
+    {
+        $this->featuredImage = $featuredImage;
+    }
+
 
 }

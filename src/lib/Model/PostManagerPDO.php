@@ -114,7 +114,13 @@ class PostManagerPDO extends PostManager
 
         $query->execute();
 
-        //$post->setId($this->dao->lastInsertId());
+
+        if($post->getFeaturedImage() !== null){
+            $imageTarget = $_SERVER["DOCUMENT_ROOT"] . '/images/post/post-'.$this->dao->lastInsertId().'.jpg';
+            $post->getFeaturedImage()->moveTo($imageTarget);
+            $post->setFeaturedImage($imageTarget);
+        }
+
     }
 
     public function update(Post $post)

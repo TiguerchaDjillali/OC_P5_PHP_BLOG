@@ -27,4 +27,5 @@ abstract class PostManager extends Manager
     }
     abstract public function add(Post $post);
 
+
 }

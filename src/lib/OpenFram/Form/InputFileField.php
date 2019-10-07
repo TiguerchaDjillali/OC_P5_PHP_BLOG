@@ -1,0 +1,70 @@
+<?php
+
+
+namespace OpenFram\Form;
+
+
+class InputFileField extends InputField
+{
+    protected $value;
+
+
+
+    public function buildWidget()
+    {
+
+        $widget = "";
+
+        if($this->value !== null){
+            if ($this->value !== null) {
+                $widget .= " <script> ";
+                $widget .= "function myFunction() {";
+                $widget .= "document.getElementById(\"myFile\").value=\"". $this->value->getClientFileName() . "\";";
+                $widget .= " } myFunction(); ";
+                $widget .= " </script> ";
+            }
+        }
+
+
+        $widget .= "<div class=\"fileinput fileinput-new text-center\" data-provides=\"fileinput\">";
+        $widget .= " <div class=\"fileinput-new thumbnail img-raised\"> ";
+        $widget .= "</div > ";
+        $widget .= "<div class=\"fileinput-preview fileinput-exists thumbnail img-raised\">";
+
+        $widget .= "</div>";
+        $widget .= "<div>";
+        $widget .= "<span class=\"btn btn-raised btn-round btn-default btn-file\">";
+        $widget .= " <span class=\"fileinput-new\">Select image</span>";
+        $widget .= " <span class=\"fileinput-exists\">Change</span>";
+        $widget .= "<input type=\"file\" id=\"myFile\" value='' name=\"featuredImage\" />";
+        $widget .= "</span>";
+        $widget .= "<a href=\"#\" class=\"btn btn-danger btn-round fileinput-exists\" data-dismiss=\"fileinput\"><i class=\"fa fa-times\"></i> Remove</a>";
+        $widget .= "</div>";
+        $widget .= "</div>";
+
+        if (!empty($this->errorMessage)) {
+
+            $widget .= '<span class="material-icons form-control-feedback">clear</span>';
+            $widget .= '<small class = "text-danger"> * ' . $this->errorMessage . '</small>';
+        }
+
+        return $widget;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
+    /**
+     * @param mixed $value
+     */
+    public function setValue($value): void
+    {
+        $this->value = $value;
+    }
+
+}
