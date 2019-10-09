@@ -62,14 +62,18 @@ class PostController extends BackController
     public function executeDelete(Request $request)
     {
         $this->page->addVar('title', 'Supprimer un article');
-        if ($request->method() == 'POST') {
+        $post = $this->managers->getManagerOf('post')->getByAttribute('id', $request->getQueryParams()['id']);
+        $this->page->addVar('post', $post);
+
+
+        if ($request->getMethod() == 'POST') {
             $id = $this->app->getRequest()->getQueryParams('GET')['id'];
 
             // Suppression des commentaire est prise en charge par la base de données
             $this->managers->getManagerOf('post')->delete($id);
 
             $this->app->getCurrentUser()->setFlash('L\'article à bien été supprimé');
-            $this->app->getResponse()->redirect('/admin/');
+            $this->app->redirect('/admin/posts');
         }
 
     }

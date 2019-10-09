@@ -7,8 +7,6 @@
         <div class="card-body">
             <form class="contact-form" action="" method="post" enctype="multipart/form-data">
 
-
-
                 <?= $form ?>
 
                 <div class="form-group">
