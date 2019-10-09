@@ -73,9 +73,10 @@ abstract class Application
         try {
             $matchedRoute = $router->getRoute($this->request->getUri()->getPath());
 
+
         } catch (\RuntimeException $e) {
             if ($e->getCode() == Router::NO_ROUTE) {
-                $this->redirect('/');
+               $this->redirect('/');
             }
         }
 

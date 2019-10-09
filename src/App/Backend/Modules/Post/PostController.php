@@ -48,6 +48,7 @@ class PostController extends BackController
 
     public function executeIndex(Request $request)
     {
+
         $this->page->addVar('title', 'Gestion des articles');
 
         $manager = $this->managers->getManagerOf('Post');
@@ -79,7 +80,7 @@ class PostController extends BackController
         $this->page->addVar('title', 'Ajouter un article');
     }
 
-    public function executeUpdate(Request $request)
+    public function executeEdit(Request $request)
     {
         $this->processForm($request);
         $this->page->addVar('title', 'Modifier un article');
@@ -112,14 +113,18 @@ class PostController extends BackController
                 ]);
             }
 
+            if (isset($request->getQueryParams()['id'])) {
+                $post->setId($request->getQueryParams()['id']);
+            }
 
-            //var_dump($file->getClientFileName());
+                //var_dump($file->getClientFileName());
             //var_dump($file->getClientMediaType());
             //var_dump($file->getSize());
 
 
         } else {
             if (isset($request->getQueryParams()['id'])) {
+
                 $post = $this->managers->getManagerOf('post')->getByAttribute('id', $request->getQueryParams()['id']);
             } else {
                 $post = new Post;

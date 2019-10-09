@@ -25,6 +25,8 @@ class Post extends Entity
         return !(empty($this->title) || empty($this->user));
     }
 
+
+
     /**
      * @return mixed
      */

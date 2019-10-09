@@ -36,6 +36,7 @@ class BackendApplication extends \OpenFram\Application
             }
             $control = [$controller->getModule(), $controller->getAction()];
 
+
             if(!in_array($control, $couple)) {
                 $this->currentUser->setFlash('Vous avez pas les permissions nécessaires');
                 $this->redirect('/');

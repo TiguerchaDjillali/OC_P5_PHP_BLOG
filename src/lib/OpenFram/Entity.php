@@ -28,7 +28,7 @@ class Entity
      */
     public function isNew(): bool
     {
-        return !isset($this->id);
+        return empty($this->id);
     }
 
     /**

@@ -2,6 +2,23 @@
     <a href="/admin/post-insert.html" class="btn btn-primary">Ajouer <i class="material-icons">add_circle</i></a>
     <p class="bg-light rounded float-right p-2 colored-shadow">Articles : <?= $postsNumber ?></p>
 
+    <?php if ($currentUser->hasFlash()) { ?>
+
+        <div class="alert alert-success">
+            <div class="container">
+                <div class="alert-icon">
+                    <i class="material-icons">check</i>
+                </div>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                </button>
+                <b>Success Alert:</b> <?= $currentUser->getFlash() ?>
+            </div>
+        </div>
+
+    <?php } ?>
+
+
     <div id="posts-table" class="card"></div>
 
 </div>
@@ -20,12 +37,12 @@ foreach ($postsList as $post) {
     title:"' . $post->getTitle() . '", 
     author:"' . $post->getUser()->getUserName() . '", 
     visible:"' . $post->isVisible() . '",
-    lastUpdate:"' . $post->getPublicationDate()->format('d/m/Y à H\hi\ ') . '",
+    lastUpdate:"' . $post->getPublicationDate()->format('Y-m-d h:m:s') . '",
     
     
     viewLink:"/post-' . $post->getId() . '.html",
-    editLink:"/post-edit-' . $post->getId() . '.html",
-    deleteLink:"/post-delete-' . $post->getId() . '.html", 
+    editLink:"/admin/post-edit-' . $post->getId() . '.html",
+    deleteLink:"/admin/post-delete-' . $post->getId() . '.html", 
     
     viewLabel:"Voir" ,
     editLabel:"Editer",
@@ -68,7 +85,7 @@ echo '</script>';
                     }
                 }
             },
-            {title: "Mis à jour", field: "lastUpdate", width: 200},
+            {title: "Mis à jour", field: "lastUpdate", width: 200, sorter: "lastUpdate"},
             {
                 field: "viewLink",
                 width: 40,
@@ -92,7 +109,7 @@ echo '</script>';
 
             },
             {
-                field: "editLink",
+                field: "deleteLink",
                 width: 40,
                 headerSort: false,
                 frozen: true,

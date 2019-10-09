@@ -9,27 +9,22 @@ class InputFileField extends InputField
     protected $value;
 
 
-
     public function buildWidget()
     {
 
         $widget = "";
-
-        if($this->value !== null){
-            if ($this->value !== null) {
-                $widget .= " <script> ";
-                $widget .= "function myFunction() {";
-                $widget .= "document.getElementById(\"myFile\").value=\"". $this->value->getClientFileName() . "\";";
-                $widget .= " } myFunction(); ";
-                $widget .= " </script> ";
-            }
-        }
 
 
         $widget .= "<div class=\"fileinput fileinput-new text-center\" data-provides=\"fileinput\">";
         $widget .= " <div class=\"fileinput-new thumbnail img-raised\"> ";
         $widget .= "</div > ";
         $widget .= "<div class=\"fileinput-preview fileinput-exists thumbnail img-raised\">";
+        if ($this->value !== null && is_string($this->value)) {
+
+                $url = str_replace($_SERVER['DOCUMENT_ROOT'], '..', $this->value);
+                $widget .= "<img src=\"" . $url . "\" class=\" img-fluid \" >";
+
+        }
 
         $widget .= "</div>";
         $widget .= "<div>";

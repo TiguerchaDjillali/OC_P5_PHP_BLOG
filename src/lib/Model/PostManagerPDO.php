@@ -19,17 +19,16 @@ class PostManagerPDO extends PostManager
         $sql = 'SELECT * FROM Post ';
 
 
-        if (isset($options['visible'])){
-            $sql .= ' WHERE visible =' . $options['visible']. ' ';
+        if (isset($options['visible'])) {
+            $sql .= ' WHERE visible =' . $options['visible'] . ' ';
         }
         $sql .= 'ORDER BY publicationDate DESC ';
-        if (isset($options['limit'])){
+        if (isset($options['limit'])) {
             $sql .= ' LIMIT ' . (int)$options['limit'] . ' ';
         }
-        if (isset($options['offset'])){
+        if (isset($options['offset'])) {
             $sql .= ' OFFSET ' . (int)$options['offset'] . ' ';
         }
-
 
 
         $query = $this->dao->query($sql);
@@ -64,8 +63,8 @@ class PostManagerPDO extends PostManager
     {
         $sql = 'SELECT * FROM Post ';
         $sql .= 'WHERE ' . $attribute . ' = ' . $value . ' ';
-        if (isset($options['visible'])){
-            $sql .= 'AND visible = '. (int) $options['visible'];
+        if (isset($options['visible'])) {
+            $sql .= 'AND visible = ' . (int)$options['visible'];
         }
 
         $query = $this->dao->query($sql);
@@ -81,6 +80,12 @@ class PostManagerPDO extends PostManager
             $post->setPublicationDate(new \DateTime($post->getPublicationDate()));
             $post->setModificationDate(new \DateTime($post->getModificationDate()));
 
+            $imagePath = $_SERVER["DOCUMENT_ROOT"] . '/images/post/post-' . $post->getId() . '.jpg';
+
+            if (file_exists($imagePath)) {
+                $post->setFeaturedImage($imagePath);
+            }
+
             return $post;
         }
 
@@ -88,11 +93,11 @@ class PostManagerPDO extends PostManager
 
     }
 
-    public function count($options=[])
+    public function count($options = [])
     {
         $sql = 'SELECT count(*) FROM Post ';
-        if (isset($options['visible'])){
-            $sql .= ' WHERE visible =' . $options['visible']. ' ';
+        if (isset($options['visible'])) {
+            $sql .= ' WHERE visible =' . $options['visible'] . ' ';
         }
         $query = $this->dao->query($sql);
 
@@ -115,8 +120,8 @@ class PostManagerPDO extends PostManager
         $query->execute();
 
 
-        if($post->getFeaturedImage() !== null){
-            $imageTarget = $_SERVER["DOCUMENT_ROOT"] . '/images/post/post-'.$this->dao->lastInsertId().'.jpg';
+        if ($post->getFeaturedImage() !== null) {
+            $imageTarget = $_SERVER["DOCUMENT_ROOT"] . '/images/post/post-' . $this->dao->lastInsertId() . '.jpg';
             $post->getFeaturedImage()->moveTo($imageTarget);
             $post->setFeaturedImage($imageTarget);
         }
@@ -131,7 +136,6 @@ class PostManagerPDO extends PostManager
         $sql .= 'content=:content, ';
         $sql .= 'userId=:userId, ';
         $sql .= 'visible=:visible, ';
-        $sql .= 'publicationDate=:publicationDate, ';
         $sql .= 'modificationDate=NOW() ';
         $sql .= 'WHERE id = :id';
 
@@ -143,13 +147,19 @@ class PostManagerPDO extends PostManager
         $query->bindValue(':content', $post->getContent());
         $query->bindValue(':userId', $post->getUser()->getId(), \PDO::PARAM_INT);
         $query->bindValue(':visible', $post->isVisible(), \PDO::PARAM_INT);
-        $query->bindValue(':publicationDate', $post->getPublicationDate()->format('Y-m-d h:m:s'));
 
         $query->execute();
 
+        if ($post->getFeaturedImage() !== null) {
+            $imageTarget = $_SERVER["DOCUMENT_ROOT"] . '/images/post/post-' . $post->getId() . '.jpg';
+            $post->getFeaturedImage()->moveTo($imageTarget);
+            $post->setFeaturedImage($imageTarget);
+        }
+
     }
 
-    public function delete ($id){
+    public function delete($id)
+    {
 
         $sql = 'DELETE FROM post ';
         $sql .= 'WHERE id=:id ';
