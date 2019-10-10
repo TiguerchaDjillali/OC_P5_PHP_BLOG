@@ -96,9 +96,10 @@ class PostController extends BackController
         if ($request->getMethod() == 'POST') {
 
             $file = $request->getUploadedFiles()["featuredImage"];
+            if($file->getError() === 4){
+                $file = null;
+            }
 
-
-            if ($file->getError() !== 4) {
                 $post = new Post([
                     'title' => $request->getParsedBody()['title'],
                     'subtitle' => $request->getParsedBody()['subtitle'],
@@ -107,15 +108,7 @@ class PostController extends BackController
                     'visible' => $request->getParsedBody()['save'],
                     'featuredImage' => $file
                 ]);
-            } else {
-                $post = new Post([
-                    'title' => $request->getParsedBody()['title'],
-                    'subtitle' => $request->getParsedBody()['subtitle'],
-                    'user' => $this->app->getCurrentUser()->getAttribute('user'),
-                    'content' => $request->getParsedBody()['content'],
-                    'visible' => $request->getParsedBody()['save'],
-                ]);
-            }
+
 
             if (isset($request->getQueryParams()['id'])) {
                 $post->setId($request->getQueryParams()['id']);

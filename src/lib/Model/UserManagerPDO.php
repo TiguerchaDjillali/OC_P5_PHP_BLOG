@@ -75,7 +75,7 @@ class UserManagerPDO extends UserManager
 
     public function add (User $user)
     {
-        $sql = 'INSERT INTO User (firstName, lastName, userName, , hashedPassword ) VALUES ';
+        $sql = 'INSERT INTO User (firstName, lastName, userName, hashedPassword, description, profileImage ) VALUES ';
         $sql .= '(:firstName, :lastName, :userName, :, :hashedPassword ) ';
 
         $query = $this->dao->prepare($sql);
@@ -84,6 +84,8 @@ class UserManagerPDO extends UserManager
         $query->bindValue(':userName', $user->getUserName());
         $query->bindValue(':', $user->getEmail());
         $query->bindValue(':hashedPassword', $user->getHashedPassword());
+        $query->bindValue(':description', $user->getDescription());
+        $query->bindValue(':profileImage', $user->getProfileImage());
 
         $query->execute();
 

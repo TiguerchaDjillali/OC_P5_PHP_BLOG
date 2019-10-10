@@ -45,6 +45,13 @@ class PostManagerPDO extends PostManager
             $post->setPublicationDate(new \DateTime($post->getPublicationDate()));
             $post->setModificationDate(new \DateTime($post->getModificationDate()));
 
+            $imagePath = $_SERVER["DOCUMENT_ROOT"] . '/images/post/post-' . $post->getId() . '.jpg';
+            if (file_exists($imagePath)) {
+                $post->setFeaturedImage('/images/post/post-' . $post->getId() . '.jpg');
+            }else{
+                $post->setFeaturedImage('/images/post/post-default.jpg');
+            }
+
         }
 
         return $postsList;
@@ -83,7 +90,9 @@ class PostManagerPDO extends PostManager
             $imagePath = $_SERVER["DOCUMENT_ROOT"] . '/images/post/post-' . $post->getId() . '.jpg';
 
             if (file_exists($imagePath)) {
-                $post->setFeaturedImage($imagePath);
+                $post->setFeaturedImage('/images/post/post-' . $post->getId() . '.jpg');
+            }else{
+                $post->setFeaturedImage('/images/post/post-default.jpg');
             }
 
             return $post;
@@ -123,7 +132,6 @@ class PostManagerPDO extends PostManager
         if ($post->getFeaturedImage() !== null) {
             $imageTarget = $_SERVER["DOCUMENT_ROOT"] . '/images/post/post-' . $this->dao->lastInsertId() . '.jpg';
             $post->getFeaturedImage()->moveTo($imageTarget);
-            $post->setFeaturedImage($imageTarget);
         }
 
     }
@@ -136,7 +144,7 @@ class PostManagerPDO extends PostManager
         $sql .= 'content=:content, ';
         $sql .= 'userId=:userId, ';
         $sql .= 'visible=:visible, ';
-        $sql .= 'modificationDate=NOW() ';
+        $sql .= 'modificationDate= NOW()  ';
         $sql .= 'WHERE id = :id';
 
         $query = $this->dao->prepare($sql);
@@ -153,7 +161,6 @@ class PostManagerPDO extends PostManager
         if ($post->getFeaturedImage() !== null) {
             $imageTarget = $_SERVER["DOCUMENT_ROOT"] . '/images/post/post-' . $post->getId() . '.jpg';
             $post->getFeaturedImage()->moveTo($imageTarget);
-            $post->setFeaturedImage($imageTarget);
         }
 
     }

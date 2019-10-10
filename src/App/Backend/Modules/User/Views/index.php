@@ -1,64 +1,122 @@
+<div class="col-12">
+    <a href="/admin/user-insert.html" class="btn btn-primary">Ajouer <i class="material-icons">add_circle</i></a>
+    <p class="bg-light rounded float-right p-2 colored-shadow">Utlisateurs : <?= $usersNumber ?></p>
 
+    <?php if ($currentUser->hasFlash()) { ?>
 
-
-<!-- Page Header -->
-<header class="masthead" style="background-image: url('/../img/home-bg.jpg')">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="site-heading">
-                    <h1>Djillali TIGUERCHA</h1>
-                    <span class="subheading">En mode apprentissage intensif</span>
+        <div class="alert alert-success">
+            <div class="container">
+                <div class="alert-icon">
+                    <i class="material-icons">check</i>
                 </div>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                </button>
+                <b>Success Alert:</b> <?= $currentUser->getFlash() ?>
             </div>
         </div>
-    </div>
-</header>
+
+    <?php } ?>
 
 
-<!-- Main Content -->
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-            <h2>Vous avez <?= $usersNumber ?> users</h2>
-            <hr>
-            <h3><a href="/admin/user-insert.html">Ajouter un utilisateur</a></h3>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Nom</th>
-                    <th scope="col">prénom</th>
-                    <th scope="col">Pseudo</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Role</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php  foreach($usersList as $user) { ?>
-                    <tr>
-                        <th scope="row"><?= $user->getId() ?></th>
-                        <td><?= $user->getFirstName() ?></td>
-                        <td><?= $user->getLastName() ?></td>
-                        <td><?= $user->getUserName() ?></td>
-                        <td><?= $user->getEmail() ?></td>
-                        <td><?= $user->getRole()->getName() ?></td>
-                        <td><a href="/admin/user-<?=  $user->getId() ?>.html"><i class="fa fa-eye"></i></a></td>
-                        <td><a href=""><i class="fas fa-pencil-alt"></i></a></td>
-                        <td><a href=""><i class="far fa-trash-alt"></i></a></td>
+    <div id="posts-table" class="card"></div>
 
-                    </tr>
-
-                <?php  } ?>
-
-                </tbody>
-            </table>
-
-
-        </div>
-    </div>
 </div>
+
+
+
+<?php
+
+echo '<script type="text/javascript">';
+
+echo 'var tabledata = [';
+
+foreach ($usersList as $user) {
+
+    echo ' {
+   
+    id:' . $user->getId() . ', 
+    firstName:"' . $user->getFirstName() . '", 
+    lastName:"' . $user->getLastName() . '", 
+    userName:"' . $user->getUserName() . '",
+    email:"' . $user->getEmail() . '",
+    role:"' . $user->getRole()->getName() . '",
+    
+    
+    viewLink:"/admin/user-' . $user->getId() . '.html",
+    editLink:"/admin/user-edit-' . $user->getId() . '.html",
+    deleteLink:"/admin/user-delete-' . $user->getId() . '.html", 
+    
+    viewLabel:"Voir" ,
+    editLabel:"Editer",
+    deleteLabel:"Supprimer"
+    }, ';
+
+}
+echo '];';
+
+echo '</script>';
+
+?>
+
+<script>
+
+    //create Tabulator on DOM element with id "example-table"
+    var table = new Tabulator("#posts-table", {
+        width: "100%",
+        autoResize: true,
+        data: tabledata, //assign data to table
+        layout: "fitColumns",
+        pagination: "local",
+        paginationSize: 6,
+        paginationSizeSelector: [3, 6, 8, 10],
+        movableColumns: true,
+        columns: [ //Define Table Columns
+            {title: "Id", field: "id", width: 70},
+            {title: "Nom", field: "firstName", minWidth: 120},
+            {title: "Prénom", field: "lastName", width: 120},
+            {title: "Pseudo", field: "userName", width: 120},
+            {title: "Email", field: "email", width: 220},
+            {title: "Role", field: "role", width: 120},
+            {
+                field: "viewLink",
+                width: 40,
+                headerSort: false,
+                frozen: true,
+                cssClass: "bg-light",
+                formatter: function (cell, formatterParams, onRendered) { //plain text value
+                    return "<a href='" + cell.getValue() + "'><i class=\"material-icons\">\n" + "pageview\n" + "</i></a>";
+                }
+            },
+
+            {
+                field: "editLink",
+                width: 40,
+                headerSort: false,
+                frozen: true,
+                cssClass: "bg-light",
+                formatter: function (cell, formatterParams, onRendered) { //plain text value
+                    return "<a href='" + cell.getValue() + "'><i class=\"material-icons\">\n" + "edit\n" + "</i></a>";
+                }
+
+            },
+            {
+                field: "deleteLink",
+                width: 40,
+                headerSort: false,
+                frozen: true,
+                cssClass: "bg-light",
+                formatter: function (cell, formatterParams, onRendered) { //plain text value
+                    return "<a href='" + cell.getValue() + "'><i class=\"material-icons\">\n" + "delete\n" + "</i></a>";
+                }
+
+            }
+
+        ]
+    });
+
+
+</script>
+
+
+

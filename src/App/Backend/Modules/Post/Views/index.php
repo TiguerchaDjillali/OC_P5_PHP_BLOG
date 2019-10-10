@@ -37,7 +37,7 @@ foreach ($postsList as $post) {
     title:"' . $post->getTitle() . '", 
     author:"' . $post->getUser()->getUserName() . '", 
     visible:"' . $post->isVisible() . '",
-    lastUpdate:"' . $post->getPublicationDate()->format('Y-m-d h:m:s') . '",
+    lastUpdate:"' . $post->getModificationDate()->format('Y-m-d H:i:s') . '",
     
     
     viewLink:"/post-' . $post->getId() . '.html",
@@ -57,7 +57,6 @@ echo '</script>';
 
 <script>
 
-    //create Tabulator on DOM element with id "example-table"
     var table = new Tabulator("#posts-table", {
         width: "100%",
         autoResize: true,

@@ -12,10 +12,12 @@ class User extends Entity
     protected $lastName;
     protected $userName;
     protected $email;
-    protected $logoUrl;
+    protected $profileImage = null;
     protected $password;
+    protected $confirmPassword;
     protected $hashedPassword;
     protected $role;
+    protected $description;
 
 
 
@@ -136,17 +138,17 @@ class User extends Entity
     /**
      * @return mixed
      */
-    public function getLogoUrl()
+    public function getProfileImage()
     {
-        return $this->logoUrl;
+        return $this->profileImage;
     }
 
     /**
      * @param mixed $logoUrl
      */
-    public function setLogoUrl($logoUrl)
+    public function setProfileImage($profileImage)
     {
-        $this->logoUrl = $logoUrl;
+        $this->profileImage = $profileImage;
     }
 
     /**
@@ -164,6 +166,39 @@ class User extends Entity
     {
         $this->password = $password;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConfirmPassword()
+    {
+        return $this->confirmPassword;
+    }
+
+    /**
+     * @param mixed $confirmPassword
+     */
+    public function setConfirmPassword($confirmPassword): void
+    {
+        $this->confirmPassword = $confirmPassword;
+    }
+
 
 
 

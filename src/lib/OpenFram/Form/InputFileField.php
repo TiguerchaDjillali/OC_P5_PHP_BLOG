@@ -21,7 +21,7 @@ class InputFileField extends InputField
         $widget .= "<div class=\"fileinput-preview fileinput-exists thumbnail img-raised\">";
         if ($this->value !== null && is_string($this->value)) {
 
-                $url = str_replace($_SERVER['DOCUMENT_ROOT'], '..', $this->value);
+                $url = '..'. $this->value;
                 $widget .= "<img src=\"" . $url . "\" class=\" img-fluid \" >";
 
         }
