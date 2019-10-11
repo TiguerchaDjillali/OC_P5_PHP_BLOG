@@ -1,3 +1,4 @@
+<?php var_dump($user); ?>
 <div class="row">
     <div class="col-md-6">
         <div class="card">
@@ -22,7 +23,7 @@
         <div class="card card-profile">
             <div class="card-avatar">
                 <a href="#pablo">
-                    <img class="img" src="../images/user/user-<?= ($user->getProfileImage() !== null) ? $user->getId() : 'default' ?>.jpg" />
+                    <img class="img" src="../images/user/user-<?= $user->getId() ?>.jpg" />
                 </a>
             </div>
             <div class="card-body">

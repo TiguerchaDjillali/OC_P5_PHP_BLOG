@@ -4,23 +4,35 @@
 namespace FormBuilder;
 
 
+use Model\UserManagerPDO;
+use MongoDB\Driver\Manager;
 use OpenFram\Form\FormBuilder;
 use OpenFram\Form\InputField;
 use OpenFram\Form\InputFileField;
+use OpenFram\Form\InputRadioField;
 use OpenFram\Form\SelectField;
 use OpenFram\Form\TextAreaField;
 use OpenFram\Form\Validators\HasLength;
 use OpenFram\Form\Validators\HasValidEmailFormat;
 use OpenFram\Form\Validators\IsImage;
 use OpenFram\Form\Validators\IsNotBlank;
+use OpenFram\Managers;
+use OpenFram\PDOFactory;
 
 class UserFormBuilder extends FormBuilder
 {
     public function build()
     {
+        $manager = (new Managers('PDO', PDOFactory::getMysqlConnection()))->getManagerOf('role');
+        $rolesList = $manager->getList();
+        $options = [];
+        foreach($rolesList as $role){
+            $options [$role->getId()] = $role->getName();
+        }
+
         $this->form->add(
             new InputFileField([
-                'label' => 'Image de mise en avant',
+                'label' => 'Image du profil',
                 'attributes' => [
                     'name' => 'profileImage',
                     'type' => 'file',
@@ -30,7 +42,7 @@ class UserFormBuilder extends FormBuilder
                 ]
             ]))->add(
             new InputField([
-                'openingGroupTags' => '<div class="row"><div class="col-md-6">',
+                'openingGroupTags' => '<div class="row"><div class="col-md-4">',
                 'closingGroupTags' => '</div>',
                 'label' => 'Votre prénom',
                 'attributes' => [
@@ -45,8 +57,8 @@ class UserFormBuilder extends FormBuilder
                         ['min' => 2, 'max' => 255]),
                 ]
             ]))->add(new InputField([
-            'openingGroupTags' => '<div class="col-md-6">',
-            'closingGroupTags' => '</div></div>',
+            'openingGroupTags' => '<div class="col-md-4">',
+            'closingGroupTags' => '</div>',
             'label' => 'Votre Nom',
             'attributes' => [
                 'name' => 'lastName',
@@ -60,6 +72,8 @@ class UserFormBuilder extends FormBuilder
                     ['min' => 2, 'max' => 255]),
             ]
         ]))->add(new InputField([
+            'openingGroupTags' => '<div class="col-md-4">',
+            'closingGroupTags' => '</div>',
             'label' => 'Votre Pseudo',
             'attributes' => [
                 'name' => 'userName',
@@ -72,7 +86,12 @@ class UserFormBuilder extends FormBuilder
                 new HasLength('Le champ doit avoir  entre 2 et 255 caractères',
                     ['min' => 2, 'max' => 255]),
             ]
-        ]))->add(new SelectField([
+        ]))->add(new InputRadioField([
+            'openingGroupTags' => '<div class="col-md-12">',
+            'closingGroupTags' => '</div></div>',
+            'checkedRadio' => 'Author',
+            'label' => 'Role',
+            'options' => $options,
             'attributes' => [
                 'name' => 'role'
 
@@ -96,7 +115,7 @@ class UserFormBuilder extends FormBuilder
         'label' => 'Confirmez votre Email',
         'attributes' => [
             'type' => 'email',
-            'name' => 'email',
+            'name' => 'confirmEmail',
             'pattern' => '/\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\Z/i',
         ],
         'validators' => [

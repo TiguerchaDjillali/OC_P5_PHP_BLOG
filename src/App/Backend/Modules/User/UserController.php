@@ -51,23 +51,29 @@ class UserController extends BackController
 
     private function processForm(Request $request)
     {
-        if ($request->getMethod() == 'post') {
+
+        if ($request->getMethod() == 'POST') {
 
             $file = $request->getUploadedFiles()["profileImage"];
              if($file->getError() === 4){
                  $file = null;
              }
+             $roleManager = $this->managers->getManagerOf('role');
 
              $user = new User([
                  'firstName' => $request->getParsedBody()["firstName"],
                  'lastName' => $request->getParsedBody()["lastName"],
                  'userName' => $request->getParsedBody()["userName"],
                  'email' => $request->getParsedBody()["email"],
+                 'confirmEmail' => $request->getParsedBody()["confirmEmail"],
                  'password' => $request->getParsedBody()["password"],
-                 'role' => $request->getParsedBody()["role"],
+                 'confirmPassword' => $request->getParsedBody()["confirmPassword"],
+                 'role' => $roleManager->getByAttribute('id',  $request->getParsedBody()["role"]),
                  'description' => $request->getParsedBody()["description"],
                  'profileImage' => $file,
                  ]);
+            $user->setHashedPassword();
+
 
             if (isset($request->getQueryParams()['id'])) {
                 $user->setId($request->getQueryParams()['id']);
@@ -89,7 +95,7 @@ class UserController extends BackController
         $formHandler = new FormHandler($form, $this->managers->getManagerOf('user'), $request);
 
         if ($formHandler->process()) {
-            $this->app->getCurrentUser()->setFlash($post->isNew() ? 'L\'utlisateur a bien été ajouté' : 'L\'utlisateur a bien été mis à jour');
+            $this->app->getCurrentUser()->setFlash($user->isNew() ? 'L\'utlisateur a bien été ajouté' : 'L\'utlisateur a bien été mis à jour');
             $this->app->redirect('/admin/users');
         }
 

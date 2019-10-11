@@ -31,7 +31,7 @@ class InputFileField extends InputField
         $widget .= "<span class=\"btn btn-raised btn-round btn-default btn-file\">";
         $widget .= " <span class=\"fileinput-new\">Select image</span>";
         $widget .= " <span class=\"fileinput-exists\">Change</span>";
-        $widget .= "<input type=\"file\" id=\"myFile\" value='' name=\"featuredImage\" />";
+        $widget .= "<input type=\"file\" id=\"myFile\" value='' name=\"".$this->attributes['name'] ."\" />";
         $widget .= "</span>";
         $widget .= "<a href=\"#\" class=\"btn btn-danger btn-round fileinput-exists\" data-dismiss=\"fileinput\"><i class=\"fa fa-times\"></i> Remove</a>";
         $widget .= "</div>";

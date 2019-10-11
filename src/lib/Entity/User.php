@@ -12,6 +12,7 @@ class User extends Entity
     protected $lastName;
     protected $userName;
     protected $email;
+    protected $confirmEmail;
     protected $profileImage = null;
     protected $password;
     protected $confirmPassword;
@@ -197,6 +198,22 @@ class User extends Entity
     public function setConfirmPassword($confirmPassword): void
     {
         $this->confirmPassword = $confirmPassword;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConfirmEmail()
+    {
+        return $this->confirmEmail;
+    }
+
+    /**
+     * @param mixed $confirmEmail
+     */
+    public function setConfirmEmail($confirmEmail): void
+    {
+        $this->confirmEmail = $confirmEmail;
     }
 
 

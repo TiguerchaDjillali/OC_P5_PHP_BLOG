@@ -7,7 +7,6 @@
 
         <div class="container">
             <div class="row">
-                <?php var_dump($post);?>
 
                 <h3 class="col-md-4"><?= $post->getSubtitle() ?></h3>
 

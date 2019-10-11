@@ -66,6 +66,15 @@ class UserManagerPDO extends UserManager
 
             $user->setRole($roleManager->getByAttribute('id', $user->roleId));
 
+            $imagePath = $_SERVER["DOCUMENT_ROOT"] . '/images/user/user-' . $user->getId() . '.jpg';
+
+            if (file_exists($imagePath)) {
+                $user->getProfileImage('/images/user/user-' . $user->getId() . '.jpg');
+            }else{
+                $user->getProfileImage('/images/user/user-default.jpg');
+            }
+
+
             return $user;
         }
 
@@ -75,21 +84,27 @@ class UserManagerPDO extends UserManager
 
     public function add (User $user)
     {
-        $sql = 'INSERT INTO User (firstName, lastName, userName, hashedPassword, description, profileImage ) VALUES ';
-        $sql .= '(:firstName, :lastName, :userName, :, :hashedPassword ) ';
+        $sql = 'INSERT INTO User (firstName, lastName, userName, email, hashedPassword, description, roleId ) VALUES ';
+        $sql .= '(:firstName, :lastName, :userName, :email, :hashedPassword, :description, :roleId ) ';
 
         $query = $this->dao->prepare($sql);
         $query->bindValue(':firstName', $user->getFirstName());
         $query->bindValue(':lastName', $user->getLastName());
         $query->bindValue(':userName', $user->getUserName());
-        $query->bindValue(':', $user->getEmail());
+        $query->bindValue(':email', $user->getEmail());
         $query->bindValue(':hashedPassword', $user->getHashedPassword());
         $query->bindValue(':description', $user->getDescription());
-        $query->bindValue(':profileImage', $user->getProfileImage());
+        $query->bindValue(':roleId', $user->getRole()->getId());
 
         $query->execute();
 
         $user->setId($this->dao->lastInsertId());
+
+
+        if ($user->getProfileImage() !== null) {
+            $imageTarget = $_SERVER["DOCUMENT_ROOT"] . '/images/user/user-' . $this->dao->lastInsertId() . '.jpg';
+            $user->getProfileImage()->moveTo($imageTarget);
+        }
     }
 
 
