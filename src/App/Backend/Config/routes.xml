@@ -24,6 +24,14 @@
     <route url="/admin/users" module="User" action="Index" />
     <route url="/admin/user-([0-9]+)\.html" module="User" action="Show" vars="id"/>
     <route url="/admin/user-insert\.html" module="User" action="Insert" />
+    <route url="/admin/user-delete-([0-9]+)\.html" module="User" action="Delete" vars="id"/>
+
+
+    <route url="/admin/comments" module="Comment" action="Index" />
+    <route url="/admin/comment-moderate-([0-9]+)\.html" module="Comment" action="Moderate" vars="id"/>
+
+
+
 
 
 </routes>

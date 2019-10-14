@@ -31,8 +31,14 @@
 
             <li class="nav-item ">
                 <a class="nav-link" href="/admin/posts">
-                    <i class="material-icons">Posts</i>
-                    <p>posts</p>
+                    <i class="material-icons">Articles</i>
+                    <p>Articles</p>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" href="/admin/comments">
+                    <i class="material-icons">Comments</i>
+                    <p>Commentaires</p>
                 </a>
             </li>
             <li class="nav-item ">

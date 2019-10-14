@@ -15,6 +15,7 @@ class Comment extends Entity
     protected $post;
     protected $user;
     protected $publicationDate;
+    protected $valid;
 
     /**
      * @return mixed
@@ -88,6 +89,23 @@ class Comment extends Entity
     {
         $this->publicationDate = $publicationDate;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getValid()
+    {
+        return $this->valid;
+    }
+
+    /**
+     * @param mixed $valid
+     */
+    public function setValid($valid): void
+    {
+        $this->valid = $valid;
+    }
+
 
 
 }

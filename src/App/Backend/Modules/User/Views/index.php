@@ -44,7 +44,7 @@ foreach ($usersList as $user) {
     
     
     viewLink:"/admin/user-' . $user->getId() . '.html",
-    editLink:"/admin/user-edit-' . $user->getId() . '.html",
+    editLink:"/admin/user-' . $user->getId() . '.html",
     deleteLink:"/admin/user-delete-' . $user->getId() . '.html", 
     
     viewLabel:"Voir" ,

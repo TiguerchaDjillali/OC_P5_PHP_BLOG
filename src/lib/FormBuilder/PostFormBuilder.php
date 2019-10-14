@@ -36,8 +36,7 @@ class PostFormBuilder extends FormBuilder
                 'attributes' => [
                     'name' => 'title',
                     'type' => 'text',
-                    'maxlength' => '255',
-                    'minlength' => '2'
+                    'required' => ''
                 ],
                 'validators' => [
                     new IsNotBlank('Ce champs est obligatoire'),

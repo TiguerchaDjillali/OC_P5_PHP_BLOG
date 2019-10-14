@@ -49,6 +49,7 @@ class UserController extends BackController
         $this->page->addVar('title', 'Ajouter un utilisateur');
     }
 
+
     private function processForm(Request $request)
     {
 
@@ -104,5 +105,22 @@ class UserController extends BackController
 
     }
 
+    public function executeDelete(Request $request)
+    {
+        $this->page->addVar('title', 'Supprimer un utlisateur');
+        $post = $this->managers->getManagerOf('user')->getByAttribute('id', $request->getQueryParams()['id']);
+        $this->page->addVar('user', $post);
+
+
+        if ($request->getMethod() == 'POST') {
+            $id = $this->app->getRequest()->getQueryParams('GET')['id'];
+
+            $this->managers->getManagerOf('user')->delete($id);
+
+            $this->app->getCurrentUser()->setFlash('L\'utlisateur a bien été supprimé');
+            $this->app->redirect('/admin/users');
+        }
+
+    }
 
 }

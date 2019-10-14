@@ -64,7 +64,6 @@ class PostController extends BackController
 
         if (empty($post)) {
 
-
             $this->page->getApp()->redirect404("L'article n'existe pas");
 
         }
@@ -80,7 +79,6 @@ class PostController extends BackController
 
         $this->page->addVar('comments', $comments);
         $this->executeInsertComment($request);
-
 
     }
 

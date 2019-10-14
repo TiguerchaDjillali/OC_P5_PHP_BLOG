@@ -72,7 +72,7 @@ class PostController extends BackController
             // Suppression des commentaire est prise en charge par la base de données
             $this->managers->getManagerOf('post')->delete($id);
 
-            $this->app->getCurrentUser()->setFlash('L\'article à bien été supprimé');
+            $this->app->getCurrentUser()->setFlash('L\'article a bien été supprimé');
             $this->app->redirect('/admin/posts');
         }
 
@@ -96,25 +96,25 @@ class PostController extends BackController
         if ($request->getMethod() == 'POST') {
 
             $file = $request->getUploadedFiles()["featuredImage"];
-            if($file->getError() === 4){
+            if ($file->getError() === 4) {
                 $file = null;
             }
 
-                $post = new Post([
-                    'title' => $request->getParsedBody()['title'],
-                    'subtitle' => $request->getParsedBody()['subtitle'],
-                    'user' => $this->app->getCurrentUser()->getAttribute('user'),
-                    'content' => $request->getParsedBody()['content'],
-                    'visible' => $request->getParsedBody()['save'],
-                    'featuredImage' => $file
-                ]);
+            $post = new Post([
+                'title' => $request->getParsedBody()['title'],
+                'subtitle' => $request->getParsedBody()['subtitle'],
+                'user' => $this->app->getCurrentUser()->getAttribute('user'),
+                'content' => $request->getParsedBody()['content'],
+                'visible' => $request->getParsedBody()['save'],
+                'featuredImage' => $file
+            ]);
 
 
             if (isset($request->getQueryParams()['id'])) {
                 $post->setId($request->getQueryParams()['id']);
             }
 
-                //var_dump($file->getClientFileName());
+            //var_dump($file->getClientFileName());
             //var_dump($file->getClientMediaType());
             //var_dump($file->getSize());
 

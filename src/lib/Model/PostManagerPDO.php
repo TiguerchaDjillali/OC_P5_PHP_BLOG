@@ -176,5 +176,11 @@ class PostManagerPDO extends PostManager
 
         $query->execute();
 
+        $imagePath = $_SERVER["DOCUMENT_ROOT"] . '/images/post/post-' . $id . '.jpg';
+
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+
     }
 }

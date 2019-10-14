@@ -69,9 +69,9 @@ class UserManagerPDO extends UserManager
             $imagePath = $_SERVER["DOCUMENT_ROOT"] . '/images/user/user-' . $user->getId() . '.jpg';
 
             if (file_exists($imagePath)) {
-                $user->getProfileImage('/images/user/user-' . $user->getId() . '.jpg');
+                $user->setProfileImage('/images/user/user-' . $user->getId() . '.jpg');
             }else{
-                $user->getProfileImage('/images/user/user-default.jpg');
+                $user->setProfileImage('/images/user/user-default.jpg');
             }
 
 
@@ -107,5 +107,58 @@ class UserManagerPDO extends UserManager
         }
     }
 
+
+    public function update(User $user)
+    {
+        $sql = "UPDATE User SET ";
+        $sql .= "firstName = :firstName, ";
+        $sql .= "lastName = :lastName, ";
+        $sql .= "userName = :userName, ";
+        $sql .= "email = :email, ";
+        $sql .= "description = :description, ";
+        $sql .= "roleId = :roleId, ";
+        $sql .= "hashedPassword = :hashedPassword ";
+        $sql .= "WHERE id = :id ";
+
+        var_dump($sql);
+
+        $query = $this->dao->prepare($sql);
+
+        $query->bindValue(':id', $user->getId(), \PDO::PARAM_INT);
+        $query->bindValue(':firstName', $user->getFirstName());
+        $query->bindValue(':lastName', $user->getLastName());
+        $query->bindValue(':userName', $user->getUserName());
+        $query->bindValue(':email', $user->getEmail());
+        $query->bindValue(':description', $user->getDescription());
+        $query->bindValue(':roleId', $user->getRole()->getId());
+        $query->bindValue(':hashedPassword', $user->getHashedPassword());
+
+        $query->execute();
+
+        if ($user->getProfileImage() !== null) {
+            $imageTarget = $_SERVER["DOCUMENT_ROOT"] . '/images/user/user-' . $user->getId() . '.jpg';
+            $user->getProfileImage()->moveTo($imageTarget);
+        }
+
+    }
+
+    public function delete($id)
+    {
+
+        $sql = 'DELETE FROM user ';
+        $sql .= 'WHERE id=:id ';
+
+        $query = $this->dao->prepare($sql);
+        $query->bindValue(':id', $id, \PDO::PARAM_INT);
+
+        $query->execute();
+
+        $imagePath = $_SERVER["DOCUMENT_ROOT"] . '/images/user/user-' . $id . '.jpg';
+
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        }
+
+    }
 
 }

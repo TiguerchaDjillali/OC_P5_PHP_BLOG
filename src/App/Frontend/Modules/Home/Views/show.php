@@ -1,10 +1,26 @@
 <div class="page-header header-filter clear-filter purple-filter" data-parallax="true"
      style="background-image: url('./assets/img/bg2.jpg');  background-position: center;">
     <div class="container">
-        <div class="row">
             <div class="col-md-8 ml-auto mr-auto">
+
+                    <?php if ($currentUser->hasFlash()) { ?>
+
+                        <div class="alert alert-danger">
+                            <div class="container">
+                                <div class="alert-icon">
+                                    <i class="material-icons">check</i>
+                                </div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true"><i class="material-icons">clear</i></span>
+                                </button>
+                                <b>Alert:</b> <?= $currentUser->getFlash() ?>
+                            </div>
+                        </div>
+
+                    <?php } ?>
+
                 <div class="brand text-center">
-                    <h1>Future Developpeur php Symfony</h1>
+                    <h1>Futur Developpeur php Symfony</h1>
                     <h3>En apprentissage intensif à OpenClassrooms</h3>
 
                     <a class="btn btn-primary btn-lg btn-round" href="docs/cv.pdf" download>
@@ -16,6 +32,8 @@
         </div>
     </div>
 </div>
+
+
 
 
 

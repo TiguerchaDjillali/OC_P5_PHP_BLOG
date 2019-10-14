@@ -5,6 +5,17 @@
 .small-header .page-header {
     height: 50vh;
 }
+.small-header .admin-header {
+    min-height: 50vh;
+    max-height: 1000px;
+    display: flex !important;
+    height: 100%;
+    padding: 0;
+    width: 100%;
+    color: #fff;
+    position: relative;
+    padding-top: 2rem;
+}
 
 .dropdown-toggle:after {
     display: none;

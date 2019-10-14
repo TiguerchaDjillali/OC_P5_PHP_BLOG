@@ -1,4 +1,4 @@
-<div class="col-md-8">
+<div class="col-md-12">
     <div class="card">
         <div class="card-header card-header-primary">
             <h4 class="card-title"><?= $title ?></h4>
