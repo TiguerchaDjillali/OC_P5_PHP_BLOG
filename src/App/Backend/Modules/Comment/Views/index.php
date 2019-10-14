@@ -1,5 +1,6 @@
 <div class="col-12">
-    <p class="bg-light rounded float-right p-2 mx-2 colored-shadow">En attente de validation: <?= $nonValidCommentsNumber ?></p>
+    <p class="bg-light rounded float-right p-2 mx-2 colored-shadow">En attente de
+        validation: <?= $nonValidCommentsNumber ?></p>
     <p class="bg-light rounded float-right p-2 mx-2 colored-shadow">Commentaires: <?= $commentsNumber ?></p>
 
     <?php if ($currentUser->hasFlash()) { ?>
@@ -24,34 +25,9 @@
 </div>
 
 
-<?php
-
-echo '<script type="text/javascript">';
-echo 'var tabledata = [';
-
-foreach ($commentsList as $comment) {
-
-    echo ' {
-    
-    id:' . $comment->getId() . ', 
-    postTitle:"' . $comment->getPost()->getTitle() . '", 
-    content:"' . $comment->getContent() . '", 
-    author:"' . $comment->getUser()->getUserName() . '", 
-    valid:"' . $comment->getValid() . '",
-    publicationDate:"' . $comment->getPublicationDate()->format('Y-m-d H:i:s') . '",
-    
-    
-    editLink:"/admin/comment-moderate-' . $comment->getId() . '.html#comment-'  .  $comment->getId() . '" ,
-    }, ';
-
-}
-echo '];';
-echo '</script>';
-
-?>
-
 <script>
 
+    var tabledata = <?= $dataTable ?>;
     var table = new Tabulator("#comments-table", {
         width: "100%",
         autoResize: true,
@@ -64,7 +40,13 @@ echo '</script>';
         columns: [ //Define Table Columns
             {title: "Id", field: "id", width: 70},
             {title: "Article", field: "postTitle", minWidth: 160},
-            {title: "Commentaire", field: "content", minWidth: 160},
+            {
+                title: "Commentaire", field: "content", minWidth: 160, formatter: "link", formatterParams: {
+                    url: function (row) {
+                        return row.getData().editLink;
+                    },
+                }
+            },
             {title: "Auteur", field: "author", width: 120},
             {
                 title: "Validé?",
@@ -88,7 +70,7 @@ echo '</script>';
                 width: 120,
                 headerSort: false,
                 frozen: true,
-                cssClass:"bg-light",
+                cssClass: "bg-light",
                 formatter: function (cell, formatterParams, onRendered) { //plain text value
                     return "<a href='" + cell.getValue() + "'><i class=\"material-icons\">\n" + "settings_applications\n" + "</i></a>";
                 }
