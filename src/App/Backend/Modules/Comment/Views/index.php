@@ -1,7 +1,7 @@
 <div class="col-12">
     <p class="bg-light rounded float-right p-2 mx-2 colored-shadow">En attente de
-        validation: <?= $nonValidCommentsNumber ?></p>
-    <p class="bg-light rounded float-right p-2 mx-2 colored-shadow">Commentaires: <?= $commentsNumber ?></p>
+        validation: <?= $nonValidCommentsNumber ?? '' ?></p>
+    <p class="bg-light rounded float-right p-2 mx-2 colored-shadow">Commentaires: <?= $commentsNumber ?? 0 ?></p>
 
     <?php if ($currentUser->hasFlash()) { ?>
 

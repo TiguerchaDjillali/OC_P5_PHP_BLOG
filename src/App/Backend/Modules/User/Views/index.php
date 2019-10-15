@@ -23,44 +23,8 @@
 
 </div>
 
-
-
-<?php
-
-echo '<script type="text/javascript">';
-
-echo 'var tabledata = [';
-
-foreach ($usersList as $user) {
-
-    echo ' {
-   
-    id:' . $user->getId() . ', 
-    firstName:"' . $user->getFirstName() . '", 
-    lastName:"' . $user->getLastName() . '", 
-    userName:"' . $user->getUserName() . '",
-    email:"' . $user->getEmail() . '",
-    role:"' . $user->getRole()->getName() . '",
-    
-    
-    viewLink:"/admin/user-' . $user->getId() . '.html",
-    editLink:"/admin/user-' . $user->getId() . '.html",
-    deleteLink:"/admin/user-delete-' . $user->getId() . '.html", 
-    
-    viewLabel:"Voir" ,
-    editLabel:"Editer",
-    deleteLabel:"Supprimer"
-    }, ';
-
-}
-echo '];';
-
-echo '</script>';
-
-?>
-
 <script>
-
+    var tabledata = <?= $dataTable ?>
     //create Tabulator on DOM element with id "example-table"
     var table = new Tabulator("#posts-table", {
         width: "100%",
@@ -114,7 +78,6 @@ echo '</script>';
 
         ]
     });
-
 
 </script>
 

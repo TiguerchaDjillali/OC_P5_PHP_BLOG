@@ -53,6 +53,22 @@ class PostController extends BackController
 
         $manager = $this->managers->getManagerOf('Post');
 
+        $dataTable = [];
+        foreach ($manager->getList() as $post) {
+            $dataTable[] = [
+                'id' => $post->getId(),
+                'title' => $post->getTitle(),
+                'author' => $post->getUser()->getUserName(),
+                'visible' => $post->isVisible(),
+                'lastUpdate' => $post->getModificationDate()->format('Y-m-d H:i:s'),
+                'viewLink' => '/post-' . $post->getId() . '.html',
+                'editLink' => '/admin/post-edit-' . $post->getId() . '.html',
+                'deleteLink' => '/admin/post-delete-' . $post->getId() . '.html',
+            ];
+        }
+
+
+        $this->page->addVar('dataTable', json_encode($dataTable));
         $this->page->addVar('postsList', $manager->getList());
         $this->page->addVar('postsNumber', $manager->count());
 

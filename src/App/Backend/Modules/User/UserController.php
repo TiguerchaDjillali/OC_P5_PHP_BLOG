@@ -19,6 +19,27 @@ class UserController extends BackController
 
         $manager = $this->managers->getManagerOf('User');
 
+
+        $dataTable = [];
+        foreach ($manager->getList() as $user) {
+            $dataTable[] = [
+                'id' => $user->getId(),
+                'firstName' => $user->getFirstName(),
+                'lastName' => $user->getLastName(),
+                'userName' => $user->getUserName(),
+                'email' => $user->getEmail(),
+                'role' => $user->getRole()->getName(),
+
+
+                'viewLink' => '/admin/user-' . $user->getId() . '.html',
+                'editLink' => '/admin/user-' . $user->getId() . '.html',
+                'deleteLink' => '/admin/user-delete-' . $user->getId() . '.html',
+            ];
+        }
+
+
+        $this->page->addVar('dataTable', json_encode($dataTable));
+
         $this->page->addVar('usersList', $manager->getList());
         $this->page->addVar('usersNumber', $manager->count());
     }
@@ -56,28 +77,31 @@ class UserController extends BackController
         if ($request->getMethod() == 'POST') {
 
             $file = $request->getUploadedFiles()["profileImage"];
-             if($file->getError() === 4){
-                 $file = null;
-             }
-             $roleManager = $this->managers->getManagerOf('role');
+            if ($file->getError() === 4) {
+                $file = null;
+            }
+            $roleManager = $this->managers->getManagerOf('role');
 
-             $user = new User([
-                 'firstName' => $request->getParsedBody()["firstName"],
-                 'lastName' => $request->getParsedBody()["lastName"],
-                 'userName' => $request->getParsedBody()["userName"],
-                 'email' => $request->getParsedBody()["email"],
-                 'confirmEmail' => $request->getParsedBody()["confirmEmail"],
-                 'password' => $request->getParsedBody()["password"],
-                 'confirmPassword' => $request->getParsedBody()["confirmPassword"],
-                 'role' => $roleManager->getByAttribute('id',  $request->getParsedBody()["role"]),
-                 'description' => $request->getParsedBody()["description"],
-                 'profileImage' => $file,
-                 ]);
+            $user = new User([
+                'firstName' => $request->getParsedBody()["firstName"],
+                'lastName' => $request->getParsedBody()["lastName"],
+                'userName' => $request->getParsedBody()["userName"],
+                'email' => $request->getParsedBody()["email"],
+                'confirmEmail' => $request->getParsedBody()["confirmEmail"],
+                'password' => $request->getParsedBody()["password"],
+                'confirmPassword' => $request->getParsedBody()["confirmPassword"],
+                'role' => $roleManager->getByAttribute('id', $request->getParsedBody()["role"]),
+                'description' => $request->getParsedBody()["description"],
+                'profileImage' => $file,
+            ]);
             $user->setHashedPassword();
 
 
             if (isset($request->getQueryParams()['id'])) {
                 $user->setId($request->getQueryParams()['id']);
+                if($request->getParsedBody()["password"] ==''){
+                    $user->setPasswordRequired(false);
+                }
             }
 
 

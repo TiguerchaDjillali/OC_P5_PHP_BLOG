@@ -12,7 +12,7 @@ class UserManagerPDO extends UserManager
     public function getList($offset = -1, $limit = -1)
     {
         $sql = 'SELECT * FROM User ';
-        if($offset != -1 || $limit != -1) {
+        if ($offset != -1 || $limit != -1) {
 
             $sql .= ' LIMIT ' . (int)$limit . ' OFFSET ' . (int)$offset;
         }
@@ -28,7 +28,7 @@ class UserManagerPDO extends UserManager
 
         foreach ($usersList as $user) {
 
-           $user->setRole($roleManager->getByAttribute('id', $user->roleId));
+            $user->setRole($roleManager->getByAttribute('id', $user->roleId));
 
         }
 
@@ -46,13 +46,12 @@ class UserManagerPDO extends UserManager
     }
 
 
-
     public function getByAttribute($attribute, $value)
     {
         $value = $value ?? 1;// TODO:
 
         $sql = 'SELECT * FROM User ';
-        $sql .= 'WHERE ' . $attribute . ' = \'' . $value. '\' ';
+        $sql .= 'WHERE ' . $attribute . ' = \'' . $value . '\' ';
 
         $query = $this->dao->query($sql);
 
@@ -70,7 +69,7 @@ class UserManagerPDO extends UserManager
 
             if (file_exists($imagePath)) {
                 $user->setProfileImage('/images/user/user-' . $user->getId() . '.jpg');
-            }else{
+            } else {
                 $user->setProfileImage('/images/user/user-default.jpg');
             }
 
@@ -82,7 +81,7 @@ class UserManagerPDO extends UserManager
 
     }
 
-    public function add (User $user)
+    public function add(User $user)
     {
         $sql = 'INSERT INTO User (firstName, lastName, userName, email, hashedPassword, description, roleId ) VALUES ';
         $sql .= '(:firstName, :lastName, :userName, :email, :hashedPassword, :description, :roleId ) ';
@@ -116,11 +115,12 @@ class UserManagerPDO extends UserManager
         $sql .= "userName = :userName, ";
         $sql .= "email = :email, ";
         $sql .= "description = :description, ";
-        $sql .= "roleId = :roleId, ";
-        $sql .= "hashedPassword = :hashedPassword ";
+        if ($user->isPasswordRequired()) {
+            $sql .= "hashedPassword = :hashedPassword, ";
+        }
+        $sql .= "roleId = :roleId ";
         $sql .= "WHERE id = :id ";
 
-        var_dump($sql);
 
         $query = $this->dao->prepare($sql);
 
@@ -131,7 +131,10 @@ class UserManagerPDO extends UserManager
         $query->bindValue(':email', $user->getEmail());
         $query->bindValue(':description', $user->getDescription());
         $query->bindValue(':roleId', $user->getRole()->getId());
-        $query->bindValue(':hashedPassword', $user->getHashedPassword());
+
+        if ($user->isPasswordRequired()) {
+            $query->bindValue(':hashedPassword', $user->getHashedPassword());
+        }
 
         $query->execute();
 

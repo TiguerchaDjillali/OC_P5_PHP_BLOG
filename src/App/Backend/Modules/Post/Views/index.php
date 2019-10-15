@@ -23,40 +23,8 @@
 
 </div>
 
-
-<?php
-
-echo '<script type="text/javascript">';
-echo 'var tabledata = [';
-
-foreach ($postsList as $post) {
-
-    echo ' {
-    
-    id:' . $post->getId() . ', 
-    title:"' . $post->getTitle() . '", 
-    author:"' . $post->getUser()->getUserName() . '", 
-    visible:"' . $post->isVisible() . '",
-    lastUpdate:"' . $post->getModificationDate()->format('Y-m-d H:i:s') . '",
-    
-    
-    viewLink:"/post-' . $post->getId() . '.html",
-    editLink:"/admin/post-edit-' . $post->getId() . '.html",
-    deleteLink:"/admin/post-delete-' . $post->getId() . '.html", 
-    
-    viewLabel:"Voir" ,
-    editLabel:"Editer",
-    deleteLabel:"Supprimer"
-    }, ';
-
-}
-echo '];';
-echo '</script>';
-
-?>
-
 <script>
-
+    var tabledata = <?= $dataTable ?>;
     var table = new Tabulator("#posts-table", {
         width: "100%",
         autoResize: true,

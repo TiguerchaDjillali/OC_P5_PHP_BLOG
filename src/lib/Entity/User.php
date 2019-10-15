@@ -16,6 +16,7 @@ class User extends Entity
     protected $profileImage = null;
     protected $password;
     protected $confirmPassword;
+    protected $passwordRequired = true;
     protected $hashedPassword;
     protected $role;
     protected $description;
@@ -214,6 +215,22 @@ class User extends Entity
     public function setConfirmEmail($confirmEmail): void
     {
         $this->confirmEmail = $confirmEmail;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPasswordRequired(): bool
+    {
+        return $this->passwordRequired;
+    }
+
+    /**
+     * @param bool $passwordRequired
+     */
+    public function setPasswordRequired(bool $passwordRequired): void
+    {
+        $this->passwordRequired = $passwordRequired;
     }
 
 
