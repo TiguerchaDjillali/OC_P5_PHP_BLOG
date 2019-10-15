@@ -25,6 +25,7 @@
     <route url="/admin/user-([0-9]+)\.html" module="User" action="Show" vars="id"/>
     <route url="/admin/user-insert\.html" module="User" action="Insert" />
     <route url="/admin/user-delete-([0-9]+)\.html" module="User" action="Delete" vars="id"/>
+    <route url="/admin/user-edit-([0-9]+)\.html" module="User" action="Edit" vars="id"/>
 
 
     <route url="/admin/comments" module="Comment" action="Index" />

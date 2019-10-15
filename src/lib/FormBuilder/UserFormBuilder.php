@@ -132,10 +132,9 @@ class UserFormBuilder extends FormBuilder
                     'maxlength' => '255',
                     'minlength' => '2'
                 ],
-                'validators' =>
-                    ($this->form->getEntity()->isPasswordRequired()) ? [
+                'validators' => ($this->form->getEntity()->isPasswordRequired()) ? [
                         new IsNotBlank('Ce champs est obligatoire')
-                    ] : null
+                    ] : []
             ]))->add(new InputField([
             'openingGroupTags' => '<div class="col-md-6">',
             'closingGroupTags' => '</div></div>',
@@ -148,7 +147,7 @@ class UserFormBuilder extends FormBuilder
             ],
             'validators' => ($this->form->getEntity()->isPasswordRequired()) ? [
                 new IsConfirmed('Les mots de passes ne correspendent pas', $this->form->fields[7]->getValue())
-            ] : null
+            ] : []
         ]))->add(
             new TextAreaField([
                 'label' => 'Description',

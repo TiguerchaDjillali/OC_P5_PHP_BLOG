@@ -93,9 +93,9 @@ abstract class Field
     }
 
     /**
-     * @param array $validators
+     * @param array|null $validators
      */
-    public function setValidators(?array $validators)
+    public function setValidators(array $validators)
     {
         foreach ($validators as $validator) {
             if ($validator instanceof Validator && !in_array($validator, $this->validators)) {

@@ -32,7 +32,7 @@ class UserController extends BackController
 
 
                 'viewLink' => '/admin/user-' . $user->getId() . '.html',
-                'editLink' => '/admin/user-' . $user->getId() . '.html',
+                'editLink' => '/admin/user-edit-' . $user->getId() . '.html',
                 'deleteLink' => '/admin/user-delete-' . $user->getId() . '.html',
             ];
         }
@@ -42,6 +42,25 @@ class UserController extends BackController
 
         $this->page->addVar('usersList', $manager->getList());
         $this->page->addVar('usersNumber', $manager->count());
+    }
+
+    public function executeEdit(Request $request)
+    {
+        $manager = $this->managers->getManagerOf('User');
+
+        $user = $manager->getByAttribute('id', $request->getQueryParams('GET')['id']);
+
+        if (empty($user)) {
+
+            $this->page->getApp()->redirect404("L'article n'existe pas");
+
+        }
+
+        $this->page->addVar('title', $user->getUserName());
+        $this->page->addVar('user', $user);
+
+        $this->processForm($request);
+
     }
 
     public function executeShow(Request $request)
