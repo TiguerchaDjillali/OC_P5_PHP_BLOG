@@ -22,6 +22,9 @@ class PostManagerPDO extends PostManager
         if (isset($options['visible'])) {
             $sql .= ' WHERE visible =' . $options['visible'] . ' ';
         }
+        if (isset($options['userId'])) {
+            $sql .= ' WHERE userId =' . $options['userId'] . ' ';
+        }
         $sql .= 'ORDER BY publicationDate DESC ';
         if (isset($options['limit'])) {
             $sql .= ' LIMIT ' . (int)$options['limit'] . ' ';
@@ -107,6 +110,9 @@ class PostManagerPDO extends PostManager
         $sql = 'SELECT count(*) FROM Post ';
         if (isset($options['visible'])) {
             $sql .= ' WHERE visible =' . $options['visible'] . ' ';
+        }
+        if (isset($options['userId'])) {
+            $sql .= ' WHERE userId =' . $options['userId'] . ' ';
         }
         $query = $this->dao->query($sql);
 

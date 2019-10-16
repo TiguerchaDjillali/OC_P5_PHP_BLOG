@@ -20,6 +20,13 @@ class PostController extends BackController
     public function executePreview(Request $request)
     {
         $id = $this->app->getRequest()->getQueryParams('GET')['id'];
+        $post = $this->managers->getManagerOf('Post')->getByAttribute('id', $id);
+        $currentUser = $this->app->getCurrentUser()->getAttribute('user');
+
+        if($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $post->getUser()->getId() && $post->isVisible() == 0){
+            $this->app->getCurrentUser()->setFlash('Accès refusé');
+            $this->app->redirect('/admin/posts');
+        }
 
         $this->app->getResponse()->redirect('/post-' . $id . '.html');
     }
@@ -29,7 +36,7 @@ class PostController extends BackController
     {
         $manager = $this->managers->getManagerOf('Post');
 
-        $post = $manager->getByAttribute('id', $request->getRequest()->getQueryParams('GET')['id']);
+        $post = $manager->getByAttribute('id', $request->getQueryParams('GET')['id']);
 
         if (empty($post)) {
 
@@ -38,11 +45,19 @@ class PostController extends BackController
 
         }
 
+        $currentUser = $this->app->getCurrentUser()->getAttribute('user');
+
+        // access controle
+        if($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $post->getUser()->getId()){
+            $this->app->getCurrentUser()->setFlash('Accès refusé');
+            $this->app->redirect('/admin/posts');
+        }
+
         $comments = $this->managers->getManagerOf('Comment')->getListOF($post);
 
         $this->page->addVar('title', $post->getTitle());
         $this->page->addVar('post', $post);
-        $this->page->addVar('comments', $comments);
+        $this->page->addVar('commentsList', $comments);
 
     }
 
@@ -53,15 +68,23 @@ class PostController extends BackController
 
         $manager = $this->managers->getManagerOf('Post');
 
+        if($this->app->getCurrentUser()->getAttribute('user')->getRole()->getId() != 1){
+            $postsList = $manager->getList(['userId' => $this->app->getCurrentUser()->getAttribute('user')->getId()]);
+            $postsNumber = $manager->count(['userId' =>  $this->app->getCurrentUser()->getAttribute('user')->getId()]);
+        }else {
+            $postsList = $manager->getList() ;
+            $postsNumber = $manager->count();
+        }
+
         $dataTable = [];
-        foreach ($manager->getList() as $post) {
+        foreach ($postsList as $post) {
             $dataTable[] = [
                 'id' => $post->getId(),
                 'title' => $post->getTitle(),
                 'author' => $post->getUser()->getUserName(),
                 'visible' => $post->isVisible(),
                 'lastUpdate' => $post->getModificationDate()->format('Y-m-d H:i:s'),
-                'viewLink' => '/post-' . $post->getId() . '.html',
+                'viewLink' => '/admin/post-' . $post->getId() . '.html',
                 'editLink' => '/admin/post-edit-' . $post->getId() . '.html',
                 'deleteLink' => '/admin/post-delete-' . $post->getId() . '.html',
             ];
@@ -69,8 +92,8 @@ class PostController extends BackController
 
 
         $this->page->addVar('dataTable', json_encode($dataTable));
-        $this->page->addVar('postsList', $manager->getList());
-        $this->page->addVar('postsNumber', $manager->count());
+        $this->page->addVar('postsList', $postsList);
+        $this->page->addVar('postsNumber', $postsNumber);
 
 
     }
@@ -79,8 +102,24 @@ class PostController extends BackController
     {
         $this->page->addVar('title', 'Supprimer un article');
         $post = $this->managers->getManagerOf('post')->getByAttribute('id', $request->getQueryParams()['id']);
-        $this->page->addVar('post', $post);
 
+        if (empty($post)) {
+
+            $this->page->addVar('title', 'Erreur 404');
+            $this->app->redirect404();
+
+        }
+
+        $currentUser = $this->app->getCurrentUser()->getAttribute('user');
+
+
+       // access controle
+        if($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $post->getUser()->getId()){
+            $this->app->getCurrentUser()->setFlash('Accès refusé');
+            $this->app->redirect('/admin/posts');
+        }
+
+            $this->page->addVar('post', $post);
 
         if ($request->getMethod() == 'POST') {
             $id = $this->app->getRequest()->getQueryParams('GET')['id'];
@@ -102,6 +141,8 @@ class PostController extends BackController
 
     public function executeEdit(Request $request)
     {
+
+
         $this->processForm($request);
         $this->page->addVar('title', 'Modifier un article');
     }
@@ -137,8 +178,18 @@ class PostController extends BackController
 
         } else {
             if (isset($request->getQueryParams()['id'])) {
-
                 $post = $this->managers->getManagerOf('post')->getByAttribute('id', $request->getQueryParams()['id']);
+                if (empty($post)) {
+                    $this->page->addVar('title', 'Erreur 404');
+                    $this->app->redirect404();
+                }
+                $currentUser = $this->app->getCurrentUser()->getAttribute('user');
+                // access controle
+                if($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $post->getUser()->getId()){
+                    $this->app->getCurrentUser()->setFlash('Accès refusé');
+                    $this->app->redirect('/admin/posts');
+                }
+
             } else {
                 $post = new Post;
             }

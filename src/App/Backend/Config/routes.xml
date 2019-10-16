@@ -9,7 +9,7 @@
 
 
     <route url="/admin/post-delete-([0-9]+)\.html" module="Post" action="Delete" vars="id"/>
-    <route url="/admin/post-show-([0-9]+)\.html" module="Post" action="Show" vars="id"/>
+    <route url="/admin/post-([0-9]+)\.html" module="Post" action="Show" vars="id"/>
     <route url="/admin/post-preview-([0-9]+)\.html" module="Post" action="Preview" vars="id"/>
 
 

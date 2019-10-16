@@ -14,23 +14,35 @@ class CommentController extends \OpenFram\BackController
         $this->page->addVar('title', 'Gestion des commentaires');
         $manager = $this->managers->getManagerOf('Comment');
 
+        $currentUser = $this->app->getCurrentUser()->getAttribute('user');
+        if($currentUser->getRole()->getId() != 1){
+            $commentsNumber = $manager->count(['userId' => $currentUser->getId()]);
+            $nonValidCommentsNumber = $manager->count(['valid'=> 0,'userId' => $currentUser->getId()]);
+        } else {
+            $commentsNumber = $manager->count();
+            $nonValidCommentsNumber = $manager->count(['valid'=> 0]);
+        }
+
+
         $dataTable = [];
         foreach ($manager->getList() as $comment) {
-            $dataTable[] = [
-                'id' => $comment->getId(),
-                'postTitle' => $comment->getPost()->getTitle(),
-                'content' => $comment->getContent(),
-                'author' => $comment->getUser()->getUserName(),
-                'valid' => $comment->getValid(),
-                'publicationDate' => $comment->getPublicationDate()->format('Y-m-d H:i:s'),
-                'editLink' => '/admin/comment-moderate-' . $comment->getId() . '.html#comment-' . $comment->getId()
-            ];
+            if($currentUser->getRole()->getId() == 1 || $comment->getPost()->getUser()->getId() == $currentUser->getId()){
+                $dataTable[] = [
+                    'id' => $comment->getId(),
+                    'postTitle' => $comment->getPost()->getTitle(),
+                    'content' => $comment->getContent(),
+                    'author' => $comment->getUser()->getUserName(),
+                    'valid' => $comment->getValid(),
+                    'publicationDate' => $comment->getPublicationDate()->format('Y-m-d H:i:s'),
+                    'editLink' => '/admin/comment-moderate-' . $comment->getId() . '.html#comment-' . $comment->getId()
+                ];
+            }
         }
 
         $this->page->addVar('dataTable', json_encode($dataTable) );
         $this->page->addVar('commentsList', $manager->getList());
-        $this->page->addVar('commentsNumber', $manager->count());
-        $this->page->addVar('nonValidCommentsNumber', $manager->count(['valid' => 0]));
+        $this->page->addVar('commentsNumber', $commentsNumber);
+        $this->page->addVar('nonValidCommentsNumber', $nonValidCommentsNumber);
 
 
     }
@@ -42,6 +54,15 @@ class CommentController extends \OpenFram\BackController
         $postManager = $this->managers->getManagerOf('post');
 
         $targetComment = $commentManager->getByAttribute('id', $request->getQueryParams()['id']);
+        // access controle
+        $currentUser = $this->app->getCurrentUser()->getAttribute('user');
+
+        if($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $targetComment->getPost()->getUser()->getId()){
+            $this->app->getCurrentUser()->setFlash('Accès refusé');
+            $this->app->redirect('/admin/comments');
+        }
+
+
         $post = $postManager->getByAttribute('id', $targetComment->getPost()->getId());
         $commentsList = $commentManager->getListOf($post);
 

@@ -93,7 +93,6 @@ class UserFormBuilder extends FormBuilder
             'options' => $options,
             'attributes' => [
                 'name' => 'role'
-
             ]
         ]))->add(
             new InputField([
@@ -128,22 +127,19 @@ class UserFormBuilder extends FormBuilder
                 'label' => 'Mot de passe',
                 'attributes' => [
                     'name' => 'password',
-                    'type' => 'password',
-                    'maxlength' => '255',
-                    'minlength' => '2'
+                    'type' => 'password'
                 ],
                 'validators' => ($this->form->getEntity()->isPasswordRequired()) ? [
-                        new IsNotBlank('Ce champs est obligatoire')
-                    ] : []
+                    new IsNotBlank('Ce champs est obligatoire'),
+                    new HasLength('Le champ doit avoir  entre 2 et 255 caractères', ['min' => 2, 'max' => 255]),
+                ] : []
             ]))->add(new InputField([
             'openingGroupTags' => '<div class="col-md-6">',
             'closingGroupTags' => '</div></div>',
             'label' => 'Confirmer le mot de passe',
             'attributes' => [
                 'name' => 'confirmPassword',
-                'type' => 'password',
-                'maxlength' => '255',
-                'minlength' => '2'
+                'type' => 'password'
             ],
             'validators' => ($this->form->getEntity()->isPasswordRequired()) ? [
                 new IsConfirmed('Les mots de passes ne correspendent pas', $this->form->fields[7]->getValue())

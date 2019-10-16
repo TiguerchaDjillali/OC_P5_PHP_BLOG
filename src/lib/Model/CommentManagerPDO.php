@@ -105,10 +105,19 @@ class CommentManagerPDO extends CommentManager
     public function count($options = [])
     {
         $sql = 'SELECT count(*) FROM Comment ';
-        if (isset($options['valid'])) {
+
+        if (isset($options['userId'])) {
+            $sql .= 'INNER JOIN Post on Comment.postId = Post.id ';
+            $sql .= 'WHERE Post.userId = ' . $options['userId'] . ' ';
+            if (isset($options['valid'])) {
+                $sql .= ' AND Comment.valid =' . $options['valid'] . ' ';
+            }
+        } elseif (isset($options['valid'])) {
             $sql .= ' WHERE valid =' . $options['valid'] . ' ';
         }
+
         $query = $this->dao->query($sql);
+
 
         return $query->fetchColumn();
     }
@@ -144,7 +153,8 @@ class CommentManagerPDO extends CommentManager
 
     }
 
-    public function validate($id){
+    public function validate($id)
+    {
 
         $sql = "UPDATE Comment SET ";
         $sql .= "valid = :valid ";
@@ -158,7 +168,9 @@ class CommentManagerPDO extends CommentManager
         $query->execute();
 
     }
-    public function invalidate($id){
+
+    public function invalidate($id)
+    {
 
         $sql = "UPDATE Comment SET ";
         $sql .= "valid = :valid ";
