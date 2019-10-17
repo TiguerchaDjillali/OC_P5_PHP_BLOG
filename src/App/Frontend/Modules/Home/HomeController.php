@@ -44,7 +44,7 @@ class HomeController extends BackController
         }
 
 
-        $formBuilder = new ContactFormBuilder($contact);
+        $formBuilder = new ContactFormBuilder($this->app, $contact);
         $formBuilder->build();
         $form = $formBuilder->getFrom();
         $formHandler = new FormHandler($form, $manager, $request);

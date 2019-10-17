@@ -10,7 +10,8 @@ class HomeController extends \OpenFram\BackController
     public function executeIndex(Request $request)
     {
 
-        $this->page->addVar('title', 'Gestion des articles');
+        $this->page->addVar('title', 'Dashobord');
+
 
         $manager = $this->managers->getManagerOf('Post');
 

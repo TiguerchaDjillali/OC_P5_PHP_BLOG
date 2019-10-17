@@ -1,63 +1,72 @@
-<!-- Page Header -->
-<header class="masthead" style="background-image: url('/../img/home-bg.jpg')">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="site-heading">
-                    <h1>Djillali TIGUERCHA</h1>
-                    <span class="subheading">En mode apprentissage intensif</span>
+<div class="col-md-12">
+    <ul class="nav nav-pills nav-pills-icons justify-content-center" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" href="#all_permissions" role="tab" data-toggle="tab" aria-selected="false">
+                <i class="material-icons">person</i> Tout
+            </a>
+        </li>
+
+        <?php foreach ($modules as $module => $actions) { ?>
+            <li class="nav-item">
+                <a class="nav-link" href="#<?= $module ?>" role="tab" data-toggle="tab" aria-selected="false">
+                    <i class="material-icons">person</i> <?= $module ?>
+                </a>
+            </li>
+        <?php } ?>
+    </ul>
+    <div class="tab-content tab-space">
+        <div class="tab-pane active show" id="all_permissions">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h3 class="text-center">Toutes les permissions</h3>
+                </div>
+                <div class="card-body">
+                        <?php foreach ($modules as $module => $actions) { ?>
+                            <?php foreach ($actions as $action) { ?>
+                                <button type="button"
+                                        class="btn btn-lg btn-outline-primary"
+                                        data-toggle="popover"
+                                        data-container="body"
+                                        data-original-title=" <?= $module . ': ' .$action[0] ?>"
+                                        data-content="<?= $action[1] ?>"
+                                        data-color="primary">
+                                    <?= $module . '_' . $action[0] ?>
+                                </button>
+
+                            <?php } ?>
+                        <?php } ?>
                 </div>
             </div>
+
         </div>
-    </div>
-</header>
 
 
+        <?php foreach ($modules as $module => $actions) { ?>
+            <div class=" tab-pane" id="<?= $module ?>">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h3 class="text-center">Les permissions du module <?= $module ?></h3>
+                    </div>
+                    <div class="card-body">
 
-<!-- Role Content -->
-<article>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
-                <h2> Role : <?= $role->getName() ?> </h2>
-                <h2> Slug : <?= $role->getSlug() ?> </h2>
-
-
-
-                <hr>
-                <h3>Vous avez <?= count($permissions) ?> permissions</h3>
-                <hr>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Module</th>
-                        <th scope="col">Action</th>
-                        <th scope="col">Description</th>
-
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php  foreach($permissions as $permission) { ?>
-                        <tr>
-                            <th scope="row"><?= $permission->getId() ?></th>
-                            <td><?= $permission->getModule() ?></td>
-                            <td><?= $permission->getAction() ?></td>
-                            <td><?= $permission->getDescription() ?></td>
-
-                        </tr>
-
-                    <?php  } ?>
-
-                    </tbody>
-                </table>
+                            <?php foreach ($actions as $action) { ?>
+                                <button type="button"
+                                        class="btn btn-lg btn-outline-primary"
+                                        data-toggle="popover"
+                                        data-container="body"
+                                        data-original-title="<?= $module . ': ' .$action[0] ?>"
+                                        data-content="<?= $action[1] ?>"
+                                        data-color="primary">
+                                    <?= $module . '_' . $action[0] ?>
+                                </button>
 
 
+                            <?php } ?>
+                        </div>
+
+                </div>
             </div>
-        </div>
+        <?php } ?>
+
     </div>
-</article>
-
-
-
+</div>

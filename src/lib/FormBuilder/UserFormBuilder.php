@@ -14,19 +14,24 @@ use OpenFram\Form\Validators\HasValidEmailFormat;
 use OpenFram\Form\Validators\IsConfirmed;
 use OpenFram\Form\Validators\IsImage;
 use OpenFram\Form\Validators\IsNotBlank;
-use OpenFram\Managers;
-use OpenFram\PDOFactory;
+
 
 class UserFormBuilder extends FormBuilder
 {
     public function build()
     {
-
-        $manager = (new Managers('PDO', PDOFactory::getMysqlConnection()))->getManagerOf('role');
-        $rolesList = $manager->getList();
+        // $manager = (new Managers('PDO', PDOFactory::getMysqlConnection()))->getManagerOf('role');
+        $controller =  $this->app->getController();
+        $manager = $controller->getManagers()->getMAnagerOf('role');
+        $currentUser = $this->app->getCurrentUser()->getAttribute('user');
         $options = [];
-        foreach ($rolesList as $role) {
-            $options [$role->getId()] = $role->getName();
+        if ($currentUser->getRole()->getId() == 1) {
+            $rolesList = $manager->getList();
+            foreach ($rolesList as $role) {
+                $options [$role->getId()] = $role->getName();
+            }
+        }else{
+            $options [$currentUser->getRole()->getId()] = $currentUser->getRole()->getName();
         }
 
 

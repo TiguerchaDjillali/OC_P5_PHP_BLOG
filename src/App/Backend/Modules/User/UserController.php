@@ -15,7 +15,8 @@ class UserController extends BackController
 {
     public function executeIndex(Request $request)
     {
-        $this->page->addVar('title', 'Gestion des Utilisateurs');
+        $this->page->addVar('title', 'Utilisateurs');
+
 
         $manager = $this->managers->getManagerOf('User');
 
@@ -49,6 +50,16 @@ class UserController extends BackController
         $manager = $this->managers->getManagerOf('User');
 
         $user = $manager->getByAttribute('id', $request->getQueryParams('GET')['id']);
+
+        $currentUser = $this->app->getCurrentUser()->getAttribute('user');
+        // access controle
+        if($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $user->getId()){
+            $this->app->getCurrentUser()->setFlash('Accès refusé');
+            $this->app->redirect('/admin/user-edit-'.$currentUser->getId().'.html');
+        }
+
+
+
 
         if (empty($user)) {
 
@@ -133,14 +144,14 @@ class UserController extends BackController
             }
         }
 
-        $formBuilder = new UserFormBuilder($user);
+        $formBuilder = new UserFormBuilder($this->app, $user);
         $formBuilder->build();
         $form = $formBuilder->getFrom();
         $formHandler = new FormHandler($form, $this->managers->getManagerOf('user'), $request);
 
         if ($formHandler->process()) {
             $this->app->getCurrentUser()->setFlash($user->isNew() ? 'L\'utlisateur a bien été ajouté' : 'L\'utlisateur a bien été mis à jour');
-            $this->app->redirect('/admin/users');
+            $this->app->redirect('/admin/user-'. $user->getId() .'.html');
         }
 
         $this->page->addVar('form', $form->createView());

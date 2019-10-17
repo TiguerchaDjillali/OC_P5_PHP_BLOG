@@ -1,6 +1,6 @@
 <div class="col-12">
-    <a href="/admin/user-insert.html" class="btn btn-primary">Ajouer <i class="material-icons">add_circle</i></a>
-    <p class="bg-light rounded float-right p-2 colored-shadow">Utlisateurs : <?= $usersNumber ?></p>
+    <a href="/admin/user-insert.html" class="btn btn-primary">Ajouter <i class="material-icons">add_circle</i></a>
+    <p class="bg-light rounded float-right p-2 colored-shadow">Utilisateurs : <?= $usersNumber ?></p>
 
     <?php if ($currentUser->hasFlash()) { ?>
 

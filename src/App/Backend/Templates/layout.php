@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>
-        Material Dashboard by Creative Tim
+        <?= $title ?>
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
           name='viewport'/>
@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
 
     <!-- CSS Files -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/4.4.3/css/semantic-ui/tabulator_semantic-ui.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tabulator/4.4.3/css/semantic-ui/tabulator_semantic-ui.css"
+          rel="stylesheet">
 
     <link href="../assets/css/material-dashboard.css?v=2.1.1" rel="stylesheet"/>
 
@@ -25,18 +26,7 @@
     <link href="../assets/css/material-kit.min.css?v=2.0.6" rel="stylesheet"/>
 
 
-
     <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.4.3/dist/js/tabulator.min.js"></script>
-
-
-
-
-
-
-
-
-
-
 
 
 </head>
@@ -56,7 +46,7 @@
 
     <div class="main-panel">
 
-       <?php include 'navigation.php' ?>
+        <?php include 'navigation.php' ?>
 
 
         <div class="content">
@@ -110,8 +100,6 @@
 
     </div>
 </div>
-
-
 
 
 <!--   Core JS Files   -->
@@ -333,8 +321,13 @@
         // Javascript method's body can be found in assets/js/demos.js
         md.initDashboardPageCharts();
 
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+
     });
 </script>
+
 
 </body>
 

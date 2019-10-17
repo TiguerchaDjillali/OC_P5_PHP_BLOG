@@ -113,7 +113,7 @@ class PostController extends BackController
             }
         }
 
-        $formBuilder = new CommentFormBuilder($comment);
+        $formBuilder = new CommentFormBuilder($this->app, $comment);
         $formBuilder->build();
 
         $form = $formBuilder->getFrom();

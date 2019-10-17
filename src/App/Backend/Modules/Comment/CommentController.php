@@ -11,7 +11,7 @@ class CommentController extends \OpenFram\BackController
     public function executeIndex(Request $request)
     {
 
-        $this->page->addVar('title', 'Gestion des commentaires');
+        $this->page->addVar('title', 'Commentaires');
         $manager = $this->managers->getManagerOf('Comment');
 
         $currentUser = $this->app->getCurrentUser()->getAttribute('user');

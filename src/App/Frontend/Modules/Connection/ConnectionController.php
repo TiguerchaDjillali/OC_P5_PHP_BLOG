@@ -43,7 +43,7 @@ class ConnectionController extends \OpenFram\BackController
             $connection = new Connection();
         }
 
-        $formBuilder = new LoginFormBuilder($connection);
+        $formBuilder = new LoginFormBuilder($this->app, $connection);
         $formBuilder->build();
         $form = $formBuilder->getFrom();
 

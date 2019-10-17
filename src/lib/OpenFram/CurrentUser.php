@@ -54,5 +54,43 @@ class CurrentUser extends ApplicationComponent
 
     }
 
+    public function hasAccess()
+    {
+        $controller = $this->app->getController();
+
+        $controller->getPage()->addVAr('user', $this);
+
+
+        $permissions = $this->getAttribute('user')->getRole()->getPermissions();
+        $couple = [];
+        foreach ($permissions as $permission) {
+            $couple [] = [$permission->getModule(), $permission->getAction()];
+        }
+        $control = [$controller->getModule(), $controller->getAction()];
+
+
+        if (!in_array($control, $couple)) {
+            return false;
+        }
+        return true;
+
+    }
+
+    public function hasAccessTo($module, $action)
+    {
+        $permissions = $this->getAttribute('user')->getRole()->getPermissions();
+        $couple = [];
+        foreach ($permissions as $permission) {
+            $couple [] = [$permission->getModule(), $permission->getAction()];
+        }
+        $control = [$module, $action];
+
+
+        if (!in_array($control, $couple)) {
+            return false;
+        }
+        return true;
+    }
+
 
 }

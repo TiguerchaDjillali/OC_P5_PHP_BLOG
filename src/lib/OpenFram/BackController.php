@@ -84,6 +84,16 @@ class BackController extends ApplicationComponent
         return $this->action;
     }
 
+    /**
+     * @return Managers|null
+     */
+    public function getManagers(): ?Managers
+    {
+        return $this->managers;
+    }
+
+
+
 
 
 }

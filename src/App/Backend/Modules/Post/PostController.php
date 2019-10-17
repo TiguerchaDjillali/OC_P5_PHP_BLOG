@@ -64,7 +64,8 @@ class PostController extends BackController
     public function executeIndex(Request $request)
     {
 
-        $this->page->addVar('title', 'Gestion des articles');
+        $this->page->addVar('title', 'Articles');
+
 
         $manager = $this->managers->getManagerOf('Post');
 
@@ -196,7 +197,7 @@ class PostController extends BackController
         }
 
 
-        $formBuilder = new PostFormBuilder($post);
+        $formBuilder = new PostFormBuilder($this->app, $post);
         $formBuilder->build();
         $form = $formBuilder->getFrom();
         $formHandler = new FormHandler($form, $this->managers->getManagerOf('post'), $request);

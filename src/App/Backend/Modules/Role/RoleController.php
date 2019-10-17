@@ -2,35 +2,63 @@
 
 namespace App\Backend\modules\Role;
 
+use GuzzleHttp\Psr7\Request;
 use OpenFram\BackController;
-use OpenFram\HTTPRequest;
 
 class RoleController extends BackController
 {
-    public function executeIndex(HTTPRequest $request)
+    public function executeIndex(Request $request)
     {
-        $this->page->addVar('title', 'Gestion des Roles');
+        $this->page->addVar('title', 'Roles');
+
 
         $manager = $this->managers->getManagerOf('Role');
-
-        $this->page->addVar('rolesList', $manager->getList());
-        $this->page->addVar('rolesNumber', $manager->count());
-    }
-
-    public function executeShow(HTTPRequest $request)
-    {
-        $manager = $this->managers->getManagerOf('Role');
-
-        $role = $manager->getByAttribute('id', $request->getData('id'));
-
-        if (empty($role)) {
-            $this->app->getHttpResponse()->redirect404();
+        $rolesList = $manager->getList();
+        $dataTable = [];
+        foreach ($rolesList as $role) {
+            $dataTable[] = [
+                'id' => $role->getId(),
+                'name' => $role->getName(),
+                'slug' => $role->getSlug(),
+                'viewLink' => '/admin/role-' . $role->getId() . '.html',
+                'editLink' => '/admin/role-edit-' . $role->getId() . '.html',
+                'deleteLink' => '/admin/role-delete-' . $role->getId() . '.html',
+            ];
         }
 
 
+        $this->page->addVar('rolesList', $rolesList);
+        $this->page->addVar('dataTable', json_encode($dataTable));
+        $this->page->addVar('rolesNumber', $manager->count());
+    }
+
+
+
+    public function executeShow(Request $request)
+    {
+        $manager = $this->managers->getManagerOf('Role');
+
+        $role = $manager->getByAttribute('id', $request->getQueryPArams()['id']);
+
+        if (empty($role)) {
+            $this->app->redirect404();
+        }
+
+        $modules = [];
+        foreach($role->getPermissions() as $permission){
+
+            if(!array_key_exists($permission->getModule(), $modules)){
+                $modules [$permission->getModule()] = [];
+            }
+            if(array_key_exists($permission->getModule(), $modules)){
+                $modules[$permission->getModule()][] = [$permission->getAction(), $permission->getDescription()];
+            }
+        }
+
+
+        $this->page->addVar('modules', $modules);
         $this->page->addVar('title', $role->getName());
         $this->page->addVar('role', $role);
-        $this->page->addVar('permissions', $role->getPermissions());
 
     }
 

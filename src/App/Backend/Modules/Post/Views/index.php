@@ -1,5 +1,5 @@
 <div class="col-12">
-    <a href="/admin/post-insert.html" class="btn btn-primary">Ajouer <i class="material-icons">add_circle</i></a>
+    <a href="/admin/post-insert.html" class="btn btn-primary">Ajouter <i class="material-icons">add_circle</i></a>
     <p class="bg-light rounded float-right p-2 colored-shadow">Articles : <?= $postsNumber ?></p>
 
     <?php if ($currentUser->hasFlash()) { ?>

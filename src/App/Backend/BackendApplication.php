@@ -22,32 +22,24 @@ class BackendApplication extends \OpenFram\Application
      */
     public function run()
     {
+        $controller = $this->getController();
 
-        if ($this->currentUser->isAuthenticated()) {
-            $controller = $this->getController();
-
-            $controller->getPage()->addVAr('user', $this->currentUser);
-
-
-            $permissions = $this->currentUser->getAttribute('user')->getRole()->getPermissions();
-            $couple = [];
-            foreach ($permissions as $permission) {
-                $couple [] = [$permission->getModule(), $permission->getAction()];
-            }
-            $control = [$controller->getModule(), $controller->getAction()];
-
-
-            if(!in_array($control, $couple)) {
-                $this->currentUser->setFlash('Vous avez pas les permissions nécessaires');
-                $this->redirect('/');
-            }
+        if (!$this->currentUser->isAuthenticated()) {
+            $this->redirect('/connection');
 
         } else {
-            $this->redirect('/connection');
+            if(!$this->currentUser->hasAccess()){
+                $this->currentUser->setFlash('Vous avez pas les permissions nécessaires');
+
+                $this->redirect('/admin/');
+            }
         }
 
         $controller->execute();
+        $controller->getpage()->addVar('module', $controller->getModule());
+
         $page = $controller->getPage()->getGeneratedPage();
         send($this->response->withBody(stream_for($page)));
     }
+
 }

@@ -1,4 +1,4 @@
-<div class="sidebar" data-color="purple" data-background-color="white">
+<div class="sidebar  " data-color="purple" data-background-color="white">
     <!--
     Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
 
@@ -9,59 +9,68 @@
             LOGO
         </a>
         <a href="" class="simple-text logo-normal">
-            <?=  $currentUser->hasAttribute('user') ? $currentUser->getAttribute('user')->getUserName() : 'connexion'  ?>
+            <?= $currentUser->hasAttribute('user') ? $currentUser->getAttribute('user')->getUserName() : 'connexion' ?>
         </a>
     </div>
     <div class="sidebar-wrapper">
         <ul class="nav">
 
-            <li class="nav-item active  ">
-                <a class="nav-link" href="#0">
+            <li class="nav-item <?= ($module == 'Home') ? 'active' : ''?>">
+                <a class="nav-link" href="/admin/">
                     <i class="material-icons">dashboard</i>
                     <p>Dashboard</p>
                 </a>
             </li>
 
-            <li class="nav-item ">
-                <a class="nav-link" href="/admin/">
+            <li class="nav-item  <?= ($module == 'Profil') ? 'active' : ''?> ">
+                <a class="nav-link" href="/admin/user-<?= $currentUser->getAttribute('user')->getId()?>.html">
                     <i class="material-icons">Profil</i>
                     <p>Profil</p>
                 </a>
             </li>
 
-            <li class="nav-item ">
+            <li class="nav-item  <?= ($module == 'Post') ? 'active' : ''?>">
                 <a class="nav-link" href="/admin/posts">
                     <i class="material-icons">Articles</i>
                     <p>Articles</p>
                 </a>
             </li>
-            <li class="nav-item ">
+            <li class="nav-item  <?= ($module == 'Comment') ? 'active' : ''?>">
                 <a class="nav-link" href="/admin/comments">
                     <i class="material-icons">Comments</i>
                     <p>Commentaires</p>
                 </a>
             </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="/admin/users">
-                    <i class="material-icons">User</i>
-                    <p>Users</p>
-                </a>
-            </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="/admin/roles">
-                    <i class="material-icons">Roles</i>
-                    <p>Roles</p>
-                </a>
-            </li>
-            <li class="nav-item ">
-                <a class="nav-link" href="/admin/permissions">
-                    <i class="material-icons">Permissions</i>
-                    <p>Permissions</p>
-                </a>
-            </li>
+            <?php if ($currentUser->hasAccessTo('User', 'Index')) { ?>
+                <li class="nav-item  <?= ($module == 'User') ? 'active' : ''?>">
+                    <a class="nav-link" href="/admin/users">
+                        <i class="material-icons">User</i>
+                        <p>Users</p>
+                    </a>
+                </li>
+            <?php } ?>
+
+            <?php if ($currentUser->hasAccessTo('Role', 'Index')) { ?>
+                <li class="nav-item  <?= ($module == 'Role') ? 'active' : ''?>">
+                    <a class="nav-link" href="/admin/roles">
+                        <i class="material-icons">Roles</i>
+                        <p>Roles</p>
+                    </a>
+                </li>
+            <?php } ?>
+
+            <?php if ($currentUser->hasAccessTo('Permission', 'Index')) { ?>
+                <li class="nav-item  <?= ($module == 'Permission') ? 'active' : ''?>">
+                    <a class="nav-link" href="/admin/permissions">
+                        <i class="material-icons">Permissions</i>
+                        <p>Permissions</p>
+                    </a>
+                </li>
+            <?php } ?>
 
 
             <!-- your sidebar here -->
         </ul>
     </div>
 </div>
+

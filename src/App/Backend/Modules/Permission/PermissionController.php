@@ -12,7 +12,8 @@ class PermissionController extends BackController
 
     public function executeIndex(HTTPRequest $request)
     {
-        $this->page->addVar('title', 'Gestion des Permission');
+        $this->page->addVar('title', 'Permissions');
+
 
         $manager = $this->managers->getManagerOf('Permission');
 
