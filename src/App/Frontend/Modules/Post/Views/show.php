@@ -8,13 +8,13 @@
         <div class="container">
             <div class="row">
 
-                <h3 class="col-md-4"><?= $post->getSubtitle() ?></h3>
+                <h3 class="col-md-4"><?= h($post->getSubtitle()) ?></h3>
 
-                <p class="col-md-8 pt-md-4"><?= $post->getContent() ?> </p>
+                <p class="col-md-8 pt-md-4"><?= h($post->getContent()) ?> </p>
                 <div class="col-12">
                     <p class="pt-3 float-right">
-                        Publié par <a href="#" class="font-italic"> <?= $post->getUser()->getUserName() ?> </a>
-                        - Le <?= $post->getPublicationDate()->format('d/m/Y à H\hi\ ') ?>
+                        Publié par <a href="#" class="font-italic"> <?= h($post->getUser()->getUserName()) ?> </a>
+                        - Le <?= h($post->getPublicationDate()->format('d/m/Y à H\hi\ ')) ?>
                     </p>
                 </div>
 

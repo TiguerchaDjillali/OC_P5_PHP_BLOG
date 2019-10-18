@@ -30,7 +30,7 @@
 
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#pablo">
+                    <a class="nav-link" href="/admin/">
                         <i class="material-icons">dashboard</i>
                         <p class="d-lg-none d-md-block">
                             Stats

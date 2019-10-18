@@ -2,6 +2,7 @@
 const ROOT = __DIR__;
 
 
+require dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'OpenFram' . DIRECTORY_SEPARATOR . 'functions.php';
 require dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
 const DEFAULT_APP = 'Frontend';

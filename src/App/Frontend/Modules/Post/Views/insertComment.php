@@ -1,6 +1,6 @@
 
 
-<form name="sentMessage" id="contactForm" action="comment-<?= $_GET['postId'] ?>.html" method="post">
+<form name="sentMessage" id="contactForm" action="" method="post">
 
     <div class="control-group">
 

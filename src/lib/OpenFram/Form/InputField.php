@@ -31,7 +31,7 @@ class InputField extends field
         $widget .= '<label id="' . $this->attributes['name'] . '" class=" control-label bmd-label-floating">' . $this->label . '</label >';
         $widget .= '<input class="form-control"  id="' . $this->attributes['name'] . '" ';
         if(!empty($this->value)){
-            $widget .= 'value ="'. $this->value . '" ';
+            $widget .= 'value ="'. h($this->value) . '" ';
         }
         // input tag attributes
 

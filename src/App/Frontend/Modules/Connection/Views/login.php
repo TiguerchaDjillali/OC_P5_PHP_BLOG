@@ -16,7 +16,7 @@
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true"><i class="material-icons">clear</i></span>
                                 </button>
-                                <b>Echec de connexion:</b> <?= $currentUser->getFlash() ?>
+                                <b>Echec de connexion:</b> <?= h($currentUser->getFlash()) ?>
                             </div>
                         </div>
                     <?php } ?>

@@ -28,7 +28,7 @@ class PostController extends BackController
             $this->app->redirect('/admin/posts');
         }
 
-        $this->app->getResponse()->redirect('/post-' . $id . '.html');
+        $this->app->getResponse()->redirect('/post-' . u($id) . '.html');
     }
 
 

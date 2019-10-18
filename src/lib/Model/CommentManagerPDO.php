@@ -18,11 +18,12 @@ class CommentManagerPDO extends CommentManager
         $sql .= '(:content, :postId, :userId, NOW()) ';
 
         $query = $this->dao->prepare($sql);
-        $query->bindValue(':content', $comment->getContent());
+        $query->bindValue(':content', $comment->getContent(), \PDO::PARAM_STR);
         $query->bindValue(':postId', $comment->getPost()->getId(), \PDO::PARAM_INT);
         $query->bindValue(':userId', $comment->getUser()->getId(), \PDO::PARAM_INT);
 
         $query->execute();
+
 
         $comment->setId($this->dao->lastInsertId());
     }

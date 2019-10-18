@@ -1,4 +1,6 @@
 <div class="col-md-12">
+
+
     <ul class="nav nav-pills nav-pills-icons justify-content-center" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" href="#all_permissions" role="tab" data-toggle="tab" aria-selected="false">
@@ -8,8 +10,8 @@
 
         <?php foreach ($modules as $module => $actions) { ?>
             <li class="nav-item">
-                <a class="nav-link" href="#<?= $module ?>" role="tab" data-toggle="tab" aria-selected="false">
-                    <i class="material-icons">person</i> <?= $module ?>
+                <a class="nav-link" href="#<?= h(u($module)) ?>" role="tab" data-toggle="tab" aria-selected="false">
+                    <i class="material-icons">person</i> <?= h($module) ?>
                 </a>
             </li>
         <?php } ?>
@@ -27,10 +29,10 @@
                                         class="btn btn-lg btn-outline-primary"
                                         data-toggle="popover"
                                         data-container="body"
-                                        data-original-title=" <?= $module . ': ' .$action[0] ?>"
-                                        data-content="<?= $action[1] ?>"
+                                        data-original-title=" <?= h($module) . ': ' . h($action[0]) ?>"
+                                        data-content="<?= h($action[1]) ?>"
                                         data-color="primary">
-                                    <?= $module . '_' . $action[0] ?>
+                                    <?= h($module) . '_' . h($action[0]) ?>
                                 </button>
 
                             <?php } ?>
@@ -40,12 +42,11 @@
 
         </div>
 
-
         <?php foreach ($modules as $module => $actions) { ?>
-            <div class=" tab-pane" id="<?= $module ?>">
+            <div class=" tab-pane" id="<?= h($module) ?>">
                 <div class="card">
                     <div class="card-header card-header-primary">
-                        <h3 class="text-center">Les permissions du module <?= $module ?></h3>
+                        <h3 class="text-center">Les permissions du module <?= h($module) ?></h3>
                     </div>
                     <div class="card-body">
 
@@ -54,12 +55,11 @@
                                         class="btn btn-lg btn-outline-primary"
                                         data-toggle="popover"
                                         data-container="body"
-                                        data-original-title="<?= $module . ': ' .$action[0] ?>"
-                                        data-content="<?= $action[1] ?>"
+                                        data-original-title="<?= h($module) . ': ' . h($action[0]) ?>"
+                                        data-content="<?= h($action[1]) ?>"
                                         data-color="primary">
-                                    <?= $module . '_' . $action[0] ?>
+                                    <?= h($module) . '_' . h($action[0]) ?>
                                 </button>
-
 
                             <?php } ?>
                         </div>

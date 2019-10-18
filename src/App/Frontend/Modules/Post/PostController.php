@@ -90,7 +90,7 @@ class PostController extends BackController
                 $this->app->getCurrentUser()->setAttribute('lastUrl', $this->app->getRequest()->getUri()->getPath());
                 $this->app->getCurrentUser()->setAttribute('commentContent', $request->getParsedBody()['content']);
 
-                $this->app->redirect('/admin/login/');
+                $this->app->redirect('/connection');
 
             }
 
@@ -122,28 +122,14 @@ class PostController extends BackController
 
         if ($formHandler->process()) {
             $this->app->getCurrentUser()->setFlash('Votre commentaitre a bien été ajouté, merci!');
-            $this->app->redirect('post-' . $request->getQueryParams('GET')['id'] . '.html#commentForm');
+            $this->app->redirect('post-' . h(u($request->getQueryParams('GET')['id'])) . '.html#commentForm');
 
         }
 
-        /*
-        if ($request->method() == 'POST') {
-
-            if ($form->isValid()) {
-
-                $this->managers->getManagerOf('Comment')->save($comment);
-
-                $this->app->getCurrentUser()->setFlash('Votre commentaitre a bien été ajouté, merci!');
-                $this->app->getHttpResponse()->redirect('post-' . $request->getData('id') . '.html#commentForm');
-
-            }
-        }
-        */
 
         $this->page->addVar('comment', $comment);
         $this->page->addVar('form', $form->createView());
         $this->page->addVar('pageType', 'small-header');
-
 
     }
 

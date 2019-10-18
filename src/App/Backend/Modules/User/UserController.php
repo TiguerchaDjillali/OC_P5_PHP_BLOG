@@ -55,7 +55,7 @@ class UserController extends BackController
         // access controle
         if($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $user->getId()){
             $this->app->getCurrentUser()->setFlash('Accès refusé');
-            $this->app->redirect('/admin/user-edit-'.$currentUser->getId().'.html');
+            $this->app->redirect('/admin/user-edit-'.h(u($currentUser->getId())).'.html');
         }
 
 
@@ -151,7 +151,7 @@ class UserController extends BackController
 
         if ($formHandler->process()) {
             $this->app->getCurrentUser()->setFlash($user->isNew() ? 'L\'utlisateur a bien été ajouté' : 'L\'utlisateur a bien été mis à jour');
-            $this->app->redirect('/admin/user-'. $user->getId() .'.html');
+            $this->app->redirect('/admin/user-'. h(u($user->getId())) .'.html');
         }
 
         $this->page->addVar('form', $form->createView());

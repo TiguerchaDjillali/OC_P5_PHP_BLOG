@@ -1,6 +1,6 @@
 <div class="col-12">
     <a href="/admin/post-insert.html" class="btn btn-primary">Ajouter <i class="material-icons">add_circle</i></a>
-    <p class="bg-light rounded float-right p-2 colored-shadow">Articles : <?= $postsNumber ?></p>
+    <p class="bg-light rounded float-right p-2 colored-shadow">Articles : <?= h($postsNumber) ?></p>
 
     <?php if ($currentUser->hasFlash()) { ?>
 
@@ -12,7 +12,7 @@
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true"><i class="material-icons">clear</i></span>
                 </button>
-                <b>Success Alert:</b> <?= $currentUser->getFlash() ?>
+                <b>Success Alert:</b> <?= h($currentUser->getFlash()) ?>
             </div>
         </div>
 

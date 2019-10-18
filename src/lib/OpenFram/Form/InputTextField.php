@@ -16,22 +16,22 @@ class InputTextField extends Field
         $widget .= $this->getOpeningGroupTags();
         $widget .= '<div class="form-group">';
         $widget .= '<label id="$this->name" class="bmd-label-floating">' . $this->label . '</label > ';
-        $widget .= '<input type="text" name="' . $this->name . '"   id="'.$this->name.'" ';
+        $widget .= '<input type="text" name="' . $this->name . '"   id="' . $this->name . '" ';
         $widget .= ' class="form-control" ';
-        if(!empty($this->value)){
-            $widget .= ' value="'.htmlspecialchars($this->value).'" ';
+        if (!empty($this->value)) {
+            $widget .= ' value="' . h($this->value) . '" ';
         }
 
-        if(!empty($this->maxLength)){
-            $widget .=' maxlength="'.$this->maxLength.'" ';
+        if (!empty($this->maxLength)) {
+            $widget .= ' maxlength="' . $this->maxLength . '" ';
         }
 
         $widget .= '/> ';
 
         if (!empty($this->errorMessage)) {
-            $widget .= '<small class = "text-danger"> * '.$this->errorMessage . '</small></div>';
+            $widget .= '<small class = "text-danger"> * ' . $this->errorMessage . '</small></div>';
         } else {
-        $widget.= '</div>';
+            $widget .= '</div>';
         }
 
         $widget .= $this->getClosingGroupTags();
@@ -44,10 +44,10 @@ class InputTextField extends Field
      */
     public function setMaxLength($maxLength)
     {
-        $maxLength = (int) $maxLength;
-        if($maxLength > 0){
+        $maxLength = (int)$maxLength;
+        if ($maxLength > 0) {
             $this->maxLength = $maxLength;
-        }else {
+        } else {
             throw new \RuntimeException('La longueur maximale doit être un nombre supérieur à zéro ');
         }
     }

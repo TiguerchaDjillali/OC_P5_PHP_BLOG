@@ -1,7 +1,7 @@
 <div class="col-md-12">
     <div class="card">
         <div class="card-header card-header-primary">
-            <h4 class="card-title"><?= $title ?></h4>
+            <h4 class="card-title"><?= h($title) ?></h4>
             <p class="card-category">Exprimez vous</p>
         </div>
         <div class="card-body">

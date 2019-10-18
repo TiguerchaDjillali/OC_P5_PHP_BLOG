@@ -20,7 +20,6 @@ class UserFormBuilder extends FormBuilder
 {
     public function build()
     {
-        // $manager = (new Managers('PDO', PDOFactory::getMysqlConnection()))->getManagerOf('role');
         $controller =  $this->app->getController();
         $manager = $controller->getManagers()->getMAnagerOf('role');
         $currentUser = $this->app->getCurrentUser()->getAttribute('user');

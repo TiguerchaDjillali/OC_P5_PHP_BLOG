@@ -39,7 +39,7 @@ class SelectField extends Field
         $widget .= "<option disabled  selected >--- Choisir une role ---</option>";
         foreach($this->options as $key=>$value){
 
-            $widget .= "<option value=\"" . $key. "\">". $value ."</option>";
+            $widget .= "<option value=\"" . h($key). "\">". h($value) ."</option>";
         }
 
 		$widget .= "</select>";

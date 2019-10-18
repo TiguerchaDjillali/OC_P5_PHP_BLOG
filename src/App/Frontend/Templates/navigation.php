@@ -60,8 +60,8 @@
 
                     <li class="dropdown nav-item">
                         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
-                            <img src="images/logo-1.jpg" alt="Circle Image" class="rounded-circle img-fluid" style="height: 25px">
-                            <?= $currentUser->getAttribute('user')->getUserName() ?>
+                            <img src="<?= h($currentUser->getAttribute('user')->getProfileImage()) ?>" alt="Circle Image" class="rounded-circle img-fluid" style="height: 25px">
+                            <?= h($currentUser->getAttribute('user')->getUserName()) ?>
                             <div class="ripple-container"></div></a>
                         <div class="dropdown-menu dropdown-with-icons">
                             <a href="/logout" class="dropdown-item">

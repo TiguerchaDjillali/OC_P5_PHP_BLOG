@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>
-        <?= $title ?>
+        <?= h($title) ?>
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
           name='viewport'/>
@@ -75,7 +75,7 @@
     <!-- End Google Tag Manager -->
 </head>
 
-<body class="<?= $pageType ?> sidebar-collapse">
+<body class="<?= h($pageType) ?> sidebar-collapse">
 <!-- Extra details for Live View on GitHub Pages -->
 <!-- Google Tag Manager (noscript) -->
 <noscript>
@@ -98,7 +98,7 @@
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true"><i class="material-icons">clear</i></span>
             </button>
-            <b>Success Alert:</b> <?= $currentUser->getFlash() ?>
+            <b>Success Alert:</b> <?= h($currentUser->getFlash()) ?>
         </div>
     </div>
 

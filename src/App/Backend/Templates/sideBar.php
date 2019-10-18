@@ -9,7 +9,7 @@
             LOGO
         </a>
         <a href="" class="simple-text logo-normal">
-            <?= $currentUser->hasAttribute('user') ? $currentUser->getAttribute('user')->getUserName() : 'connexion' ?>
+            <?= $currentUser->hasAttribute('user') ? h($currentUser->getAttribute('user')->getUserName()) : 'connexion' ?>
         </a>
     </div>
     <div class="sidebar-wrapper">
@@ -23,7 +23,7 @@
             </li>
 
             <li class="nav-item  <?= ($module == 'Profil') ? 'active' : ''?> ">
-                <a class="nav-link" href="/admin/user-<?= $currentUser->getAttribute('user')->getId()?>.html">
+                <a class="nav-link" href="/admin/user-<?= h(u($currentUser->getAttribute('user')->getId()))?>.html">
                     <i class="material-icons">Profil</i>
                     <p>Profil</p>
                 </a>
