@@ -1,3 +1,8 @@
+<?php
+use function OpenFram\h;
+use function OpenFram\u;
+
+?>
 <div class="fresh-table col-12">
 
 

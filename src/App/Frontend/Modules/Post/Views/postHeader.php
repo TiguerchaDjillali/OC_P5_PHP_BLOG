@@ -1,3 +1,7 @@
+<?php
+use function OpenFram\h;
+
+?>
 <div class="page-header header-filter clear-filter purple-filter" data-parallax="true"
      style="background-image: url( <?= h($post->getFeaturedImage()) ?>);">
     <div class="container">

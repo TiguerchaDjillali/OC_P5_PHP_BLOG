@@ -1,3 +1,8 @@
+<?php
+use function OpenFram\h;
+use function OpenFram\u;
+?>
+
 <!-- Page Header -->
 <div class="page-header header-filter clear-filter purple-filter" data-parallax="true"
      style="background-image: url('./assets/img/bg2.jpg');">
@@ -22,7 +27,9 @@
 
                 <h2 class="text-center title col-12">Articles</h2>
                 <div class="col-12">
-                    <?php include 'pagination.php'; ?>
+                    <?php
+
+                    include 'pagination.php'; ?>
                     <hr>
                 </div>
 

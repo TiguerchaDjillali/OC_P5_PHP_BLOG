@@ -1,3 +1,7 @@
+<?php
+use function OpenFram\h;
+
+?>
 <div class="col-12">
 
         <h2> Commentaires <small class="float-right"><?= h(count($comments)) ?> commentaires</small></h2>

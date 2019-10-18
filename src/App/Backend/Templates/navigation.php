@@ -1,3 +1,8 @@
+<?php
+use function OpenFram\h;
+use function OpenFram\u;
+
+?>
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
     <div class="container-fluid">

@@ -11,6 +11,8 @@ use OpenFram\BackController;
 use OpenFram\Form\Form;
 use OpenFram\Form\FormHandler;
 use GuzzleHttp\Psr7\Response;
+use function OpenFram\h;
+use function OpenFram\u;
 
 
 class PostController extends BackController

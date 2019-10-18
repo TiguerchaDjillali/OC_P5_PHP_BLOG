@@ -1,3 +1,8 @@
+<?php
+use function OpenFram\h;
+use function OpenFram\u;
+
+?>
 <div class="col-12 col-md-3">
 
     <ul class="nav nav-pills nav-pills-icons  flex-column " role="tablist">

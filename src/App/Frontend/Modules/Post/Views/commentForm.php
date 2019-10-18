@@ -1,4 +1,8 @@
+<?php
+use function OpenFram\h;
+use function OpenFram\u;
 
+?>
 
 <h2 class="col-12">Laisser un commentaire </h2>
 

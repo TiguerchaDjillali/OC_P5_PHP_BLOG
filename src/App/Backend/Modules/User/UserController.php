@@ -10,6 +10,8 @@ use FormBuilder\UserFormBuilder;
 use GuzzleHttp\Psr7\Request;
 use OpenFram\BackController;
 use OpenFram\Form\FormHandler;
+use function OpenFram\h;
+use function OpenFram\u;
 
 class UserController extends BackController
 {

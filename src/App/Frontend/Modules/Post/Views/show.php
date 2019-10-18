@@ -1,3 +1,9 @@
+<?php
+use function OpenFram\h;
+use function OpenFram\u;
+
+?>
+
 <!-- Page Header -->
 <?php require 'postHeader.php' ?>
 

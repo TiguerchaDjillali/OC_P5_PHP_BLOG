@@ -1,3 +1,8 @@
+<?php
+use function OpenFram\h;
+use function OpenFram\u;
+
+?>
 <div class="col-12">
     <a href="/admin/post-insert.html" class="btn btn-primary">Ajouter <i class="material-icons">add_circle</i></a>
     <p class="bg-light rounded float-right p-2 colored-shadow">Articles : <?= h($postsNumber) ?></p>

@@ -1,3 +1,8 @@
+ <?php
+ use function OpenFram\h;
+
+ ?>
+
 <div class="page-header header-filter clear-filter purple-filter" data-parallax="true"
      style="background-image: url('./assets/img/bg2.jpg');  background-position: center;">
     <div class="container">

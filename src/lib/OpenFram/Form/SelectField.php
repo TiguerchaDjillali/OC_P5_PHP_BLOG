@@ -4,6 +4,8 @@
 namespace OpenFram\Form;
 
 
+use function OpenFram\h;
+
 class SelectField extends Field
 {
     protected $options = [];

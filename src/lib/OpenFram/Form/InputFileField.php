@@ -4,6 +4,8 @@
 namespace OpenFram\Form;
 
 
+use function OpenFram\h;
+
 class InputFileField extends InputField
 {
     protected $value;

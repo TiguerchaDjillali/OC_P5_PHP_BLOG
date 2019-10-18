@@ -5,6 +5,7 @@ namespace Model;
 
 
 use Entity\User;
+use function OpenFram\h;
 
 class UserManagerPDO extends UserManager
 {
@@ -65,10 +66,10 @@ class UserManagerPDO extends UserManager
 
             $user->setRole($roleManager->getByAttribute('id', $user->roleId));
 
-            $imagePath = $_SERVER["DOCUMENT_ROOT"] . '/images/user/user-' . $user->getId() . '.jpg';
+            $imagePath = $_SERVER["DOCUMENT_ROOT"] . '/images/user/user-' . h($user->getId()) . '.jpg';
 
             if (file_exists($imagePath)) {
-                $user->setProfileImage('/images/user/user-' . $user->getId() . '.jpg');
+                $user->setProfileImage('/images/user/user-' . h($user->getId()) . '.jpg');
             } else {
                 $user->setProfileImage('/images/user/user-default.jpg');
             }
@@ -156,7 +157,7 @@ class UserManagerPDO extends UserManager
 
         $query->execute();
 
-        $imagePath = $_SERVER["DOCUMENT_ROOT"] . '/images/user/user-' . $id . '.jpg';
+        $imagePath = $_SERVER["DOCUMENT_ROOT"] . '/images/user/user-' . h($id) . '.jpg';
 
         if (file_exists($imagePath)) {
             unlink($imagePath);

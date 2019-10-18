@@ -18,7 +18,10 @@
       "FormBuilder\\": "src/lib/FormBuilder/",
       "OpenFram\\Form\\": "src/lib/OpenFram/Form/",
       "OpenFram\\Form\\Validators\\": "src/lib/OpenFram/Form/Validators/"
-    }
+    },
+    "files": [
+      "src/lib/OpenFram/functions.php"
+    ]
   },
   "require": {
     "psr/http-message": "^1.0",

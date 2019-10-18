@@ -4,6 +4,8 @@
 namespace OpenFram\Form;
 
 
+use function OpenFram\h;
+
 class TextAreaField extends Field
 {
     protected $cols;

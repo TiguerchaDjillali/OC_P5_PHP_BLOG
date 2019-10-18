@@ -3,8 +3,6 @@
 namespace App\Frontend;
 
 use OpenFram\Application;
-use OpenFram\Routing\Route;
-use OpenFram\Routing\Router;
 use function GuzzleHttp\Psr7\stream_for;
 use function Http\Response\send;
 

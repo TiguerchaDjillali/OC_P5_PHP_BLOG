@@ -1,3 +1,8 @@
+<?php
+use function OpenFram\h;
+use function OpenFram\u;
+
+?>
 <div class="col-12">
     <p class="bg-light rounded float-right p-2 mx-2 colored-shadow">En attente de
         validation: <?= h($nonValidCommentsNumber) ?? '' ?></p>
