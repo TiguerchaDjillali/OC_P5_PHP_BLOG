@@ -195,6 +195,5 @@ class PostManagerPDO extends PostManager
         if (file_exists($imagePath)) {
             unlink($imagePath);
         }
-
     }
 }
