@@ -53,11 +53,10 @@ class PostManagerPDO extends PostManager
             $imagePath = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/post/post-' . h($post->getId()) . '.jpg';
 
 
-            if (file_exists($imagePath)) {
-                $post->setFeaturedImage('/images/post/post-' . $post->getId() . '.jpg');
-            } else {
-                $post->setFeaturedImage('/images/post/post-default.jpg');
-            }
+
+            $url = file_exists($imagePath) ? '/images/post/post-' . h($post->getId()) . '.jpg' : '/images/post/post-default.jpg';
+
+            $post->setFeaturedImage($url);
 
         }
 
@@ -97,7 +96,7 @@ class PostManagerPDO extends PostManager
 
             $imagePath = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/post/post-' . h($post->getId()) . '.jpg';
 
-            $url = file_exists($imagePath) ? '/images/post/post-' . $post->getId() . '.jpg' : '/images/post/post-default.jpg';
+            $url = file_exists($imagePath) ? '/images/post/post-' . h($post->getId()) . '.jpg' : '/images/post/post-default.jpg';
 
             $post->setFeaturedImage($url);
 
@@ -189,7 +188,8 @@ class PostManagerPDO extends PostManager
 
         $query->execute();
 
-        $imagePath = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/post/post-' . $id . '.jpg';
+        $imagePath = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/post/post-' . h($id) . '.jpg';
+
 
         if (file_exists($imagePath)) {
             unlink($imagePath);
