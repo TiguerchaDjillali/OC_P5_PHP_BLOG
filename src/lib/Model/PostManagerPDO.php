@@ -5,6 +5,8 @@ namespace Model;
 
 
 use Entity\Post;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\ServerRequest;
 
 class PostManagerPDO extends PostManager
 {
@@ -48,7 +50,9 @@ class PostManagerPDO extends PostManager
             $post->setPublicationDate(new \DateTime($post->getPublicationDate()));
             $post->setModificationDate(new \DateTime($post->getModificationDate()));
 
-            $imagePath = $_SERVER["DOCUMENT_ROOT"] . '/images/post/post-' . $post->getId() . '.jpg';
+            $imagePath = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/post/post-' . h($post->getId()) . '.jpg';
+
+
             if (file_exists($imagePath)) {
                 $post->setFeaturedImage('/images/post/post-' . $post->getId() . '.jpg');
             }else{
@@ -56,6 +60,7 @@ class PostManagerPDO extends PostManager
             }
 
         }
+
 
         return $postsList;
 
@@ -90,7 +95,7 @@ class PostManagerPDO extends PostManager
             $post->setPublicationDate(new \DateTime($post->getPublicationDate()));
             $post->setModificationDate(new \DateTime($post->getModificationDate()));
 
-            $imagePath = $_SERVER["DOCUMENT_ROOT"] . '/images/post/post-' . $post->getId() . '.jpg';
+            $imagePath = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/post/post-' . h($post->getId()) . '.jpg';
 
             if (file_exists($imagePath)) {
                 $post->setFeaturedImage('/images/post/post-' . $post->getId() . '.jpg');
@@ -136,7 +141,7 @@ class PostManagerPDO extends PostManager
 
 
         if ($post->getFeaturedImage() !== null) {
-            $imageTarget = $_SERVER["DOCUMENT_ROOT"] . '/images/post/post-' . $this->dao->lastInsertId() . '.jpg';
+            $imageTarget = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/post/post-' . $this->dao->lastInsertId() . '.jpg';
             $post->getFeaturedImage()->moveTo($imageTarget);
         }
 
@@ -165,7 +170,7 @@ class PostManagerPDO extends PostManager
         $query->execute();
 
         if ($post->getFeaturedImage() !== null) {
-            $imageTarget = $_SERVER["DOCUMENT_ROOT"] . '/images/post/post-' . $post->getId() . '.jpg';
+            $imageTarget = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/post/post-' . $post->getId() . '.jpg';
             $post->getFeaturedImage()->moveTo($imageTarget);
         }
 
@@ -182,7 +187,7 @@ class PostManagerPDO extends PostManager
 
         $query->execute();
 
-        $imagePath = $_SERVER["DOCUMENT_ROOT"] . '/images/post/post-' . $id . '.jpg';
+        $imagePath = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/post/post-' . $id . '.jpg';
 
         if (file_exists($imagePath)) {
             unlink($imagePath);
