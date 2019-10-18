@@ -55,7 +55,7 @@ class PostManagerPDO extends PostManager
 
             if (file_exists($imagePath)) {
                 $post->setFeaturedImage('/images/post/post-' . $post->getId() . '.jpg');
-            }else{
+            } else {
                 $post->setFeaturedImage('/images/post/post-default.jpg');
             }
 
@@ -99,7 +99,7 @@ class PostManagerPDO extends PostManager
 
             if (file_exists($imagePath)) {
                 $post->setFeaturedImage('/images/post/post-' . $post->getId() . '.jpg');
-            }else{
+            } else {
                 $post->setFeaturedImage('/images/post/post-default.jpg');
             }
 
@@ -176,6 +176,9 @@ class PostManagerPDO extends PostManager
 
     }
 
+    /**
+     * @param $id
+     */
     public function delete($id)
     {
 
