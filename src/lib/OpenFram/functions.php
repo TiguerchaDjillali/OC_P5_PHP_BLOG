@@ -7,7 +7,7 @@ function u($string = "")
     return urlencode($string);
 }
 
-function htmlspecialchars($string = "")
+function h($string = "")
 {
     return htmlspecialchars($string);
 }
