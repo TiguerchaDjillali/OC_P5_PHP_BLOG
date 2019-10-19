@@ -35,7 +35,7 @@ abstract class Application
      */
     public function __construct()
     {
-        $this->setRequest();
+        $this->request = ServerRequest::fromGlobals();
         $this->response = new Response();
         $this->currentUser = new CurrentUser($this);
         $this->name = '';
@@ -107,9 +107,9 @@ abstract class Application
      *
      * @return void
      */
-    public function setRequest(): void
+    public function setRequest( $request): void
     {
-        $this->request =  ServerRequest::fromGlobals();
+        $this->request =  $request;
     }
 
     public function getCurrentUser()
