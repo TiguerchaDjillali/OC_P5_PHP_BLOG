@@ -22,7 +22,7 @@ abstract class PostManager extends Manager
         if ($post->isValid()) {
             $post->isNew() ? $this->add($post) : $this->update($post);
         } else {
-            throw new RuntimeException('L\'article doit être valid pour être enregistré');
+            throw new RuntimeException('L\'article doit être valide pour être enregistré');
         }
     }
     abstract public function add(Post $post);
