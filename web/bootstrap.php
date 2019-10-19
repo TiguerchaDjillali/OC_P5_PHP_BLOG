@@ -1,17 +1,24 @@
 <?php
-const ROOT = __DIR__;
+
+
+use GuzzleHttp\Psr7\ServerRequest;
 
 
 require dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
-require dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'OpenFram' . DIRECTORY_SEPARATOR . 'functions.php';
+//require dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'OpenFram' . DIRECTORY_SEPARATOR . 'functions.php';
+
+
+
+$get = ServerRequest::fromGlobals()->getQueryParams()['app'] ?? false;
+
 
 const DEFAULT_APP = 'Frontend';
 
-if(!isset($_GET['app']) || !file_exists(__DIR__.'/../src/App/'.$_GET['app'])) {
-    $_GET['app'] = DEFAULT_APP;
+if(!$get || !file_exists(__DIR__.'/../src/App/'.$get)) {
+    $get['app'] = DEFAULT_APP;
 }
 
-$appClass = 'App\\' . $_GET['app'] . '\\' . $_GET['app'] . 'Application';
+$appClass = 'App\\' . $get . '\\' . $get . 'Application';
 
 $app = new $appClass();
 
