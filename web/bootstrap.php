@@ -14,6 +14,6 @@ if (!$get || !file_exists(__DIR__ . '/../src/App/' . $get)) {
 
 $appClass = 'App\\' . $get . '\\' . $get . 'Application';
 
-$app = new $appClass();
+$app = new $appClass(ServerRequest::fromGlobals());
 
 $app->run();

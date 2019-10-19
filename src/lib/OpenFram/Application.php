@@ -32,10 +32,11 @@ abstract class Application
 
     /**
      * Application constructor.
+     * @param $request
      */
-    public function __construct()
+    public function __construct($request)
     {
-        $this->request = ServerRequest::fromGlobals();
+        $this->request = $request;
         $this->response = new Response();
         $this->currentUser = new CurrentUser($this);
         $this->name = '';

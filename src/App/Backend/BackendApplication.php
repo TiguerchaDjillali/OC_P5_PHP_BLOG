@@ -11,9 +11,9 @@ use function Http\Response\send;
 class BackendApplication extends \OpenFram\Application
 {
 
-    public function __construct()
+    public function __construct($request)
     {
-        parent::__construct();
+        parent::__construct($request);
         $this->name = 'Backend';
     }
 

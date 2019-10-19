@@ -9,9 +9,9 @@ use function Http\Response\send;
 class FrontendApplication extends Application
 {
 
-    public function __construct()
+    public function __construct($request)
     {
-        parent::__construct();
+        parent::__construct($request);
         $this->name = 'Frontend';
     }
 
