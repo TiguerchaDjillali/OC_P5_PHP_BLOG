@@ -27,6 +27,5 @@ class FrontendApplication extends Application
 
         send($this->response->withBody(stream_for($page)));
 
-
     }
 }
