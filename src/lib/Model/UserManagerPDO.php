@@ -5,6 +5,7 @@ namespace Model;
 
 
 use Entity\User;
+use GuzzleHttp\Psr7\ServerRequest;
 use function OpenFram\h;
 
 class UserManagerPDO extends UserManager
@@ -49,8 +50,6 @@ class UserManagerPDO extends UserManager
 
     public function getByAttribute($attribute, $value)
     {
-        $value = $value ?? 1;// TODO:
-
         $sql = 'SELECT * FROM User ';
         $sql .= 'WHERE ' . $attribute . ' = \'' . $value . '\' ';
 
@@ -66,13 +65,12 @@ class UserManagerPDO extends UserManager
 
             $user->setRole($roleManager->getByAttribute('id', $user->roleId));
 
-            $imagePath = $_SERVER["DOCUMENT_ROOT"] . '/images/user/user-' . h($user->getId()) . '.jpg';
 
-            if (file_exists($imagePath)) {
-                $user->setProfileImage('/images/user/user-' . h($user->getId()) . '.jpg');
-            } else {
-                $user->setProfileImage('/images/user/user-default.jpg');
-            }
+
+            $imagePath = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/user/user-' . h($user->getId()) . '.jpg';
+            $url = file_exists($imagePath) ? '/images/user/user-' . h($user->getId()) . '.jpg' : '/images/user/user-default.jpg';
+            $user->setProfileImage($url);
+
 
 
             return $user;
@@ -102,7 +100,7 @@ class UserManagerPDO extends UserManager
 
 
         if ($user->getProfileImage() !== null) {
-            $imageTarget = $_SERVER["DOCUMENT_ROOT"] . '/images/user/user-' . $this->dao->lastInsertId() . '.jpg';
+            $imageTarget = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/user/user-' . $this->dao->lastInsertId() . '.jpg';
             $user->getProfileImage()->moveTo($imageTarget);
         }
     }
@@ -140,7 +138,7 @@ class UserManagerPDO extends UserManager
         $query->execute();
 
         if ($user->getProfileImage() !== null) {
-            $imageTarget = $_SERVER["DOCUMENT_ROOT"] . '/images/user/user-' . $user->getId() . '.jpg';
+            $imageTarget = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/user/user-' .  $user->getId() . '.jpg';
             $user->getProfileImage()->moveTo($imageTarget);
         }
 
@@ -157,7 +155,8 @@ class UserManagerPDO extends UserManager
 
         $query->execute();
 
-        $imagePath = $_SERVER["DOCUMENT_ROOT"] . '/images/user/user-' . h($id) . '.jpg';
+        $imagePath = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/user/user-' .  htmlspecialchars($id) . '.jpg';
+
 
         if (file_exists($imagePath)) {
             unlink($imagePath);
