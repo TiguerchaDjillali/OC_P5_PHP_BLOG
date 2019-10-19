@@ -1,13 +1,11 @@
 <?php
 
-
 namespace OpenFram;
 
 session_start();
 
 class CurrentUser extends ApplicationComponent
 {
-
     public function hasFlash()
     {
         return isset($_SESSION['flash']);
@@ -51,29 +49,22 @@ class CurrentUser extends ApplicationComponent
             throw new \InvalidArgumentException('La valeur spécaifiée à la méthode CurrentUser::setAuthenticated() doitêtre un boolean ');
         }
         $_SESSION['auth'] = $authenticated;
-
     }
 
     public function hasAccess()
     {
         $controller = $this->app->getController();
-
         $controller->getPage()->addVAr('user', $this);
-
-
         $permissions = $this->getAttribute('user')->getRole()->getPermissions();
         $couple = [];
         foreach ($permissions as $permission) {
             $couple [] = [$permission->getModule(), $permission->getAction()];
         }
         $control = [$controller->getModule(), $controller->getAction()];
-
-
         if (!in_array($control, $couple)) {
             return false;
         }
         return true;
-
     }
 
     public function hasAccessTo($module, $action)
@@ -84,13 +75,9 @@ class CurrentUser extends ApplicationComponent
             $couple [] = [$permission->getModule(), $permission->getAction()];
         }
         $control = [$module, $action];
-
-
         if (!in_array($control, $couple)) {
             return false;
         }
         return true;
     }
-
-
 }

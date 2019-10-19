@@ -27,7 +27,7 @@ class ConnectionController extends \OpenFram\BackController
             if($user !== null  &&  $user->verifyPassword($password)){
 
                 $this->app->getCurrentUser()->setAuthenticated(true);
-                $this->app->getCurrentUser()->setAttribute('user',$user);
+                $this->app->getCurrentUser()->setAttribute('user', $user);
                 if($this->app->getCurrentUser()->hasAttribute('lastUrl')){
                     $this->app->redirect($this->app->getCurrentUser()->getAttribute('lastUrl'));
 

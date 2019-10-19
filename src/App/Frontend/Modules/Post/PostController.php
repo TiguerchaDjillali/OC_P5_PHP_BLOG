@@ -124,7 +124,7 @@ class PostController extends BackController
 
         if ($formHandler->process()) {
             $this->app->getCurrentUser()->setFlash('Votre commentaitre a bien été ajouté, merci!');
-            $this->app->redirect('post-' . h(u($request->getQueryParams('GET')['id'])) . '.html#commentForm');
+            $this->app->redirect('post-' . htmlspecialchars(urlencode($request->getQueryParams('GET')['id'])) . '.html#commentForm');
 
         }
 

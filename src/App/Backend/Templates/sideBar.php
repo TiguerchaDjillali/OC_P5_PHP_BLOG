@@ -14,7 +14,7 @@ use function OpenFram\u;
             LOGO
         </a>
         <a href="" class="simple-text logo-normal">
-            <?= $currentUser->hasAttribute('user') ? h($currentUser->getAttribute('user')->getUserName()) : 'connexion' ?>
+            <?= $currentUser->hasAttribute('user') ? htmlspecialchars($currentUser->getAttribute('user')->getUserName()) : 'connexion' ?>
         </a>
     </div>
     <div class="sidebar-wrapper">
@@ -28,7 +28,7 @@ use function OpenFram\u;
             </li>
 
             <li class="nav-item  <?= ($module == 'Profil') ? 'active' : ''?> ">
-                <a class="nav-link" href="/admin/user-<?= h(u($currentUser->getAttribute('user')->getId()))?>.html">
+                <a class="nav-link" href="/admin/user-<?= htmlspecialchars(urlencode($currentUser->getAttribute('user')->getId()))?>.html">
                     <i class="material-icons">Profil</i>
                     <p>Profil</p>
                 </a>

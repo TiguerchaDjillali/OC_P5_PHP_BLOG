@@ -10,7 +10,7 @@ use function OpenFram\u;
             <div class="row">
                 <div class="col-md-12 ml-auto mr-auto">
                     <div class="brand text-center">
-                        <h1><?= h($post->getTitle()) ?></h1>
+                        <h1><?= htmlspecialchars($post->getTitle()) ?></h1>
 
                     </div>
                 </div>
@@ -24,13 +24,13 @@ use function OpenFram\u;
     <section class="section">
         <div class="container">
             <div class="row">
-                <h3 class="col-md-4"><?= h($post->getSubtitle())?></h3>
+                <h3 class="col-md-4"><?= htmlspecialchars($post->getSubtitle())?></h3>
 
-                <p class="col-md-8 pt-md-4"><?= h($post->getContent()) ?> </p>
+                <p class="col-md-8 pt-md-4"><?= htmlspecialchars($post->getContent()) ?> </p>
                 <div class="col-12">
                     <p class="pt-3 float-right">
-                        Publié par <a href="#" class="font-italic"> <?= h($post->getUser()->getUserName()) ?> </a>
-                        - Le <?= h($post->getPublicationDate()->format('d/m/Y à H\hi\ ')) ?>
+                        Publié par <a href="#" class="font-italic"> <?= htmlspecialchars($post->getUser()->getUserName()) ?> </a>
+                        - Le <?= htmlspecialchars($post->getPublicationDate()->format('d/m/Y à H\hi\ ')) ?>
                     </p>
                 </div>
 
@@ -47,27 +47,27 @@ use function OpenFram\u;
 
                 <div class="col-12">
 
-                    <h2> Commentaires <small class="float-right"><?= h(count($commentsList)) ?> commentaires</small></h2>
+                    <h2> Commentaires <small class="float-right"><?= htmlspecialchars(count($commentsList)) ?> commentaires</small></h2>
 
 
                     <?php foreach ($commentsList as $comment) { ?>
 
 
-                        <div id="comment-<?= h($comment->getId()) ?>"
+                        <div id="comment-<?= htmlspecialchars($comment->getId()) ?>"
                              class="media px-3 card <?= ($comment->getId() == $targetComment->getId()) ? ' bmd-card-raised bg-light text-dark' : '' ?>">
                             <div class="media-body col-12 ">
                                 <p class="float-right">
-                                    <small>Le <?= h($comment->getPublicationDate()->format('d/m/Y à H\hi\ ')) ?></small>
+                                    <small>Le <?= htmlspecialchars($comment->getPublicationDate()->format('d/m/Y à H\hi\ ')) ?></small>
                                 </p>
 
-                                <h4 class="media-heading currentUser_name"><?= h($comment->getUser()->getUserName()) ?></h4>
-                                <p><?= h($comment->getContent()) ?></p>
+                                <h4 class="media-heading currentUser_name"><?= htmlspecialchars($comment->getUser()->getUserName()) ?></h4>
+                                <p><?= htmlspecialchars($comment->getContent()) ?></p>
                                 <?php
                                 if ($comment->getValid() == 0) { ?>
                                 <form action="" method="post">
                                     <div class="form-group">
                                         <button type="submit" name="valid" class="btn btn-primary"
-                                                value="<?= h($comment->getId()) ?>">
+                                                value="<?= htmlspecialchars($comment->getId()) ?>">
                                             Valider
                                         </button>
 
@@ -75,13 +75,13 @@ use function OpenFram\u;
                                     <form action="" method="post">
                                         <div class="form-group">
                                             <button type="submit" name="invalid" class="btn btn-primary"
-                                                    value="<?= h($comment->getId()) ?>">
+                                                    value="<?= htmlspecialchars($comment->getId()) ?>">
                                                 Cacher
                                             </button>
 
                                         <?php } ?>
 
-                                            <button type="submit" name="delete" value="<?= h($comment->getId()) ?>"
+                                            <button type="submit" name="delete" value="<?= htmlspecialchars($comment->getId()) ?>"
                                                     class="btn btn-primary">
                                                 Supprimer
                                             </button>
