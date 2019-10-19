@@ -27,8 +27,7 @@
     "psr/http-message": "^1.0",
     "guzzlehttp/psr7": "^1.6",
     "http-interop/response-sender": "^1.0",
-    "ext-pdo": "*",
-    "ext-http": "*"
+    "ext-pdo": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "^8.3"
