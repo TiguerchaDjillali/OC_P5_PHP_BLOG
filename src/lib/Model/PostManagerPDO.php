@@ -48,11 +48,11 @@ class PostManagerPDO extends PostManager
             $post->setPublicationDate(new \DateTime($post->getPublicationDate()));
             $post->setModificationDate(new \DateTime($post->getModificationDate()));
 
-            $imagePath = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/post/post-' . h($post->getId()) . '.jpg';
+            $imagePath = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/post/post-' . htmlspecialchars($post->getId()) . '.jpg';
 
 
 
-            $url = file_exists($imagePath) ? '/images/post/post-' . h($post->getId()) . '.jpg' : '/images/post/post-default.jpg';
+            $url = file_exists($imagePath) ? '/images/post/post-' . htmlspecialchars($post->getId()) . '.jpg' : '/images/post/post-default.jpg';
 
             $post->setFeaturedImage($url);
 
@@ -92,9 +92,9 @@ class PostManagerPDO extends PostManager
             $post->setPublicationDate(new \DateTime($post->getPublicationDate()));
             $post->setModificationDate(new \DateTime($post->getModificationDate()));
 
-            $imagePath = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/post/post-' . h($post->getId()) . '.jpg';
+            $imagePath = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/post/post-' . htmlspecialchars($post->getId()) . '.jpg';
 
-            $url = file_exists($imagePath) ? '/images/post/post-' . h($post->getId()) . '.jpg' : '/images/post/post-default.jpg';
+            $url = file_exists($imagePath) ? '/images/post/post-' . htmlspecialchars($post->getId()) . '.jpg' : '/images/post/post-default.jpg';
 
             $post->setFeaturedImage($url);
 
@@ -186,7 +186,7 @@ class PostManagerPDO extends PostManager
 
         $query->execute();
 
-        $imagePath = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/post/post-' . h($id) . '.jpg';
+        $imagePath = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/post/post-' . htmlspecialchars($id) . '.jpg';
 
 
         if (file_exists($imagePath)) {

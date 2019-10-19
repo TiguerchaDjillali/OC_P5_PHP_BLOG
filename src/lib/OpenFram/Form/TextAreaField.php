@@ -39,7 +39,7 @@ class TextAreaField extends Field
 
         $widget .= ' />';
         if(!empty($this->value)){
-            $widget .= h($this->value);
+            $widget .= htmlspecialchars($this->value);
         }
         $widget .= '</textarea>';
 

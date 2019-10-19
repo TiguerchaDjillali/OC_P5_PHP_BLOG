@@ -21,7 +21,7 @@ class InputTextField extends Field
         $widget .= '<input type="text" name="' . $this->name . '"   id="' . $this->name . '" ';
         $widget .= ' class="form-control" ';
         if (!empty($this->value)) {
-            $widget .= ' value="' . h($this->value) . '" ';
+            $widget .= ' value="' . htmlspecialchars($this->value) . '" ';
         }
 
         if (!empty($this->maxLength)) {

@@ -25,7 +25,7 @@ class InputRadioField extends InputField
         foreach($this->options as $key=>$value){
             $widget .= "<label class=\"form-check-label px-4\">";
             $widget .= "<input type = \"radio\" class=\" form-check-input \" name = \"". $this->attributes["name"] ."\"";
-            $widget .=" value = \"". h($key)."\"";
+            $widget .=" value = \"". htmlspecialchars($key)."\"";
             if(isset($this->value)){
                 if ($this->value->getName() === $value) {
                     $widget .= 'checked';
@@ -34,7 +34,7 @@ class InputRadioField extends InputField
                 $widget .= 'checked';
             }
             $widget .=">";
-            $widget .= h($value);
+            $widget .= htmlspecialchars($value);
 
              $widget .= "<span class=\"circle\"><span class=\"check\"></span></span>";
              $widget .= "</label>";
