@@ -2,6 +2,10 @@
 use function OpenFram\h;
 use function OpenFram\u;
 
+function escape_to_html($dirty){
+    echo htmlspecialchars($dirty, ENT_QUOTES, 'UTF-8');
+}
+
 ?>
 
 <!-- Page Header -->
@@ -14,7 +18,7 @@ use function OpenFram\u;
         <div class="container">
             <div class="row">
 
-                <h3 class="col-md-4"><?= htmlentities($post->getSubtitle(),ENT_QUOTES) ?></h3>
+                <h3 class="col-md-4"><?php escape_to_html($post->getSubtitle()) ?></h3>
 
                 <p class="col-md-8 pt-md-4"><?= htmlspecialchars($post->getContent()) ?> </p>
                 <div class="col-12">
