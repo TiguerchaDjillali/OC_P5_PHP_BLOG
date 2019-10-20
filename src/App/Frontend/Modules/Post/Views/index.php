@@ -49,7 +49,7 @@ use function OpenFram\u;
                                 <a href="/post-<?php h(u($post->getId())) ; ?>.html" class="btn btn-primary">Lire</a>
 
                                 <p class="float-right pt-3">Publié par <a href="#"
-                                                                          class="font-italic"> <?= $post->getUser()->getUserName() ?> </a>
+                                                                          class="font-italic"> <?php h($post->getUser()->getUserName()) ?> </a>
                                     - Le
                                     <?php h(($post->getPublicationDate()->format('d/m/Y à H\hi\ '))); ?>
 
