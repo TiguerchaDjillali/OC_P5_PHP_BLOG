@@ -6,26 +6,68 @@ namespace Entity;
 
 use OpenFram\Entity;
 
+/**
+ * Class User
+ *
+ * @package Entity
+ */
 class User extends Entity
 {
+    /**
+     * @var
+     */
     protected $firstName;
+    /**
+     * @var
+     */
     protected $lastName;
+    /**
+     * @var
+     */
     protected $userName;
+    /**
+     * @var
+     */
     protected $email;
+    /**
+     * @var
+     */
     protected $confirmEmail;
+    /**
+     * @var null
+     */
     protected $profileImage = null;
+    /**
+     * @var
+     */
     protected $password;
+    /**
+     * @var
+     */
     protected $confirmPassword;
+    /**
+     * @var bool
+     */
     protected $passwordRequired = true;
+    /**
+     * @var
+     */
     protected $hashedPassword;
+    /**
+     * @var
+     */
     protected $role;
+    /**
+     * @var
+     */
     protected $description;
 
 
-
+    /**
+     * @return bool
+     */
     public function isValid()
     {
-        //TODO:
         return true;
     }
 
@@ -42,8 +84,8 @@ class User extends Entity
      */
     public function setFirstName($firstName)
     {
-        if(is_string($firstName)){
-        $this->firstName = $firstName;
+        if(is_string($firstName)) {
+            $this->firstName = $firstName;
         }
     }
 
@@ -55,12 +97,13 @@ class User extends Entity
         return $this->lastName;
     }
 
+
     /**
-     * @param mixed $lastName
+     * @param string $lastName
      */
-    public function setLastName($lastName)
+    public function setLastName(string $lastName): void
     {
-        if(is_string($lastName)){
+        if(is_string($lastName)) {
             $this->lastName = $lastName;
         }
     }
@@ -78,8 +121,8 @@ class User extends Entity
      */
     public function setUserName($userName)
     {
-        if(is_string($userName)){
-        $this->userName = $userName;
+        if(is_string($userName)) {
+            $this->userName = $userName;
         }
     }
 
@@ -113,11 +156,16 @@ class User extends Entity
      */
     public function setHashedPassword()
     {
-        $this->hashedPassword = password_hash($this->password, PASSWORD_BCRYPT) ;
+        $this->hashedPassword = password_hash($this->password, PASSWORD_BCRYPT);
     }
 
 
-    public function verifyPassword($password) {
+    /**
+     * @param  $password
+     * @return bool
+     */
+    public function verifyPassword($password)
+    {
         return password_verify($password, $this->hashedPassword);
     }
 
@@ -227,6 +275,7 @@ class User extends Entity
 
     /**
      * @param bool $passwordRequired
+     * @return void
      */
     public function setPasswordRequired(bool $passwordRequired): void
     {

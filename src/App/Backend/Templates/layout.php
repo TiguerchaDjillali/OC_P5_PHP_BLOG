@@ -1,8 +1,9 @@
 <?php
 use function OpenFram\escape_to_html as h;
+use function OpenFram\escape_to_json as j;
 use function OpenFram\u;
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
