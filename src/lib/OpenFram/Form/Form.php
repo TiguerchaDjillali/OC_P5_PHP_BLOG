@@ -14,6 +14,7 @@ class Form
 
     /**
      * Form constructor.
+     *
      * @param $entity
      */
     public function __construct(Entity $entity)
@@ -45,7 +46,7 @@ class Form
     {
         $valid = true;
         foreach($this->fields as $field){
-            if(!$field->isValid()){
+            if(!$field->isValid()) {
                 $valid = false;
             }
         }

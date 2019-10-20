@@ -12,7 +12,7 @@ use function OpenFram\u;
             <div class="card-body">
                 <form class="contact-form" action="" method="post" enctype="multipart/form-data">
 
-                    <?= $form ?>
+                    <?php echo $form ?>
 
                     <div class="form-group">
                         <button type="submit"  class="btn btn-primary">Envoyer</button>

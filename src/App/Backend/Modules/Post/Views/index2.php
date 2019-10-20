@@ -28,11 +28,11 @@ use function OpenFram\u;
 
         <?php foreach ($postsList as $post) { ?>
             <tr>
-                <td scope="row"><?= $post->getId() ?></td>
-                <td><a href="/admin/show/"><?= $post->getTitle() ?></a></td>
-                <td><?= $post->getUser()->getUserName() ?></td>
-                <td><?= $post->isVisible() ? 'Oui' : 'Non' ?></td>
-                <td><?= $post->getPublicationDate()->format('d/m/y') ?></td>
+                <td scope="row"><?php echo $post->getId() ?></td>
+                <td><a href="/admin/show/"><?php echo $post->getTitle() ?></a></td>
+                <td><?php echo $post->getUser()->getUserName() ?></td>
+                <td><?php echo $post->isVisible() ? 'Oui' : 'Non' ?></td>
+                <td><?php echo $post->getPublicationDate()->format('d/m/y') ?></td>
 
 
                 <td>

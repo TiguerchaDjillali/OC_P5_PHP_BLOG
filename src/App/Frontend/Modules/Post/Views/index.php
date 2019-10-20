@@ -29,7 +29,7 @@ use function OpenFram\u;
                 <div class="col-12">
                     <?php
 
-                    include 'pagination.php'; ?>
+                    require 'pagination.php'; ?>
                     <hr>
                 </div>
 
@@ -39,18 +39,18 @@ use function OpenFram\u;
                         <div class="card">
                             <div class="card-header card-header-text card-header-primary">
                                 <div class="card-text">
-                                    <h4 class="card-title"><?= htmlspecialchars($post->getTitle()) ?></h4>
+                                    <h4 class="card-title"><?php echo htmlspecialchars($post->getTitle()) ?></h4>
                                 </div>
                             </div>
                             <div class="card-body">
 
-                                <p style="height:100px; overflow-y: hidden"><?= htmlspecialchars($post->getSubTitle()) ?></p>
-                                <a href="/post-<?= htmlspecialchars(urlencode($post->getId()))?>.html" class="btn btn-primary">Lire</a>
+                                <p style="height:100px; overflow-y: hidden"><?php echo htmlspecialchars($post->getSubTitle()) ?></p>
+                                <a href="/post-<?php echo htmlspecialchars(urlencode($post->getId()))?>.html" class="btn btn-primary">Lire</a>
 
                                 <p class="float-right pt-3">Publié par <a href="#"
-                                                                          class="font-italic"> <?= $post->getUser()->getUserName() ?> </a>
+                                                                          class="font-italic"> <?php echo $post->getUser()->getUserName() ?> </a>
                                     - Le
-                                    <?= htmlspecialchars($post->getPublicationDate()->format('d/m/Y à H\hi\ ')) ?>
+                                    <?php echo htmlspecialchars($post->getPublicationDate()->format('d/m/Y à H\hi\ ')) ?>
 
                                 </p>
 
@@ -62,7 +62,7 @@ use function OpenFram\u;
                 <?php } ?>
                 <div class="col-12">
                     <hr>
-                    <?php include 'pagination.php'; ?>
+                    <?php require 'pagination.php'; ?>
                 </div>
 
 

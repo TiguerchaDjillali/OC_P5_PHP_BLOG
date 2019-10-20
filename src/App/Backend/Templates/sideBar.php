@@ -14,40 +14,40 @@ use function OpenFram\u;
             LOGO
         </a>
         <a href="" class="simple-text logo-normal">
-            <?= $currentUser->hasAttribute('user') ? htmlspecialchars($currentUser->getAttribute('user')->getUserName()) : 'connexion' ?>
+            <?php echo $currentUser->hasAttribute('user') ? htmlspecialchars($currentUser->getAttribute('user')->getUserName()) : 'connexion' ?>
         </a>
     </div>
     <div class="sidebar-wrapper">
         <ul class="nav">
 
-            <li class="nav-item <?= ($module == 'Home') ? 'active' : ''?>">
+            <li class="nav-item <?php echo ($module == 'Home') ? 'active' : ''?>">
                 <a class="nav-link" href="/admin/">
                     <i class="material-icons">dashboard</i>
                     <p>Dashboard</p>
                 </a>
             </li>
 
-            <li class="nav-item  <?= ($module == 'Profil') ? 'active' : ''?> ">
-                <a class="nav-link" href="/admin/user-<?= htmlspecialchars(urlencode($currentUser->getAttribute('user')->getId()))?>.html">
+            <li class="nav-item  <?php echo ($module == 'Profil') ? 'active' : ''?> ">
+                <a class="nav-link" href="/admin/user-<?php echo htmlspecialchars(urlencode($currentUser->getAttribute('user')->getId()))?>.html">
                     <i class="material-icons">Profil</i>
                     <p>Profil</p>
                 </a>
             </li>
 
-            <li class="nav-item  <?= ($module == 'Post') ? 'active' : ''?>">
+            <li class="nav-item  <?php echo ($module == 'Post') ? 'active' : ''?>">
                 <a class="nav-link" href="/admin/posts">
                     <i class="material-icons">Articles</i>
                     <p>Articles</p>
                 </a>
             </li>
-            <li class="nav-item  <?= ($module == 'Comment') ? 'active' : ''?>">
+            <li class="nav-item  <?php echo ($module == 'Comment') ? 'active' : ''?>">
                 <a class="nav-link" href="/admin/comments">
                     <i class="material-icons">Comments</i>
                     <p>Commentaires</p>
                 </a>
             </li>
             <?php if ($currentUser->hasAccessTo('User', 'Index')) { ?>
-                <li class="nav-item  <?= ($module == 'User') ? 'active' : ''?>">
+                <li class="nav-item  <?php echo ($module == 'User') ? 'active' : ''?>">
                     <a class="nav-link" href="/admin/users">
                         <i class="material-icons">User</i>
                         <p>Users</p>
@@ -56,7 +56,7 @@ use function OpenFram\u;
             <?php } ?>
 
             <?php if ($currentUser->hasAccessTo('Role', 'Index')) { ?>
-                <li class="nav-item  <?= ($module == 'Role') ? 'active' : ''?>">
+                <li class="nav-item  <?php echo ($module == 'Role') ? 'active' : ''?>">
                     <a class="nav-link" href="/admin/roles">
                         <i class="material-icons">Roles</i>
                         <p>Roles</p>
@@ -65,7 +65,7 @@ use function OpenFram\u;
             <?php } ?>
 
             <?php if ($currentUser->hasAccessTo('Permission', 'Index')) { ?>
-                <li class="nav-item  <?= ($module == 'Permission') ? 'active' : ''?>">
+                <li class="nav-item  <?php echo ($module == 'Permission') ? 'active' : ''?>">
                     <a class="nav-link" href="/admin/permissions">
                         <i class="material-icons">Permissions</i>
                         <p>Permissions</p>

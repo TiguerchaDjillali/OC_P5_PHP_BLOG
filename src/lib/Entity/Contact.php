@@ -36,7 +36,7 @@ class Contact extends Entity
      */
     public function setFirstName($firstName): void
     {
-        if(empty($firstName || !is_string($firstName))){
+        if(empty($firstName || !is_string($firstName))) {
             $this->errors[] = self::FIRST_NAME_INVALID;
         }
         $this->firstName = $firstName;
@@ -55,7 +55,7 @@ class Contact extends Entity
      */
     public function setEmail($email): void
     {
-        if(empty($email || !is_string($email))){
+        if(empty($email || !is_string($email))) {
             $this->errors[] = self::EMAIL_INVALID;
         }
         $this->email = $email;
@@ -74,7 +74,7 @@ class Contact extends Entity
      */
     public function setMessage($message): void
     {
-        if(empty($message || !is_string($message))){
+        if(empty($message || !is_string($message))) {
             $this->errors[] = self::MESSAGE_INVALID;
         }
         $this->message = $message;
@@ -93,7 +93,7 @@ class Contact extends Entity
      */
     public function setObject($object): void
     {
-        if(empty($object || !is_string($object))){
+        if(empty($object || !is_string($object))) {
             $this->errors[] = self::OBJECT_INVALID;
         }
         $this->object = $object;

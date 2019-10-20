@@ -1,7 +1,7 @@
  <?php
  use function OpenFram\h;
 
- ?>
+    ?>
 
 <div class="page-header header-filter clear-filter purple-filter" data-parallax="true"
      style="background-image: url('./assets/img/bg2.jpg');  background-position: center;">
@@ -18,7 +18,7 @@
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true"><i class="material-icons">clear</i></span>
                                 </button>
-                                <b>Alert:</b> <?= htmlspecialchars($currentUser->getFlash()) ?>
+                                <b>Alert:</b> <?php echo htmlspecialchars($currentUser->getFlash()) ?>
                             </div>
                         </div>
 
@@ -83,18 +83,18 @@
                         <div class="card">
                             <div class="card-header card-header-text card-header-primary">
                                 <div class="card-text">
-                                    <h4 class="card-title"><?= htmlspecialchars($post->getTitle()) ?></h4>
+                                    <h4 class="card-title"><?php echo htmlspecialchars($post->getTitle()) ?></h4>
                                 </div>
                             </div>
                             <div class="card-body">
 
-                                <p style="height:100px; overflow-y: hidden"><?= htmlspecialchars($post->getSubTitle()) ?></p>
-                                <a href="/post-<?= htmlspecialchars($post->getId()) ?>.html" class="btn btn-primary">Lire</a>
+                                <p style="height:100px; overflow-y: hidden"><?php echo htmlspecialchars($post->getSubTitle()) ?></p>
+                                <a href="/post-<?php echo htmlspecialchars($post->getId()) ?>.html" class="btn btn-primary">Lire</a>
 
                                 <p class="float-right pt-3">Publié par <a href="#"
-                                                                          class="font-italic"> <?= $post->getUser()->getUserName() ?> </a>
+                                                                          class="font-italic"> <?php echo $post->getUser()->getUserName() ?> </a>
                                     - Le
-                                    <?= htmlspecialchars($post->getPublicationDate()->format('d/m/Y à H\hi\ ')) ?>
+                                    <?php echo htmlspecialchars($post->getPublicationDate()->format('d/m/Y à H\hi\ ')) ?>
 
                                 </p>
 
@@ -123,7 +123,7 @@
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true"><i class="material-icons">clear</i></span>
                     </button>
-                    <b>Success Alert:</b> <?= htmlspecialchars($currentUser->getFlash()) ?>
+                    <b>Success Alert:</b> <?php echo htmlspecialchars($currentUser->getFlash()) ?>
                 </div>
             </div>
 
@@ -138,7 +138,7 @@
                     to you in a couple of hours.</h4>
                 <form class="contact-form" action=".#contactSection" method="post">
 
-                    <?= $form ?>
+                    <?php echo $form ?>
 
                     <div class="row">
                         <div class="col-md-4 ml-auto mr-auto text-center">

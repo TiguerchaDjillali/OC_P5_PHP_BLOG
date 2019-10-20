@@ -10,7 +10,7 @@ class PostManagerPDO extends PostManager
 {
 
     /**
-     * @param array $options
+     * @param  array $options
      * @return mixed
      * @throws \Exception
      */
@@ -65,9 +65,9 @@ class PostManagerPDO extends PostManager
 
 
     /**
-     * @param $attribute
-     * @param $value
-     * @param array $options
+     * @param  $attribute
+     * @param  $value
+     * @param  array     $options
      * @return Post | null
      * @throws \Exception
      */

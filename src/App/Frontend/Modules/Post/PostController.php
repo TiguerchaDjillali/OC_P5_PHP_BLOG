@@ -100,8 +100,10 @@ class PostController extends BackController
             $comment = new Comment(
                 [
                     'content' => $request->getParsedBody()['content'],
-                    'post' => $this->managers->getManagerOf('Post')->getByAttribute('id',
-                        $request->getQueryParams('GET')['id']),
+                    'post' => $this->managers->getManagerOf('Post')->getByAttribute(
+                        'id',
+                        $request->getQueryParams('GET')['id']
+                    ),
                     'user' => $this->app->getCurrentUser()->getAttribute('user')
                 ]
             );

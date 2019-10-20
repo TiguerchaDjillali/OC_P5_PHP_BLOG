@@ -15,7 +15,7 @@ class CommentController extends \OpenFram\BackController
         $manager = $this->managers->getManagerOf('Comment');
 
         $currentUser = $this->app->getCurrentUser()->getAttribute('user');
-        if($currentUser->getRole()->getId() != 1){
+        if($currentUser->getRole()->getId() != 1) {
             $commentsNumber = $manager->count(['userId' => $currentUser->getId()]);
             $nonValidCommentsNumber = $manager->count(['valid'=> 0,'userId' => $currentUser->getId()]);
         } else {
@@ -26,7 +26,7 @@ class CommentController extends \OpenFram\BackController
 
         $dataTable = [];
         foreach ($manager->getList() as $comment) {
-            if($currentUser->getRole()->getId() == 1 || $comment->getPost()->getUser()->getId() == $currentUser->getId()){
+            if($currentUser->getRole()->getId() == 1 || $comment->getPost()->getUser()->getId() == $currentUser->getId()) {
                 $dataTable[] = [
                     'id' => $comment->getId(),
                     'postTitle' => $comment->getPost()->getTitle(),
@@ -39,7 +39,7 @@ class CommentController extends \OpenFram\BackController
             }
         }
 
-        $this->page->addVar('dataTable', json_encode($dataTable) );
+        $this->page->addVar('dataTable', json_encode($dataTable));
         $this->page->addVar('commentsList', $manager->getList());
         $this->page->addVar('commentsNumber', $commentsNumber);
         $this->page->addVar('nonValidCommentsNumber', $nonValidCommentsNumber);
@@ -57,7 +57,7 @@ class CommentController extends \OpenFram\BackController
         // access controle
         $currentUser = $this->app->getCurrentUser()->getAttribute('user');
 
-        if($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $targetComment->getPost()->getUser()->getId()){
+        if($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $targetComment->getPost()->getUser()->getId()) {
             $this->app->getCurrentUser()->setFlash('Accès refusé');
             $this->app->redirect('/admin/comments');
         }

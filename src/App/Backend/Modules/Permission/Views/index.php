@@ -21,7 +21,7 @@
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
             <h2 class="text-danger" >Only for Administrator</h2>
-            <h2>Vous avez <?= $permissionsNumber ?> permissions</h2>
+            <h2>Vous avez <?php echo $permissionsNumber ?> permissions</h2>
 
             <hr>
             <h3><a href="/admin/permission-insert.html">Ajouter une permission</a></h3>
@@ -40,10 +40,10 @@
                 <tbody>
                 <?php  foreach($permissionsList as $permission) { ?>
                     <tr>
-                        <th scope="row"><?= $permission->getId() ?></th>
-                        <td><?= $permission->getModule() ?></td>
-                        <td><?= $permission->getAction() ?></td>
-                        <td><?= $permission->getDescription() ?></td>
+                        <th scope="row"><?php echo $permission->getId() ?></th>
+                        <td><?php echo $permission->getModule() ?></td>
+                        <td><?php echo $permission->getAction() ?></td>
+                        <td><?php echo $permission->getDescription() ?></td>
                         <td><a href=""><i class="fa fa-eye"></i></a></td>
                         <td><a href=""><i class="fas fa-pencil-alt"></i></a></td>
                         <td><a href=""><i class="far fa-trash-alt"></i></a></td>

@@ -12,7 +12,7 @@ use function OpenFram\u;
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>
-        <?= htmlspecialchars($title) ?>
+        <?php echo htmlspecialchars($title) ?>
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
           name='viewport'/>
@@ -80,7 +80,7 @@ use function OpenFram\u;
     <!-- End Google Tag Manager -->
 </head>
 
-<body class="<?= htmlspecialchars($pageType) ?> sidebar-collapse">
+<body class="<?php echo htmlspecialchars($pageType) ?> sidebar-collapse">
 <!-- Extra details for Live View on GitHub Pages -->
 <!-- Google Tag Manager (noscript) -->
 <noscript>
@@ -90,7 +90,7 @@ use function OpenFram\u;
 <!-- End Google Tag Manager (noscript) -->
 
 
-<?php include 'navigation.php'; ?>
+<?php require 'navigation.php'; ?>
 
 
 <?php if ($currentUser->hasFlash()) { ?>
@@ -103,14 +103,14 @@ use function OpenFram\u;
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true"><i class="material-icons">clear</i></span>
             </button>
-            <b>Success Alert:</b> <?= htmlspecialchars($currentUser->getFlash()) ?>
+            <b>Success Alert:</b> <?php echo htmlspecialchars($currentUser->getFlash()) ?>
         </div>
     </div>
 
 <?php } ?>
 
 
-<?= $content ?>
+<?php echo $content ?>
 
 
 <footer class="footer footer-default">
@@ -156,7 +156,7 @@ use function OpenFram\u;
 <script src="../assets/js/core/popper.min.js" type="text/javascript"></script>
 <script src="../assets/js/core/bootstrap-material-design.min.js" type="text/javascript"></script>
 <script src="../assets/js/plugins/moment.min.js"></script>
-<!--	Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
+<!--    Plugin for the Datepicker, full documentation here: https://github.com/Eonasdan/bootstrap-datetimepicker -->
 <script src="../assets/js/plugins/bootstrap-datetimepicker.js" type="text/javascript"></script>
 <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
 <script src="../assets/js/plugins/nouislider.min.js" type="text/javascript"></script>
@@ -164,7 +164,7 @@ use function OpenFram\u;
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGat1sgDZ-3y6fFe6HD7QUziVC6jlJNog"></script>
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
-<!--	Plugin for Sharrre btn -->
+<!--    Plugin for Sharrre btn -->
 <script src="../assets/js/plugins/jquery.sharrre.js" type="text/javascript"></script>
 <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
 <script src="../assets/js/material-kit.min.js?v=2.0.6" type="text/javascript"></script>

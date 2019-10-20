@@ -15,6 +15,7 @@ class FormHandler
 
     /**
      * FormHandler constructor.
+     *
      * @param $form
      * @param $manager
      * @param $request
@@ -23,11 +24,12 @@ class FormHandler
     {
         $this->setForm($form);
         $this->setManager($manager);
-        $this->setRequest ($request);
+        $this->setRequest($request);
     }
 
-    public function process(){
-        if($this->request->getMethod() == 'POST' && $this->form->isValid()){
+    public function process()
+    {
+        if($this->request->getMethod() == 'POST' && $this->form->isValid()) {
             $this->manager->save($this->form->getEntity());
 
             return true;

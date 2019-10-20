@@ -32,7 +32,7 @@ class InputField extends field
 
         $widget .= '<label id="' . $this->attributes['name'] . '" class=" control-label bmd-label-floating">' . $this->label . '</label >';
         $widget .= '<input class="form-control"  id="' . $this->attributes['name'] . '" ';
-        if(!empty($this->value)){
+        if(!empty($this->value)) {
             $widget .= 'value ="'. htmlspecialchars($this->value) . '" ';
         }
         // input tag attributes

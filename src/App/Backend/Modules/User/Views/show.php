@@ -27,16 +27,16 @@ use function OpenFram\u;
             <div class="card card-profile">
                 <div class="card-avatar">
                     <a href="#pablo">
-                        <img class="img" src="..<?= htmlspecialchars($user->getProfileImage()) ?>" .jpg"/>
+                        <img class="img" src="..<?php echo htmlspecialchars($user->getProfileImage()) ?>" .jpg"/>
                     </a>
                 </div>
                 <div class="card-body">
-                    <h6 class="card-category text-gray"><?= htmlspecialchars($user->getUserName()) ?></h6>
-                    <h4 class="card-title"><?= htmlspecialchars($user->getRole()->getName()) ?></h4>
-                    <p><?= htmlspecialchars($user->getLastName()) . ' ' . htmlspecialchars($user->getFirstName()) ?></p>
-                    <p><?= htmlspecialchars($user->getEmail()) ?></p>
+                    <h6 class="card-category text-gray"><?php echo htmlspecialchars($user->getUserName()) ?></h6>
+                    <h4 class="card-title"><?php echo htmlspecialchars($user->getRole()->getName()) ?></h4>
+                    <p><?php echo htmlspecialchars($user->getLastName()) . ' ' . htmlspecialchars($user->getFirstName()) ?></p>
+                    <p><?php echo htmlspecialchars($user->getEmail()) ?></p>
                     <div class="card-description">
-                        <?= htmlspecialchars($user->getDescription()) ?>
+                        <?php echo htmlspecialchars($user->getDescription()) ?>
 
                     </div>
                     <a href="#pablo" class="btn btn-primary btn-round">Follow</a>
@@ -51,10 +51,10 @@ use function OpenFram\u;
                     <p class="card-category">Complete your profile</p>
                 </div>
                 <div class="card-body">
-                    <form class="contact-form" action="/admin/user-edit-<?= htmlspecialchars(urlencode($user->getId())) ?>.html" method="post"
+                    <form class="contact-form" action="/admin/user-edit-<?php echo htmlspecialchars(urlencode($user->getId())) ?>.html" method="post"
                           enctype="multipart/form-data">
 
-                        <?= $form ?>
+                        <?php echo $form ?>
 
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary">Envoyer</button>

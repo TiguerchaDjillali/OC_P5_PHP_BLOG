@@ -21,7 +21,7 @@ use function OpenFram\h;
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true"><i class="material-icons">clear</i></span>
                                 </button>
-                                <b>Echec de connexion:</b> <?= htmlspecialchars($currentUser->getFlash()) ?>
+                                <b>Echec de connexion:</b> <?php echo htmlspecialchars($currentUser->getFlash()) ?>
                             </div>
                         </div>
                     <?php } ?>
@@ -34,7 +34,7 @@ use function OpenFram\h;
                         <div class="card-body px-4">
 
 
-                            <?= $form ?>
+                            <?php echo $form ?>
 
                         </div>
                         <div class="row">

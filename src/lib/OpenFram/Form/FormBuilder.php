@@ -14,8 +14,9 @@ abstract class FormBuilder extends ApplicationComponent
 
     /**
      * FormBuilder constructor.
+     *
      * @param Application $app
-     * @param Entity $entity
+     * @param Entity      $entity
      */
     public function __construct(Application $app, Entity $entity)
     {

@@ -15,7 +15,8 @@ class CommentFormBuilder extends FormBuilder
     {
         // TODO: Implement build() method.
         $this->form->add(
-            new TextAreaField([
+            new TextAreaField(
+                [
                 'label' => 'Contenu',
                 'attributes' => [
                     'name' => 'content',
@@ -27,6 +28,8 @@ class CommentFormBuilder extends FormBuilder
                     new IsNotBlank('Ce champs est obligatoire'),
                     new HasLength('Le commentaire doit avoir au minimum 20 caractères', ['min'=>20])
                 ]
-            ]));
+                ]
+            )
+        );
     }
 }
