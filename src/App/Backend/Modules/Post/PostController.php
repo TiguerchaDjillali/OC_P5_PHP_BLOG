@@ -19,7 +19,7 @@ class PostController extends BackController
 {
     public function executePreview(Request $request)
     {
-        $id = $this->app->getRequest()->getQueryParams('GET')['id'];
+        $id = $request->getQueryParams('GET')['id'];
         $post = $this->managers->getManagerOf('Post')->getByAttribute('id', $id);
         $currentUser = $this->app->getCurrentUser()->getAttribute('user');
 
@@ -172,10 +172,6 @@ class PostController extends BackController
                 $post->setId($request->getQueryParams()['id']);
             }
 
-            //var_dump($file->getClientFileName());
-            //var_dump($file->getClientMediaType());
-            //var_dump($file->getSize());
-
 
         } else {
             if (isset($request->getQueryParams()['id'])) {
@@ -208,7 +204,6 @@ class PostController extends BackController
         }
 
         $this->page->addVar('form', $form->createView());
-
     }
 
 
