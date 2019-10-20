@@ -3,7 +3,6 @@
 
 namespace OpenFram;
 
-
 class Page extends ApplicationComponent
 {
 

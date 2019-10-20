@@ -3,7 +3,6 @@
 
 namespace Entity;
 
-
 use OpenFram\Entity;
 
 class Connection extends Entity
@@ -49,7 +48,4 @@ class Connection extends Entity
     {
         $this->passWord = $passWord;
     }
-
-
-
 }

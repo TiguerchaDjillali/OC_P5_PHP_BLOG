@@ -12,8 +12,7 @@ class ConnectionController extends \OpenFram\BackController
 
     public function executeLogin(Request $request)
     {
-        if($request->getMethod() ==='POST'){
-
+        if ($request->getMethod() ==='POST') {
             $userName = $request->getParsedBody()['userName'];
             $password = $request->getParsedBody()['password'];
 
@@ -24,22 +23,18 @@ class ConnectionController extends \OpenFram\BackController
 
 
             $user = $this->managers->getManagerOf('User')->getByAttribute('userName', $userName);
-            if($user !== null  &&  $user->verifyPassword($password)){
-
+            if ($user !== null  &&  $user->verifyPassword($password)) {
                 $this->app->getCurrentUser()->setAuthenticated(true);
                 $this->app->getCurrentUser()->setAttribute('user', $user);
-                if($this->app->getCurrentUser()->hasAttribute('lastUrl')){
+                if ($this->app->getCurrentUser()->hasAttribute('lastUrl')) {
                     $this->app->redirect($this->app->getCurrentUser()->getAttribute('lastUrl'));
-
-                }else{
+                } else {
                     $this->app->redirect('/admin/');
                 }
-
-            }else{
+            } else {
                 $this->app->getCurrentUser()->setFlash('Le userName ou le mot de passe est incorrect');
             }
-        }else {
-
+        } else {
             $connection = new Connection();
         }
 
@@ -50,7 +45,6 @@ class ConnectionController extends \OpenFram\BackController
         $this->page->addVar('form', $form->createView());
         $this->page->addVar('title', 'Connexion');
         $this->page->addVar('pageType', 'login-page');
-
     }
 
 
@@ -64,5 +58,4 @@ class ConnectionController extends \OpenFram\BackController
         $this->getApp()->getCurrentUser()->setFlash('Déconnexion réussie');
         $this->app->redirect('/');
     }
-
 }

@@ -3,7 +3,6 @@
 
 namespace OpenFram\Form;
 
-
 use function OpenFram\escape_to_html as h;
 
 class InputTextField extends Field

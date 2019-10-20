@@ -3,7 +3,6 @@
 
 namespace FormBuilder;
 
-
 use OpenFram\Form\FormBuilder;
 use OpenFram\Form\InputField;
 use OpenFram\Form\InputFileField;
@@ -30,7 +29,8 @@ class PostFormBuilder extends FormBuilder
                 'validators' => [
                     new IsImage("Le fichier n'est pas une image")
                 ]
-            ]))->add(
+            ])
+        )->add(
             new InputField([
                 'label' => 'Titre',
                 'attributes' => [
@@ -40,34 +40,41 @@ class PostFormBuilder extends FormBuilder
                 ],
                 'validators' => [
                     new IsNotBlank('Ce champs est obligatoire'),
-                    new HasLength('Le champ doit avoir  entre 2 et 255 caractères',
-                        ['min' => 2, 'max' => 255]),
+                    new HasLength(
+                        'Le champ doit avoir  entre 2 et 255 caractères',
+                        ['min' => 2, 'max' => 255]
+                    ),
                 ]
-            ]))->add(
+                ])
+        )->add(
             new InputField([
-                'label' => 'Sous-titre',
-                'attributes' => [
+                    'label' => 'Sous-titre',
+                    'attributes' => [
                     'name' => 'subtitle',
                     'type' => 'text',
                     'maxlength' => '600',
                     'minlength' => '2'
-                ],
-                'validators' => [
+                    ],
+                    'validators' => [
                     new IsNotBlank('Ce champs est obligatoire'),
-                    new HasLength('Le champ doit avoir  entre 2 et 255 caractères',
-                        ['min' => 2, 'max' => 600]),
-                ]
-            ]))->add(
+                    new HasLength(
+                        'Le champ doit avoir  entre 2 et 255 caractères',
+                        ['min' => 2, 'max' => 600]
+                    ),
+                    ]
+                    ])
+        )->add(
             new TextAreaField([
-                'label' => 'Contenu',
-                'attributes' => [
+                    'label' => 'Contenu',
+                    'attributes' => [
                     'name' => 'content',
                     'minlength' => '2'
-                ],
-                'validators' => [
+                    ],
+                    'validators' => [
                     new IsNotBlank('Ce champs est obligatoire'),
                     new HasLength('Le commentaire doit avoir au minimum 20 caractères', ['min' => 2])
-                ]
-            ]));
+                    ]
+                    ])
+        );
     }
 }

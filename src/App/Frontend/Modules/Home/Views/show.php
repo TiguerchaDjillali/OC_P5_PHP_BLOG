@@ -2,7 +2,7 @@
  use function OpenFram\escape_to_html as h;
  use function OpenFram\u;
 
- ?>
+    ?>
 
 <div class="page-header header-filter clear-filter purple-filter" data-parallax="true"
      style="background-image: url('./assets/img/bg2.jpg');  background-position: center;">
@@ -10,7 +10,6 @@
             <div class="col-md-8 ml-auto mr-auto">
 
                     <?php if ($currentUser->hasFlash()) { ?>
-
                         <div class="alert alert-danger">
                             <div class="container">
                                 <div class="alert-icon">
@@ -79,7 +78,6 @@
                 <h2 class="text-center title col-12">Derniers articles</h2>
 
                 <?php foreach ($postsList as $post) { ?>
-
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-header card-header-text card-header-primary">
@@ -115,7 +113,6 @@
     <div id="contactSection" class="section section-contacts px-3">
 
         <?php if ($currentUser->hasFlash()) { ?>
-
             <div class="alert alert-success">
                 <div class="container">
                     <div class="alert-icon">

@@ -7,7 +7,6 @@ use App\Frontend\Modules\Connection\ConnectionController;
 use function GuzzleHttp\Psr7\stream_for;
 use function Http\Response\send;
 
-
 class BackendApplication extends \OpenFram\Application
 {
 
@@ -26,13 +25,12 @@ class BackendApplication extends \OpenFram\Application
 
         if (!$this->currentUser->isAuthenticated()) {
             $this->redirect('/connection');
-
         }
 
-        if(!$this->currentUser->hasAccess()){
+        if (!$this->currentUser->hasAccess()) {
                 $this->currentUser->setFlash('Vous avez pas les permissions nécessaires');
                 $this->redirect('/admin/');
-            }
+        }
 
 
         $controller->execute();
@@ -41,5 +39,4 @@ class BackendApplication extends \OpenFram\Application
         $page = $controller->getPage()->getGeneratedPage();
         send($this->response->withBody(stream_for($page)));
     }
-
 }

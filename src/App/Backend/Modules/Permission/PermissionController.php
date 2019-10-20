@@ -20,5 +20,4 @@ class PermissionController extends BackController
         $this->page->addVar('permissionsList', $manager->getList());
         $this->page->addVar('permissionsNumber', $manager->count());
     }
-
 }

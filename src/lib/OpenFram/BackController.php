@@ -3,7 +3,6 @@
 
 namespace OpenFram;
 
-
 class BackController extends ApplicationComponent
 {
     protected $module = '';
@@ -22,7 +21,6 @@ class BackController extends ApplicationComponent
         $this->setModule($module);
         $this->setAction($action);
         $this->setView($action);
-
     }
 
 
@@ -91,9 +89,4 @@ class BackController extends ApplicationComponent
     {
         return $this->managers;
     }
-
-
-
-
-
 }

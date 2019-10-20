@@ -2,7 +2,6 @@
 
 namespace App\Backend\Modules\Home;
 
-
 use GuzzleHttp\Psr7\Request;
 
 class HomeController extends \OpenFram\BackController
@@ -18,7 +17,5 @@ class HomeController extends \OpenFram\BackController
         $this->page->addVar('postsList', $manager->getList());
         $this->page->addVar('postsNumber', $manager->count());
         $this->page->addVar('request', $request);
-
     }
-
 }

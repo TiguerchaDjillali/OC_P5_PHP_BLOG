@@ -3,7 +3,6 @@
 
 namespace OpenFram\Form\Validators;
 
-
 class HasLength extends Validator
 {
 
@@ -13,19 +12,18 @@ class HasLength extends Validator
     {
         parent::__construct($errorMessage);
 
-        foreach ($options as $option=>$value ){
+        foreach ($options as $option => $value) {
             $this->lengthLimits[$option] = $value;
         }
-
     }
 
     public function isValid($value)
     {
-        if(isset($this->lengthLimits['min']) && !$this->hasLengthGreaterThan($value, $this->lengthLimits['min'] - 1)) {
+        if (isset($this->lengthLimits['min']) && !$this->hasLengthGreaterThan($value, $this->lengthLimits['min'] - 1)) {
             return false;
-        } elseif(isset($this->lengthLimits['max']) && !$this->hasLengthLessThan($value, $this->lengthLimits['max'] + 1)) {
+        } elseif (isset($this->lengthLimits['max']) && !$this->hasLengthLessThan($value, $this->lengthLimits['max'] + 1)) {
             return false;
-        } elseif(isset($this->lengthLimits['exact']) && !$this->hasLengthExactly($value, $this->lengthLimits['exact'])) {
+        } elseif (isset($this->lengthLimits['exact']) && !$this->hasLengthExactly($value, $this->lengthLimits['exact'])) {
             return false;
         } else {
             return true;
@@ -38,12 +36,14 @@ class HasLength extends Validator
         return $length > $min;
     }
 
-    public function hasLengthLessThan($value, $max) {
+    public function hasLengthLessThan($value, $max)
+    {
         $length = strlen($value);
         return $length < $max;
     }
 
-    public function hasLengthExactly($value, $exact) {
+    public function hasLengthExactly($value, $exact)
+    {
         $length = strlen($value);
         return $length == $exact;
     }

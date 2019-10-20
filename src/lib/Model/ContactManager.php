@@ -3,7 +3,6 @@
 
 namespace Model;
 
-
 use Entity\Contact;
 use Exception;
 use http\Exception\RuntimeException;
@@ -15,9 +14,7 @@ class ContactManager extends Manager
     public function save(Contact $contact)
     {
         if ($contact->isValid()) {
-
             $this->sendMessage($contact);
-
         } else {
             throw new Exception('Le message doit être valide pour être envoyé');
         }
@@ -34,6 +31,4 @@ class ContactManager extends Manager
 
         mail($to, $subject, $message, $headers);
     }
-
-
 }

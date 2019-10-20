@@ -52,8 +52,6 @@ use function OpenFram\u;
 
 
                     <?php foreach ($commentsList as $comment) { ?>
-
-
                     <div id="comment-<?php h($comment->getId()) ?>"
                          class="media px-3 card <?= $comment->getValid() == 0 ? 'bg-dark' : '' ?>">
                         <div class="media-body col-12 ">
@@ -72,7 +70,7 @@ use function OpenFram\u;
                                         Valider
                                     </button>
 
-                                    <?php } else { ?>
+                            <?php } else { ?>
                                     <form action="/admin/comment-moderate-<?php h(u($comment->getId())) ?>.html" method="post">
                                         <div class="form-group">
                                             <button type="submit" name="invalid" class="btn btn-primary"
@@ -80,7 +78,7 @@ use function OpenFram\u;
                                                 Cacher
                                             </button>
 
-                                            <?php } ?>
+                            <?php } ?>
 
                                             <button type="submit" name="delete" value="<?php h($comment->getId()) ?>"
                                                     class="btn btn-primary">
@@ -91,7 +89,7 @@ use function OpenFram\u;
                                 </div>
                         </div>
 
-                        <?php } ?>
+                    <?php } ?>
                     </div>
 
                 </div>

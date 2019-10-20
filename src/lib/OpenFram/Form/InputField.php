@@ -3,7 +3,6 @@
 
 namespace OpenFram\Form;
 
-
 use function OpenFram\escape_to_html as h;
 
 class InputField extends field
@@ -18,12 +17,10 @@ class InputField extends field
         $widget .= '<div class="form-group label-floating ';
 
         if ($this->success === true) {
-
             $widget .= 'has-success';
         }
 
         if (!empty($this->errorMessage)) {
-
             $widget .= 'has-danger';
         }
 
@@ -32,12 +29,12 @@ class InputField extends field
 
         $widget .= '<label id="' . $this->attributes['name'] . '" class=" control-label bmd-label-floating">' . $this->label . '</label >';
         $widget .= '<input class="form-control"  id="' . $this->attributes['name'] . '" ';
-        if(!empty($this->value)){
+        if (!empty($this->value)) {
             $widget .= 'value ="'. htmlspecialchars($this->value) . '" ';
         }
         // input tag attributes
 
-        foreach($this->attributes as $attribute=>$value){
+        foreach ($this->attributes as $attribute => $value) {
             $widget .= $attribute . ' = "' . $value . '" ';
         }
 
@@ -45,13 +42,10 @@ class InputField extends field
 
 
         if (!empty($this->errorMessage)) {
-
             $widget .= '<span class="material-icons form-control-feedback">clear</span>';
             $widget .= '<small class = "text-danger"> * ' . $this->errorMessage . '</small></div>';
         } elseif ($this->success) {
-
             $widget .= '<span class="form-control-feedback"> <i class="material-icons">done</i></span></div>';
-
         } else {
             $widget .= '</div>';
         }
@@ -61,5 +55,4 @@ class InputField extends field
 
         return $widget;
     }
-
 }

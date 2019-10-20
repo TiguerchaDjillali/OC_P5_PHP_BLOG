@@ -3,7 +3,6 @@
 
 namespace OpenFram\Form\Validators;
 
-
 abstract class Validator
 {
     protected $errorMessage;
@@ -20,7 +19,7 @@ abstract class Validator
      */
     public function setErrorMessage($errorMessage)
     {
-        if(is_string($errorMessage)){
+        if (is_string($errorMessage)) {
             $this->errorMessage = $errorMessage;
         }
     }

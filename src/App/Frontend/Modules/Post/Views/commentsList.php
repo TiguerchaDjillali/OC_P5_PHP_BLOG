@@ -1,5 +1,5 @@
 <?php
-use function OpenFram\escape_to_html as h;
+use  function OpenFram\escape_to_html as h;
 
 ?>
 <div class="col-12">
@@ -8,8 +8,6 @@ use function OpenFram\escape_to_html as h;
 
 
     <?php foreach ($comments as $comment) { ?>
-
-
         <div class="media">
             <div class="media-body">
                 <p class="float-right"><small>

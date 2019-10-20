@@ -3,7 +3,6 @@
 
 namespace Model;
 
-
 use Entity\User;
 use http\Exception\RuntimeException;
 use OpenFram\Manager;
@@ -21,5 +20,4 @@ abstract class UserManager extends Manager
         }
     }
     abstract public function add(User $post);
-
 }

@@ -3,7 +3,6 @@
 
 namespace Model;
 
-
 use Entity\Comment;
 use Entity\Post;
 use http\Exception\RuntimeException;
@@ -19,14 +18,10 @@ abstract class CommentManager extends Manager
 
     public function save(Comment $comment)
     {
-        if($comment->isValid()){
+        if ($comment->isValid()) {
             $comment->isNew() ? $this->add($comment) : $this->update($comment);
-        }else{
+        } else {
             throw new RuntimeException('Le commentaire doit être valid pour être enregistré');
         }
     }
-
-
-
-
 }

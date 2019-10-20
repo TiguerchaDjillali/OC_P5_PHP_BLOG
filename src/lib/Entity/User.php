@@ -3,7 +3,6 @@
 
 namespace Entity;
 
-
 use OpenFram\Entity;
 
 /**
@@ -13,53 +12,17 @@ use OpenFram\Entity;
  */
 class User extends Entity
 {
-    /**
-     * @var
-     */
     protected $firstName;
-    /**
-     * @var
-     */
     protected $lastName;
-    /**
-     * @var
-     */
     protected $userName;
-    /**
-     * @var
-     */
     protected $email;
-    /**
-     * @var
-     */
     protected $confirmEmail;
-    /**
-     * @var null
-     */
     protected $profileImage = null;
-    /**
-     * @var
-     */
     protected $password;
-    /**
-     * @var
-     */
     protected $confirmPassword;
-    /**
-     * @var bool
-     */
     protected $passwordRequired = true;
-    /**
-     * @var
-     */
     protected $hashedPassword;
-    /**
-     * @var
-     */
     protected $role;
-    /**
-     * @var
-     */
     protected $description;
 
 
@@ -84,7 +47,7 @@ class User extends Entity
      */
     public function setFirstName($firstName)
     {
-        if(is_string($firstName)) {
+        if (is_string($firstName)) {
             $this->firstName = $firstName;
         }
     }
@@ -97,13 +60,12 @@ class User extends Entity
         return $this->lastName;
     }
 
-
     /**
-     * @param string $lastName
+     * @param mixed $lastName
      */
-    public function setLastName(string $lastName): void
+    public function setLastName($lastName)
     {
-        if(is_string($lastName)) {
+        if (is_string($lastName)) {
             $this->lastName = $lastName;
         }
     }
@@ -121,7 +83,7 @@ class User extends Entity
      */
     public function setUserName($userName)
     {
-        if(is_string($userName)) {
+        if (is_string($userName)) {
             $this->userName = $userName;
         }
     }
@@ -275,14 +237,9 @@ class User extends Entity
 
     /**
      * @param bool $passwordRequired
-     * @return void
      */
     public function setPasswordRequired(bool $passwordRequired): void
     {
         $this->passwordRequired = $passwordRequired;
     }
-
-
-
-
 }

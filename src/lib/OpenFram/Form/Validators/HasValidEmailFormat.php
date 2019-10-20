@@ -3,7 +3,6 @@
 
 namespace OpenFram\Form\Validators;
 
-
 class HasValidEmailFormat extends Validator
 {
 

@@ -3,10 +3,8 @@
 
 namespace Model;
 
-
 use Entity\Role;
 use MongoDB\Driver\Manager;
-
 
 class RoleManagerPDO extends RoleManager
 {
@@ -15,8 +13,7 @@ class RoleManagerPDO extends RoleManager
     public function getList($offset = -1, $limit = -1)
     {
         $sql = 'SELECT * FROM Role ';
-        if($offset != -1 || $limit != -1) {
-
+        if ($offset != -1 || $limit != -1) {
             $sql .= ' LIMIT ' . (int)$limit . ' OFFSET ' . (int)$offset;
         }
 
@@ -27,13 +24,12 @@ class RoleManagerPDO extends RoleManager
 
         $query->closeCursor();
         $permissionsManager = new PermissionManagerPDO($this->dao);
-        foreach($rolesList as $role){
+        foreach ($rolesList as $role) {
             $role->setPermissions($permissionsManager->getListOf($role));
         }
 
 
         return $rolesList;
-
     }
 
     public function getByAttribute($attribute, $value)
@@ -49,7 +45,6 @@ class RoleManagerPDO extends RoleManager
 
         $permissionsManager = new PermissionManagerPDO($this->dao);
         if ($role = $query->fetch()) {
-
             $role->setPermissions($permissionsManager->getListOf($role));
             $query->closeCursor();
 

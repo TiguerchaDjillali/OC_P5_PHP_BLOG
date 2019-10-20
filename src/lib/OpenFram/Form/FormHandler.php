@@ -3,7 +3,6 @@
 
 namespace OpenFram\Form;
 
-
 use GuzzleHttp\Psr7\Request;
 use OpenFram\Manager;
 
@@ -19,15 +18,16 @@ class FormHandler
      * @param $manager
      * @param $request
      */
-    public function __construct(Form $form, Manager $manager,Request $request)
+    public function __construct(Form $form, Manager $manager, Request $request)
     {
         $this->setForm($form);
         $this->setManager($manager);
-        $this->setRequest ($request);
+        $this->setRequest($request);
     }
 
-    public function process(){
-        if($this->request->getMethod() == 'POST' && $this->form->isValid()){
+    public function process()
+    {
+        if ($this->request->getMethod() == 'POST' && $this->form->isValid()) {
             $this->manager->save($this->form->getEntity());
 
             return true;
@@ -57,8 +57,4 @@ class FormHandler
     {
         $this->request = $request;
     }
-
-
-
-
 }

@@ -3,7 +3,6 @@
 
 namespace Model;
 
-
 use Entity\User;
 use GuzzleHttp\Psr7\ServerRequest;
 use function OpenFram\escape_to_html as h;
@@ -15,7 +14,6 @@ class UserManagerPDO extends UserManager
     {
         $sql = 'SELECT * FROM User ';
         if ($offset != -1 || $limit != -1) {
-
             $sql .= ' LIMIT ' . (int)$limit . ' OFFSET ' . (int)$offset;
         }
 
@@ -29,14 +27,10 @@ class UserManagerPDO extends UserManager
         $roleManager = new RoleManagerPDO($this->dao);
 
         foreach ($usersList as $user) {
-
             $user->setRole($roleManager->getByAttribute('id', $user->roleId));
-
         }
 
         return $usersList;
-
-
     }
 
     public function count()
@@ -60,7 +54,6 @@ class UserManagerPDO extends UserManager
         $roleManager = new RoleManagerPDO($this->dao);
 
         if ($user = $query->fetch()) {
-
             $query->closeCursor();
 
             $user->setRole($roleManager->getByAttribute('id', $user->roleId));
@@ -77,7 +70,6 @@ class UserManagerPDO extends UserManager
         }
 
         return null;
-
     }
 
     public function add(User $user)
@@ -141,7 +133,6 @@ class UserManagerPDO extends UserManager
             $imageTarget = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/user/user-' .  $user->getId() . '.jpg';
             $user->getProfileImage()->moveTo($imageTarget);
         }
-
     }
 
     public function delete($id)
@@ -161,7 +152,5 @@ class UserManagerPDO extends UserManager
         if (file_exists($imagePath)) {
             unlink($imagePath);
         }
-
     }
-
 }

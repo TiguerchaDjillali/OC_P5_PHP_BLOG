@@ -45,12 +45,11 @@ class RoleController extends BackController
         }
 
         $modules = [];
-        foreach($role->getPermissions() as $permission){
-
-            if(!array_key_exists($permission->getModule(), $modules)){
+        foreach ($role->getPermissions() as $permission) {
+            if (!array_key_exists($permission->getModule(), $modules)) {
                 $modules [$permission->getModule()] = [];
             }
-            if(array_key_exists($permission->getModule(), $modules)){
+            if (array_key_exists($permission->getModule(), $modules)) {
                 $modules[$permission->getModule()][] = [$permission->getAction(), $permission->getDescription()];
             }
         }
@@ -59,7 +58,5 @@ class RoleController extends BackController
         $this->page->addVar('modules', $modules);
         $this->page->addVar('title', $role->getName());
         $this->page->addVar('role', $role);
-
     }
-
 }

@@ -35,7 +35,6 @@ use function OpenFram\u;
                 </div>
 
                 <?php foreach ($postsList as $post) { ?>
-
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-header card-header-text card-header-primary">

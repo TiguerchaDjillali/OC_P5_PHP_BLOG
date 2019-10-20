@@ -3,7 +3,6 @@
 
 namespace FormBuilder;
 
-
 use OpenFram\Form\FormBuilder;
 use OpenFram\Form\InputField;
 use OpenFram\Form\Validators\HasLength;
@@ -25,10 +24,13 @@ class LoginFormBuilder extends FormBuilder
                 ],
                 'validators' => [
                     new IsNotBlank('Ce champs est obligatoire'),
-                    new HasLength('Le champ doit avoir  entre 2 et 255 caractères',
-                        ['min' => 2, 'max' => 255]),
+                    new HasLength(
+                        'Le champ doit avoir  entre 2 et 255 caractères',
+                        ['min' => 2, 'max' => 255]
+                    ),
                 ]
-            ]))->add(
+            ])
+        )->add(
             new InputField([
                 'label' => 'Votre prénom',
                 'attributes' => [
@@ -39,9 +41,12 @@ class LoginFormBuilder extends FormBuilder
                 ],
                 'validators' => [
                     new IsNotBlank('Ce champs est obligatoire'),
-                    new HasLength('Le champ doit avoir  entre 2 et 255 caractères',
-                        ['min' => 2, 'max' => 255]),
+                    new HasLength(
+                        'Le champ doit avoir  entre 2 et 255 caractères',
+                        ['min' => 2, 'max' => 255]
+                    ),
                 ]
-            ]));
+                ])
+        );
     }
 }

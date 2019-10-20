@@ -3,7 +3,6 @@
 
 namespace Model;
 
-
 use Entity\Role;
 use http\Exception\RuntimeException;
 use OpenFram\Manager;

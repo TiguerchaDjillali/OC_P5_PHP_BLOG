@@ -3,7 +3,6 @@
 
 namespace OpenFram;
 
-
 abstract class Manager
 {
     protected $dao;
@@ -13,5 +12,4 @@ abstract class Manager
     {
         $this->dao = $dao;
     }
-
 }

@@ -3,7 +3,6 @@
 
 namespace FormBuilder;
 
-
 use OpenFram\Form\FormBuilder;
 use OpenFram\Form\TextAreaField;
 use OpenFram\Form\Validators\HasLength;
@@ -27,6 +26,7 @@ class CommentFormBuilder extends FormBuilder
                     new IsNotBlank('Ce champs est obligatoire'),
                     new HasLength('Le commentaire doit avoir au minimum 20 caractères', ['min'=>20])
                 ]
-            ]));
+            ])
+        );
     }
 }

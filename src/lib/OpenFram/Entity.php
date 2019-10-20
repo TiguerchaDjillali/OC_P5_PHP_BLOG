@@ -3,7 +3,6 @@
 
 namespace OpenFram;
 
-
 class Entity
 {
     use Hydrator;
@@ -54,5 +53,4 @@ class Entity
     {
         return $this->errors;
     }
-
 }

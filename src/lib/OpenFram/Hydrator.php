@@ -3,7 +3,6 @@
 
 namespace OpenFram;
 
-
 trait Hydrator
 {
     /**

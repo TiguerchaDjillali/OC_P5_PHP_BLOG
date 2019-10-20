@@ -3,7 +3,6 @@
 
 namespace OpenFram\Routing;
 
-
 use phpDocumentor\Reflection\Types\Boolean;
 
 /**

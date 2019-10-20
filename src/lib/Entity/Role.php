@@ -3,7 +3,6 @@
 
 namespace Entity;
 
-
 use http\Exception\InvalidArgumentException;
 use OpenFram\Entity;
 
@@ -54,9 +53,8 @@ class Role extends Entity
      */
     public function setName($name)
     {
-        if(is_string($name)){
-        $this->name = $name;
-
+        if (is_string($name)) {
+            $this->name = $name;
         }
     }
 
@@ -73,11 +71,8 @@ class Role extends Entity
      */
     public function setSlug($slug)
     {
-        if(is_string($slug)){
-        $this->slug = $slug;
+        if (is_string($slug)) {
+            $this->slug = $slug;
         }
     }
-
-
-
 }

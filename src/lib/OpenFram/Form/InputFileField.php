@@ -3,7 +3,6 @@
 
 namespace OpenFram\Form;
 
-
 use function OpenFram\escape_to_html as h;
 
 class InputFileField extends InputField
@@ -22,10 +21,8 @@ class InputFileField extends InputField
         $widget .= "</div > ";
         $widget .= "<div class=\"fileinput-preview fileinput-exists thumbnail img-raised\">";
         if ($this->value !== null && is_string($this->value)) {
-
                 $url = '..'. htmlspecialchars($this->value);
                 $widget .= "<img src=\"" . $url . "\" class=\" img-fluid \" >";
-
         }
 
         $widget .= "</div>";
@@ -40,7 +37,6 @@ class InputFileField extends InputField
         $widget .= "</div>";
 
         if (!empty($this->errorMessage)) {
-
             $widget .= '<span class="material-icons form-control-feedback">clear</span>';
             $widget .= '<small class = "text-danger"> * ' . $this->errorMessage . '</small>';
         }
@@ -63,5 +59,4 @@ class InputFileField extends InputField
     {
         $this->value = $value;
     }
-
 }

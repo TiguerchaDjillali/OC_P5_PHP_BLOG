@@ -9,7 +9,6 @@ use function OpenFram\u;
     <p class="bg-light rounded float-right p-2 colored-shadow">Articles : <?php h($postsNumber) ?></p>
 
     <?php if ($currentUser->hasFlash()) { ?>
-
         <div class="alert alert-success">
             <div class="container">
                 <div class="alert-icon">

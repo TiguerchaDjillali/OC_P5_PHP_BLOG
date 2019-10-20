@@ -3,7 +3,6 @@
 
 namespace OpenFram\Form\Validators;
 
-
 class IsNotBlank extends Validator
 {
 
@@ -11,5 +10,4 @@ class IsNotBlank extends Validator
     {
         return isset($value) && trim($value) !== '';
     }
-
 }

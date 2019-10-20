@@ -61,7 +61,6 @@ use function OpenFram\escape_to_html as h;
 
 
                 <?php if ($currentUser->hasAttribute('user')) { ?>
-
                     <li class="dropdown nav-item">
                         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
                             <img src="<?php h($currentUser->getAttribute('user')->getProfileImage()) ?>" alt="Circle Image" class="rounded-circle img-fluid" style="height: 25px">
@@ -78,7 +77,6 @@ use function OpenFram\escape_to_html as h;
                     </li>
 
                 <?php } else { ?>
-
                     <li class="nav-item">
                         <a class="nav-link btn btn-primary" href="/connection">
                             <i class="material-icons">account_circle</i> Se connecter

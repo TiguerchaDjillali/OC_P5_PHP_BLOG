@@ -3,7 +3,6 @@
 
 namespace OpenFram\Form;
 
-
 use OpenFram\Entity;
 
 class Form
@@ -34,7 +33,7 @@ class Form
     public function createView()
     {
         $view = '';
-        foreach($this->fields as $field){
+        foreach ($this->fields as $field) {
             $view .= $field->buildWidget();
         }
 
@@ -44,13 +43,12 @@ class Form
     public function isValid()
     {
         $valid = true;
-        foreach($this->fields as $field){
-            if(!$field->isValid()){
+        foreach ($this->fields as $field) {
+            if (!$field->isValid()) {
                 $valid = false;
             }
         }
         return $valid;
-
     }
 
 
@@ -70,6 +68,4 @@ class Form
     {
         $this->entity = $entity;
     }
-
-
 }

@@ -3,7 +3,6 @@
 
 namespace Model;
 
-
 use Entity\Comment;
 use Entity\Post;
 use http\Exception\InvalidArgumentException;
@@ -53,7 +52,6 @@ class CommentManagerPDO extends CommentManager
             $comment->setUser($userManager->getByAttribute('id', $comment->userId));
             $comment->setPost($post);
             $comment->setPublicationDate(new \DateTime($comment->getPublicationDate()));
-
         }
 
         return $comments;
@@ -92,7 +90,6 @@ class CommentManagerPDO extends CommentManager
             $comment->setUser($userManager->getByAttribute('id', $comment->userId));
             $comment->setPublicationDate(new \DateTime($comment->getPublicationDate()));
             $comment->setPost($postManager->getByAttribute('id', $comment->postId));
-
         }
 
         return $commentsList;
@@ -137,7 +134,6 @@ class CommentManagerPDO extends CommentManager
 
 
         if ($comment = $query->fetch()) {
-
             $query->closeCursor();
 
             $userManager = new UserManagerPDO($this->dao);
@@ -151,7 +147,6 @@ class CommentManagerPDO extends CommentManager
         }
 
         return null;
-
     }
 
     public function validate($id)
@@ -167,7 +162,6 @@ class CommentManagerPDO extends CommentManager
         $query->bindValue(':valid', 1, \PDO::PARAM_INT);
 
         $query->execute();
-
     }
 
     public function invalidate($id)
@@ -183,7 +177,6 @@ class CommentManagerPDO extends CommentManager
         $query->bindValue(':valid', 0, \PDO::PARAM_INT);
 
         $query->execute();
-
     }
 
     public function delete($id)
@@ -196,8 +189,5 @@ class CommentManagerPDO extends CommentManager
         $query->bindValue(':id', $id, \PDO::PARAM_INT);
 
         $query->execute();
-
-
     }
-
 }

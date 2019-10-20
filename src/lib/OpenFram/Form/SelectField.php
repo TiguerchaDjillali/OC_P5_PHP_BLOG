@@ -3,7 +3,6 @@
 
 namespace OpenFram\Form;
 
-
 use function OpenFram\escape_to_html as h;
 
 class SelectField extends Field
@@ -20,12 +19,10 @@ class SelectField extends Field
         $widget .= '<div class="form-group label-floating ';
 
         if ($this->success === true) {
-
             $widget .= 'has-success';
         }
 
         if (!empty($this->errorMessage)) {
-
             $widget .= 'has-danger';
         }
 
@@ -33,29 +30,25 @@ class SelectField extends Field
 
         $widget .= '<label id="' . $this->attributes['name'] . '" class=" control-label bmd-label-floating">' . $this->label . '</label >';
         $widget .= "<select class=\"form-control valid\"";
-        foreach($this->attributes as $attribute=>$value){
+        foreach ($this->attributes as $attribute => $value) {
             $widget .= $attribute . ' = "' . $value . '" ';
         }
 
         $widget .= ">";
         $widget .= "<option disabled  selected >--- Choisir une role ---</option>";
-        foreach($this->options as $key=>$value){
-
+        foreach ($this->options as $key => $value) {
             $widget .= "<option value=\"" . htmlspecialchars($key). "\">". htmlspecialchars($value) ."</option>";
         }
 
-		$widget .= "</select>";
+        $widget .= "</select>";
 
 
 
         if (!empty($this->errorMessage)) {
-
             $widget .= '<span class="material-icons form-control-feedback">clear</span>';
             $widget .= '<small class = "text-danger"> * ' . $this->errorMessage . '</small></div>';
         } elseif ($this->success) {
-
             $widget .= '<span class="form-control-feedback"> <i class="material-icons">done</i></span></div>';
-
         } else {
             $widget .= '</div>';
         }
@@ -84,6 +77,4 @@ class SelectField extends Field
     {
         $this->options = $options;
     }
-
-
 }

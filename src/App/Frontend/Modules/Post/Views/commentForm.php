@@ -6,7 +6,6 @@ use function OpenFram\escape_to_html as h;
 <h2 class="col-12">Laisser un commentaire </h2>
 
 <?php if ($currentUser->hasFlash()) { ?>
-
     <div class=" col-12 alert alert-success">
         <div class="container">
             <div class="alert-icon">
@@ -34,7 +33,6 @@ use function OpenFram\escape_to_html as h;
         </button>
 
         <?php if (!$currentUser->hasAttribute('user')) { ?>
-
             <button class="btn btn-primary" type="submit" name="loginForComment" value="1"> Sign in</button>
 
         <?php } ?>

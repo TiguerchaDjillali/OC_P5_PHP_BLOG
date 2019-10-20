@@ -3,7 +3,6 @@
 
 namespace OpenFram\Form\Validators;
 
-
 class IsConfirmed extends Validator
 {
 
@@ -13,7 +12,6 @@ class IsConfirmed extends Validator
     {
         parent::__construct($errorMessage);
         $this->fieldToConfirm = $fieldToConfirm;
-
     }
 
     public function isValid($value)

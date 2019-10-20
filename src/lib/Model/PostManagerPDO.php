@@ -55,12 +55,10 @@ class PostManagerPDO extends PostManager
             $url = file_exists($imagePath) ? '/images/post/post-' . htmlspecialchars($post->getId()) . '.jpg' : '/images/post/post-default.jpg';
 
             $post->setFeaturedImage($url);
-
         }
 
 
         return $postsList;
-
     }
 
 
@@ -85,7 +83,6 @@ class PostManagerPDO extends PostManager
 
 
         if ($post = $query->fetch()) {
-
             $query->closeCursor();
 
             $post->setUser((new UserManagerPDO($this->dao))->getByAttribute('id', $post->userId));
@@ -103,7 +100,6 @@ class PostManagerPDO extends PostManager
         }
 
         return null;
-
     }
 
     public function count($options = [])
@@ -140,7 +136,6 @@ class PostManagerPDO extends PostManager
             $imageTarget = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/post/post-' . $this->dao->lastInsertId() . '.jpg';
             $post->getFeaturedImage()->moveTo($imageTarget);
         }
-
     }
 
     public function update(Post $post)
@@ -169,7 +164,6 @@ class PostManagerPDO extends PostManager
             $imageTarget = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/post/post-' . $post->getId() . '.jpg';
             $post->getFeaturedImage()->moveTo($imageTarget);
         }
-
     }
 
     /**

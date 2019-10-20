@@ -3,7 +3,6 @@
 
 namespace Model;
 
-
 use Entity\Permission;
 use Entity\Role;
 
@@ -15,7 +14,6 @@ class PermissionManagerPDO extends PermissionManager
     {
         $sql = 'SELECT * FROM Permission ';
         if ($offset != -1 || $limit != -1) {
-
             $sql .= ' LIMIT ' . (int)$limit . ' OFFSET ' . (int)$offset;
         }
 
@@ -28,7 +26,6 @@ class PermissionManagerPDO extends PermissionManager
 
 
         return $permissionsList;
-
     }
 
     public function getByAttribute($attribute, $value)
@@ -43,7 +40,6 @@ class PermissionManagerPDO extends PermissionManager
         $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Permission');
 
         if ($permission = $query->fetch()) {
-
             $query->closeCursor();
 
             return $permission;

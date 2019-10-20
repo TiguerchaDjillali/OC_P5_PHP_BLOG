@@ -10,7 +10,8 @@ use OpenFram\Managers;
 
 class HomeController extends BackController
 {
-    public function executeShow(Request $request){
+    public function executeShow(Request $request)
+    {
         $this->page->addVar('title', $this->getModule());
         $manager = $this->managers->getManagerOf('post');
         $postsList = $manager->getList(['limit'=> 4, 'visible'=> 1]);
@@ -18,17 +19,14 @@ class HomeController extends BackController
         $this->page->addVar('pageType', 'profile-page');
 
         $this->executeContact($request);
-
     }
 
     public function executeContact(Request $request)
     {
-        $this->managers = new Managers('','');
+        $this->managers = new Managers('', '');
         $manager = $this->managers->getManagerOf('contact');
 
-        if($request->getMethod()=='POST'){
-
-
+        if ($request->getMethod()=='POST') {
             $contact = new Contact(
                 [
                     'firstName'=>$this->app->getRequest()->getParsedBody()['firstName'],
@@ -37,9 +35,7 @@ class HomeController extends BackController
                     'message'=>$this->app->getRequest()->getParsedBody()['message']
                 ]
             );
-
-
-        }else{
+        } else {
             $contact = new Contact();
         }
 
@@ -58,5 +54,4 @@ class HomeController extends BackController
 
         $this->page->addVar('form', $form->createView());
     }
-
 }

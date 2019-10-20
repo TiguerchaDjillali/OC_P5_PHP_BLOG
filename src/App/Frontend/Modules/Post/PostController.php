@@ -14,7 +14,6 @@ use GuzzleHttp\Psr7\Response;
 use function OpenFram\escape_to_html as h;
 use function OpenFram\u;
 
-
 class PostController extends BackController
 {
     public function executeIndex(Request $request)
@@ -65,9 +64,7 @@ class PostController extends BackController
 
 
         if (empty($post)) {
-
             $this->page->getApp()->redirect404("L'article n'existe pas");
-
         }
 
         //___________________________
@@ -81,7 +78,6 @@ class PostController extends BackController
 
         $this->page->addVar('comments', $comments);
         $this->executeInsertComment($request);
-
     }
 
     public function executeInsertComment(Request $request)
@@ -93,19 +89,19 @@ class PostController extends BackController
                 $this->app->getCurrentUser()->setAttribute('commentContent', $request->getParsedBody()['content']);
 
                 $this->app->redirect('/connection');
-
             }
 
 
             $comment = new Comment(
                 [
                     'content' => $request->getParsedBody()['content'],
-                    'post' => $this->managers->getManagerOf('Post')->getByAttribute('id',
-                        $request->getQueryParams('GET')['id']),
+                    'post' => $this->managers->getManagerOf('Post')->getByAttribute(
+                        'id',
+                        $request->getQueryParams('GET')['id']
+                    ),
                     'user' => $this->app->getCurrentUser()->getAttribute('user')
                 ]
             );
-
         } else {
             $comment = new Comment;
 
@@ -125,14 +121,11 @@ class PostController extends BackController
         if ($formHandler->process()) {
             $this->app->getCurrentUser()->setFlash('Votre commentaitre a bien été ajouté, merci!');
             $this->app->redirect('post-' . htmlspecialchars(urlencode($request->getQueryParams('GET')['id'])) . '.html#commentForm');
-
         }
 
 
         $this->page->addVar('comment', $comment);
         $this->page->addVar('form', $form->createView());
         $this->page->addVar('pageType', 'small-header');
-
     }
-
 }

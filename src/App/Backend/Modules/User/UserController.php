@@ -3,7 +3,6 @@
 
 namespace App\Backend\Modules\User;
 
-
 use Entity\User;
 use FormBuilder\PostFormBuilder;
 use FormBuilder\UserFormBuilder;
@@ -55,7 +54,7 @@ class UserController extends BackController
 
         $currentUser = $this->app->getCurrentUser()->getAttribute('user');
         // access controle
-        if($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $user->getId()){
+        if ($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $user->getId()) {
             $this->app->getCurrentUser()->setFlash('Accès refusé');
             $this->app->redirect('/admin/user-edit-'.htmlspecialchars(urlencode($currentUser->getId())).'.html');
         }
@@ -64,16 +63,13 @@ class UserController extends BackController
 
 
         if (empty($user)) {
-
             $this->page->getApp()->redirect404("L'article n'existe pas");
-
         }
 
         $this->page->addVar('title', $user->getUserName());
         $this->page->addVar('user', $user);
 
         $this->processForm($request);
-
     }
 
     public function executeShow(Request $request)
@@ -83,16 +79,13 @@ class UserController extends BackController
         $user = $manager->getByAttribute('id', $request->getQueryParams('GET')['id']);
 
         if (empty($user)) {
-
             $this->page->getApp()->redirect404("L'article n'existe pas");
-
         }
 
         $this->page->addVar('title', $user->getUserName());
         $this->page->addVar('user', $user);
 
         $this->processForm($request);
-
     }
 
 
@@ -107,7 +100,6 @@ class UserController extends BackController
     {
 
         if ($request->getMethod() == 'POST') {
-
             $file = $request->getUploadedFiles()["profileImage"];
             if ($file->getError() === 4) {
                 $file = null;
@@ -131,15 +123,12 @@ class UserController extends BackController
 
             if (isset($request->getQueryParams()['id'])) {
                 $user->setId($request->getQueryParams()['id']);
-                if($request->getParsedBody()["password"] ==''){
+                if ($request->getParsedBody()["password"] =='') {
                     $user->setPasswordRequired(false);
                 }
             }
-
-
         } else {
             if (isset($request->getQueryParams()['id'])) {
-
                 $user = $this->managers->getManagerOf('user')->getByAttribute('id', $request->getQueryParams()['id']);
             } else {
                 $user = new User;
@@ -157,8 +146,6 @@ class UserController extends BackController
         }
 
         $this->page->addVar('form', $form->createView());
-
-
     }
 
     public function executeDelete(Request $request)
@@ -176,7 +163,5 @@ class UserController extends BackController
             $this->app->getCurrentUser()->setFlash('L\'utlisateur a bien été supprimé');
             $this->app->redirect('/admin/users');
         }
-
     }
-
 }

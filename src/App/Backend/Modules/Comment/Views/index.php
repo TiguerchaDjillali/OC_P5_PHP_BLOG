@@ -10,7 +10,6 @@ use function OpenFram\u;
     <p class="bg-light rounded float-right p-2 mx-2 colored-shadow">Commentaires: <?php h($commentsNumber ?? '')?></p>
 
     <?php if ($currentUser->hasFlash()) { ?>
-
         <div class="alert alert-success">
             <div class="container">
                 <div class="alert-icon">

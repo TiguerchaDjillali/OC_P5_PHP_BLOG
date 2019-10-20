@@ -3,7 +3,6 @@
 
 namespace Model;
 
-
 use Entity\Post;
 use http\Exception\RuntimeException;
 use OpenFram\Manager;
@@ -26,6 +25,4 @@ abstract class PostManager extends Manager
         }
     }
     abstract public function add(Post $post);
-
-
 }

@@ -3,7 +3,6 @@
 
 namespace OpenFram;
 
-
 class ApplicationComponent
 {
     protected $app;
@@ -17,5 +16,4 @@ class ApplicationComponent
     {
         return $this->app;
     }
-
 }

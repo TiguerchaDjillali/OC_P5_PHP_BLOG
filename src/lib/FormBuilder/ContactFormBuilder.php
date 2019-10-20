@@ -3,7 +3,6 @@
 
 namespace FormBuilder;
 
-
 use OpenFram\Form\FormBuilder;
 use OpenFram\Form\InputField;
 use OpenFram\Form\TextAreaField;
@@ -30,10 +29,13 @@ class ContactFormBuilder extends FormBuilder
                 ],
                 'validators' => [
                     new IsNotBlank('Ce champs est obligatoire'),
-                    new HasLength('Le champ doit avoir  entre 2 et 255 caractères',
-                        ['min' => 2, 'max' => 255]),
+                    new HasLength(
+                        'Le champ doit avoir  entre 2 et 255 caractères',
+                        ['min' => 2, 'max' => 255]
+                    ),
                 ]
-            ]))->add(new InputField([
+            ])
+        )->add(new InputField([
             'openingGroupTags' => '<div class="col-md-6">',
             'closingGroupTags' => '</div></div>',
             'label' => 'Votre Email',
@@ -46,8 +48,8 @@ class ContactFormBuilder extends FormBuilder
                 new IsNotBlank('Ce champs est obligatoire'),
                 new HasValidEmailFormat('L\'email doit avoir un format valide')
             ]
-        ]))->add(
-            new InputField([
+            ]))->add(
+                new InputField([
                 'label' => 'Objet',
                 'attributes' => [
                     'name' => 'object',
@@ -59,8 +61,9 @@ class ContactFormBuilder extends FormBuilder
                     new IsNotBlank('Ce champs est obligatoire'),
                     new HasLength('Le champ ne doit pas dépasser 255 caractères', ['max' => 255])
                 ]
-            ]))->add(
-            new TextAreaField([
+                ])
+            )->add(
+                new TextAreaField([
                 'label' => 'Votre message',
                 'attributes' => [
                     'name' => 'message',
@@ -71,6 +74,7 @@ class ContactFormBuilder extends FormBuilder
                     new IsNotBlank('Ce champs est obligatoire'),
                     new HasLength('Le champ doit avoir au minimum 20 caractères', ['min' => 20])
                 ]
-            ]));
+                ])
+            );
     }
 }

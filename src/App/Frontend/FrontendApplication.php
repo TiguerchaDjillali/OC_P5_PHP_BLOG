@@ -26,6 +26,5 @@ class FrontendApplication extends Application
         $page = $controller->getPage()->getGeneratedPage();
 
         send($this->response->withBody(stream_for($page)));
-
     }
 }

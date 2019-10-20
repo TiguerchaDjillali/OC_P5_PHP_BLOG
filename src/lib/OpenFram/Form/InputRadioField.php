@@ -3,7 +3,6 @@
 
 namespace OpenFram\Form;
 
-
 use function OpenFram\escape_to_html as h;
 
 class InputRadioField extends InputField
@@ -22,15 +21,15 @@ class InputRadioField extends InputField
         $widget .= "<div class=\"form-group\">";
         $widget .= "<div class=\"form-check form-check-radio\">";
 
-        foreach($this->options as $key=>$value){
+        foreach ($this->options as $key => $value) {
             $widget .= "<label class=\"form-check-label px-4\">";
             $widget .= "<input type = \"radio\" class=\" form-check-input \" name = \"". $this->attributes["name"] ."\"";
             $widget .=" value = \"". htmlspecialchars($key)."\"";
-            if(isset($this->value)){
+            if (isset($this->value)) {
                 if ($this->value->getName() === $value) {
                     $widget .= 'checked';
                 }
-            }elseif($value === $this->checkedRadio){
+            } elseif ($value === $this->checkedRadio) {
                 $widget .= 'checked';
             }
             $widget .=">";
@@ -47,9 +46,6 @@ class InputRadioField extends InputField
         $widget .= $this->getClosingGroupTags();
 
         return $widget;
-
-
-
     }
 
 
@@ -84,7 +80,4 @@ class InputRadioField extends InputField
     {
         $this->checkedRadio = $checkedRadio;
     }
-
-
-
 }

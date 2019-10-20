@@ -3,7 +3,6 @@
 
 namespace OpenFram\Form;
 
-
 use OpenFram\Application;
 use OpenFram\ApplicationComponent;
 use OpenFram\Entity;
@@ -21,7 +20,6 @@ abstract class FormBuilder extends ApplicationComponent
     {
         parent::__construct($app);
         $this->setFrom(new Form($entity));
-
     }
 
     abstract public function build();
@@ -42,5 +40,4 @@ abstract class FormBuilder extends ApplicationComponent
     {
         $this->form = $form;
     }
-
 }

@@ -3,7 +3,6 @@
 
 namespace Model;
 
-
 use Entity\Permission;
 use Entity\Role;
 use http\Exception\RuntimeException;
@@ -20,7 +19,7 @@ abstract class PermissionManager extends Manager
 
     public function save(Permission $permission)
     {
-    if ($permission->isValid()) {
+        if ($permission->isValid()) {
             $permission->isNew() ? $this->add($permission) : $this->update($permission);
         } else {
             throw new RuntimeException('La pemission doit être valie  pour être enregistrée');
@@ -28,5 +27,4 @@ abstract class PermissionManager extends Manager
     }
     abstract public function add(Permission $permission);
     abstract public function getListOf(Role $role);
-
 }

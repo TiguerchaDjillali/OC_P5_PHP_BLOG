@@ -17,7 +17,6 @@ use function OpenFram\u;
 
         <?php
         while ($page <= $pagesNumber) { ?>
-
             <?php $active = ($page == $activePage) ? ' active' : ''; ?>
             <?php
 
@@ -25,15 +24,11 @@ use function OpenFram\u;
             $display = ($page > 5) ? ' d-none' : '';
 
             if ($activePage > 4) {
-
                 if ($activePage < $pagesNumber - 3) {
-
                     $display = (abs($page - $activePage) > 2) ? ' d-none' : '';
-
-                }else {
+                } else {
                     $display = ($page < $pagesNumber - 4) ? ' d-none' : '';
                 }
-
             }
 
             ?>

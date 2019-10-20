@@ -3,7 +3,6 @@
 
 namespace Entity;
 
-
 use OpenFram\Entity;
 
 class Comment extends Entity
@@ -105,7 +104,4 @@ class Comment extends Entity
     {
         $this->valid = $valid;
     }
-
-
-
 }

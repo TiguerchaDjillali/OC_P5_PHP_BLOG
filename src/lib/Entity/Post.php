@@ -124,7 +124,7 @@ class Post extends Entity
     /**
      * @param mixed $publicationDate
      */
-    public function setPublicationDate( $publicationDate)
+    public function setPublicationDate($publicationDate)
     {
         $this->publicationDate = $publicationDate;
     }
@@ -140,7 +140,7 @@ class Post extends Entity
     /**
      * @param mixed $modificationDate
      */
-    public function setModificationDate( $modificationDate)
+    public function setModificationDate($modificationDate)
     {
         $this->modificationDate = $modificationDate;
     }
@@ -176,6 +176,4 @@ class Post extends Entity
     {
         $this->featuredImage = $featuredImage;
     }
-
-
 }

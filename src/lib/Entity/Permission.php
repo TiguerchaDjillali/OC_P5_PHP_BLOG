@@ -3,7 +3,6 @@
 
 namespace Entity;
 
-
 use OpenFram\Entity;
 
 class Permission extends Entity
@@ -65,6 +64,4 @@ class Permission extends Entity
         //TODO:
         return true;
     }
-
-
 }
