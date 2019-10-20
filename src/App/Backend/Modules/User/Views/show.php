@@ -1,5 +1,5 @@
 <?php
-use function OpenFram\h;
+use function OpenFram\escape_to_html as h;
 use function OpenFram\u;
 
 ?>
@@ -27,16 +27,16 @@ use function OpenFram\u;
             <div class="card card-profile">
                 <div class="card-avatar">
                     <a href="#pablo">
-                        <img class="img" src="..<?php escape_to_html($user->getProfileImage()) ?>" .jpg"/>
+                        <img class="img" src="..<?php h($user->getProfileImage()) ?>" .jpg"/>
                     </a>
                 </div>
                 <div class="card-body">
-                    <h6 class="card-category text-gray"><?php escape_to_html($user->getUserName()) ?></h6>
-                    <h4 class="card-title"><?php escape_to_html($user->getRole()->getName()) ?></h4>
-                    <p><?php escape_to_html($user->getLastName()) . ' ' . htmlspecialchars($user->getFirstName()) ?></p>
-                    <p><?php escape_to_html($user->getEmail()) ?></p>
+                    <h6 class="card-category text-gray"><?php h($user->getUserName()) ?></h6>
+                    <h4 class="card-title"><?php h($user->getRole()->getName()) ?></h4>
+                    <p><?php h($user->getLastName()) . ' ' . htmlspecialchars($user->getFirstName()) ?></p>
+                    <p><?php h($user->getEmail()) ?></p>
                     <div class="card-description">
-                        <?php escape_to_html($user->getDescription()) ?>
+                        <?php h($user->getDescription()) ?>
 
                     </div>
                     <a href="#pablo" class="btn btn-primary btn-round">Follow</a>
@@ -51,7 +51,7 @@ use function OpenFram\u;
                     <p class="card-category">Complete your profile</p>
                 </div>
                 <div class="card-body">
-                    <form class="contact-form" action="/admin/user-edit-<?php escape_to_html(urlencode($user->getId())) ?>.html" method="post"
+                    <form class="contact-form" action="/admin/user-edit-<?php h(urlencode($user->getId())) ?>.html" method="post"
                           enctype="multipart/form-data">
 
                         <?= $form ?>

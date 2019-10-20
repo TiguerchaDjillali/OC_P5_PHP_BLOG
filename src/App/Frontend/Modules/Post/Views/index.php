@@ -1,6 +1,5 @@
 <?php
-use function OpenFram\h;
-use function OpenFram\u;
+use function OpenFram\escape_to_html as h;
 ?>
 
 <!-- Page Header -->
@@ -39,18 +38,18 @@ use function OpenFram\u;
                         <div class="card">
                             <div class="card-header card-header-text card-header-primary">
                                 <div class="card-text">
-                                    <h4 class="card-title"><?php escape_to_html($post->getTitle()) ?></h4>
+                                    <h4 class="card-title"><?php h($post->getTitle()) ?></h4>
                                 </div>
                             </div>
                             <div class="card-body">
 
-                                <p style="height:100px; overflow-y: hidden"><?php escape_to_html($post->getSubTitle()) ?></p>
-                                <a href="/post-<?php escape_to_html(urlencode($post->getId()))?>.html" class="btn btn-primary">Lire</a>
+                                <p style="height:100px; overflow-y: hidden"><?php h($post->getSubTitle()) ?></p>
+                                <a href="/post-<?php h(urlencode($post->getId())) ; ?>.html" class="btn btn-primary">Lire</a>
 
                                 <p class="float-right pt-3">Publié par <a href="#"
                                                                           class="font-italic"> <?= $post->getUser()->getUserName() ?> </a>
                                     - Le
-                                    <?php escape_to_html($post->getPublicationDate()->format('d/m/Y à H\hi\ ')) ?>
+                                    <?php h(($post->getPublicationDate()->format('d/m/Y à H\hi\ '))); ?>
 
                                 </p>
 

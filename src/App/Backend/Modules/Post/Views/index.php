@@ -1,11 +1,11 @@
 <?php
-use function OpenFram\h;
+use function OpenFram\escape_to_html as h;
 use function OpenFram\u;
 
 ?>
 <div class="col-12">
     <a href="/admin/post-insert.html" class="btn btn-primary">Ajouter <i class="material-icons">add_circle</i></a>
-    <p class="bg-light rounded float-right p-2 colored-shadow">Articles : <?php escape_to_html($postsNumber) ?></p>
+    <p class="bg-light rounded float-right p-2 colored-shadow">Articles : <?php h($postsNumber) ?></p>
 
     <?php if ($currentUser->hasFlash()) { ?>
 
@@ -17,7 +17,7 @@ use function OpenFram\u;
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true"><i class="material-icons">clear</i></span>
                 </button>
-                <b>Success Alert:</b> <?php escape_to_html($currentUser->getFlash()) ?>
+                <b>Success Alert:</b> <?php h($currentUser->getFlash()) ?>
             </div>
         </div>
 

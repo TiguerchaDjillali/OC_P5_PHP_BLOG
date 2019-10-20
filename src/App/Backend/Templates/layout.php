@@ -1,5 +1,5 @@
 <?php
-use function OpenFram\h;
+use function OpenFram\escape_to_html as h;
 use function OpenFram\u;
 
 ?>
@@ -12,7 +12,7 @@ use function OpenFram\u;
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>
-        <?php escape_to_html($title) ?>
+        <?php h($title) ?>
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
           name='viewport'/>

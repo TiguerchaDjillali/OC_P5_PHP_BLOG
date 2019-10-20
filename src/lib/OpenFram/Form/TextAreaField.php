@@ -4,7 +4,7 @@
 namespace OpenFram\Form;
 
 
-use function OpenFram\h;
+use function OpenFram\escape_to_html as h;
 
 class TextAreaField extends Field
 {
@@ -39,7 +39,7 @@ class TextAreaField extends Field
 
         $widget .= ' />';
         if(!empty($this->value)){
-            $widget .php escape_to_html($this->value);
+            $widget .= htmlspecialchars($this->value);
         }
         $widget .= '</textarea>';
 

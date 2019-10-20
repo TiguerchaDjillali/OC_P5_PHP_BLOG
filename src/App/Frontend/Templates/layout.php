@@ -1,5 +1,5 @@
 <?php
-use function OpenFram\h;
+use function OpenFram\escape_to_html as h;
 use function OpenFram\u;
 
 ?>
@@ -12,7 +12,7 @@ use function OpenFram\u;
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>
-        <?php escape_to_html($title) ?>
+        <?php h($title) ?>
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
           name='viewport'/>
@@ -80,7 +80,7 @@ use function OpenFram\u;
     <!-- End Google Tag Manager -->
 </head>
 
-<body class="<?php escape_to_html($pageType) ?> sidebar-collapse">
+<body class="<?php h($pageType) ?> sidebar-collapse">
 <!-- Extra details for Live View on GitHub Pages -->
 <!-- Google Tag Manager (noscript) -->
 <noscript>
@@ -103,7 +103,7 @@ use function OpenFram\u;
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true"><i class="material-icons">clear</i></span>
             </button>
-            <b>Success Alert:</b> <?php escape_to_html($currentUser->getFlash()) ?>
+            <b>Success Alert:</b> <?php h($currentUser->getFlash()) ?>
         </div>
     </div>
 

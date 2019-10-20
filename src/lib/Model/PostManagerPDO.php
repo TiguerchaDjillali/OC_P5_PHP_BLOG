@@ -4,7 +4,7 @@ namespace Model;
 
 use Entity\Post;
 use GuzzleHttp\Psr7\ServerRequest;
-use function OpenFram\h;
+use function OpenFram\escape_to_html as h;
 
 class PostManagerPDO extends PostManager
 {

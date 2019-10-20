@@ -1,5 +1,5 @@
 <?php
-use function OpenFram\h;
+use function OpenFram\escape_to_html as h;
 use function OpenFram\u;
 
 ?>
@@ -14,13 +14,13 @@ use function OpenFram\u;
         <div class="container">
             <div class="row">
 
-                <h3 class="col-md-4"><?php escape_to_html($post->getSubtitle()) ?></h3>
+                <h3 class="col-md-4"><?php h($post->getSubtitle()) ?></h3>
 
-                <p class="col-md-8 pt-md-4"><?php escape_to_html($post->getContent()) ?> </p>
+                <p class="col-md-8 pt-md-4"><?php h($post->getContent()) ?> </p>
                 <div class="col-12">
                     <p class="pt-3 float-right">
-                        Publié par <a href="#" class="font-italic"> <?php escape_to_html($post->getUser()->getUserName()) ?> </a>
-                        - Le <?php escape_to_html($post->getPublicationDate()->format('d/m/Y à H\hi\ ')) ?>
+                        Publié par <a href="#" class="font-italic"> <?php h($post->getUser()->getUserName()) ?> </a>
+                        - Le <?php h($post->getPublicationDate()->format('d/m/Y à H\hi\ ')) ?>
                     </p>
                 </div>
 

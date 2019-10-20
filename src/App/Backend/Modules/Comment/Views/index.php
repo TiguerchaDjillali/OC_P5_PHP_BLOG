@@ -1,12 +1,12 @@
 <?php
-use function OpenFram\h;
+use function OpenFram\escape_to_html as h;
 use function OpenFram\u;
 
 ?>
 <div class="col-12">
     <p class="bg-light rounded float-right p-2 mx-2 colored-shadow">En attente de
-        validation: <?php escape_to_html($nonValidCommentsNumber) ?? '' ?></p>
-    <p class="bg-light rounded float-right p-2 mx-2 colored-shadow">Commentaires: <?php escape_to_html($commentsNumber) ?? '' ?></p>
+        validation: <?php h($nonValidCommentsNumber) ?? '' ?></p>
+    <p class="bg-light rounded float-right p-2 mx-2 colored-shadow">Commentaires: <?php h($commentsNumber) ?? '' ?></p>
 
     <?php if ($currentUser->hasFlash()) { ?>
 
@@ -18,7 +18,7 @@ use function OpenFram\u;
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true"><i class="material-icons">clear</i></span>
                 </button>
-                <b>Success Alert:</b> <?php escape_to_html($currentUser->getFlash()) ?>
+                <b>Success Alert:</b> <?php h($currentUser->getFlash()) ?>
             </div>
         </div>
 

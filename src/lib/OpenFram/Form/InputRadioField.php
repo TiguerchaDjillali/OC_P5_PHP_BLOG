@@ -4,7 +4,7 @@
 namespace OpenFram\Form;
 
 
-use function OpenFram\h;
+use function OpenFram\escape_to_html as h;
 
 class InputRadioField extends InputField
 {
@@ -34,7 +34,7 @@ class InputRadioField extends InputField
                 $widget .= 'checked';
             }
             $widget .=">";
-            $widget .php escape_to_html($value);
+            $widget .= htmlspecialchars($value);
 
              $widget .= "<span class=\"circle\"><span class=\"check\"></span></span>";
              $widget .= "</label>";

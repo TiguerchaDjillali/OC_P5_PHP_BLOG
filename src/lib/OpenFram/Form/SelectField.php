@@ -4,7 +4,7 @@
 namespace OpenFram\Form;
 
 
-use function OpenFram\h;
+use function OpenFram\escape_to_html as h;
 
 class SelectField extends Field
 {

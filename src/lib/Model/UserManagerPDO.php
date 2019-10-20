@@ -6,7 +6,7 @@ namespace Model;
 
 use Entity\User;
 use GuzzleHttp\Psr7\ServerRequest;
-use function OpenFram\h;
+use function OpenFram\escape_to_html as h;
 
 class UserManagerPDO extends UserManager
 {
