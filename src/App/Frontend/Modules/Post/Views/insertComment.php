@@ -1,5 +1,3 @@
-
-
 <form name="sentMessage" id="contactForm" action="" method="post">
 
     <div class="control-group">
@@ -8,9 +6,7 @@
 
         <div class="form-group">
             <button type="submit" class="btn btn-primary"
-                    id="sendMessageButton" <?php if (!$currentUser->hasAttribute('user')) {
-                echo ' disabled ';
-            } ?>>Envoyer
+                    id="sendMessageButton" <?= (!$currentUser->hasAttribute('user')) ? ' disabled ' : '' ?>>Envoyer
             </button>
 
             <?php if (!$currentUser->hasAttribute('user')) { ?>

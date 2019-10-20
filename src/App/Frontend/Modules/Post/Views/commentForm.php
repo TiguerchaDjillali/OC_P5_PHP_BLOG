@@ -1,6 +1,5 @@
 <?php
 use function OpenFram\escape_to_html as h;
-use function OpenFram\u;
 
 ?>
 
@@ -30,9 +29,8 @@ use function OpenFram\u;
 
 
     <div class="form-group">
-        <button type="submit" class="btn btn-primary" <?php if (!$currentUser->hasAttribute('user')) {
-            echo ' disabled ';
-        } ?>>Envoyer
+        <button type="submit" class="btn btn-primary" <?= (!$currentUser->hasAttribute('user'))? ' disabled ' : '' ?>>
+            Envoyer
         </button>
 
         <?php if (!$currentUser->hasAttribute('user')) { ?>
