@@ -13,7 +13,6 @@ class Entity
 
     /**
      * Entity constructor.
-     *
      * @param array $data
      */
     public function __construct(array $data = [])

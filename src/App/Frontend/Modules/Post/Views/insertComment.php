@@ -4,13 +4,13 @@
 
     <div class="control-group">
 
-        <?php echo $form ?>
+        <?= $form ?>
 
         <div class="form-group">
             <button type="submit" class="btn btn-primary"
                     id="sendMessageButton" <?php if (!$currentUser->hasAttribute('user')) {
-                        echo ' disabled ';
-} ?>>Envoyer
+                echo ' disabled ';
+            } ?>>Envoyer
             </button>
 
             <?php if (!$currentUser->hasAttribute('user')) { ?>

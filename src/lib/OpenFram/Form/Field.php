@@ -150,7 +150,7 @@ abstract class Field
     public function setAttributes(array $attributes): void
     {
         foreach ($attributes as $attribute => $value){
-            if(is_string($attribute) && is_string($value)) {
+            if(is_string($attribute) && is_string($value)){
                 $this->attributes[$attribute] =  $value;
             }
         }

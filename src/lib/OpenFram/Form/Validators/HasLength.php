@@ -38,14 +38,12 @@ class HasLength extends Validator
         return $length > $min;
     }
 
-    public function hasLengthLessThan($value, $max)
-    {
+    public function hasLengthLessThan($value, $max) {
         $length = strlen($value);
         return $length < $max;
     }
 
-    public function hasLengthExactly($value, $exact)
-    {
+    public function hasLengthExactly($value, $exact) {
         $length = strlen($value);
         return $length == $exact;
     }

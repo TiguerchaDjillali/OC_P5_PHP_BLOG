@@ -55,7 +55,7 @@ class UserController extends BackController
 
         $currentUser = $this->app->getCurrentUser()->getAttribute('user');
         // access controle
-        if($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $user->getId()) {
+        if($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $user->getId()){
             $this->app->getCurrentUser()->setFlash('Accès refusé');
             $this->app->redirect('/admin/user-edit-'.htmlspecialchars(urlencode($currentUser->getId())).'.html');
         }
@@ -114,8 +114,7 @@ class UserController extends BackController
             }
             $roleManager = $this->managers->getManagerOf('role');
 
-            $user = new User(
-                [
+            $user = new User([
                 'firstName' => $request->getParsedBody()["firstName"],
                 'lastName' => $request->getParsedBody()["lastName"],
                 'userName' => $request->getParsedBody()["userName"],
@@ -126,14 +125,13 @@ class UserController extends BackController
                 'role' => $roleManager->getByAttribute('id', $request->getParsedBody()["role"]),
                 'description' => $request->getParsedBody()["description"],
                 'profileImage' => $file,
-                ]
-            );
+            ]);
             $user->setHashedPassword();
 
 
             if (isset($request->getQueryParams()['id'])) {
                 $user->setId($request->getQueryParams()['id']);
-                if($request->getParsedBody()["password"] =='') {
+                if($request->getParsedBody()["password"] ==''){
                     $user->setPasswordRequired(false);
                 }
             }

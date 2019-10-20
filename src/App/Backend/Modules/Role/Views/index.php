@@ -6,7 +6,7 @@ use function OpenFram\u;
 ?>
 <div class="col-12">
     <a href="/admin/role-insert.html" class="btn btn-primary">Ajouter <i class="material-icons">add_circle</i></a>
-    <p class="bg-light rounded float-right p-2 colored-shadow">Roles: <?php echo htmlspecialchars($rolesNumber) ?></p>
+    <p class="bg-light rounded float-right p-2 colored-shadow">Roles: <?= htmlspecialchars($rolesNumber) ?></p>
 
     <?php if ($currentUser->hasFlash()) { ?>
 
@@ -18,7 +18,7 @@ use function OpenFram\u;
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true"><i class="material-icons">clear</i></span>
                 </button>
-                <b>Success Alert:</b> <?php echo htmlspecialchars($currentUser->getFlash()) ?>
+                <b>Success Alert:</b> <?= htmlspecialchars($currentUser->getFlash()) ?>
             </div>
         </div>
 
@@ -30,7 +30,7 @@ use function OpenFram\u;
 </div>
 
 <script>
-    var tabledata = <?php echo $dataTable ?>
+    var tabledata = <?= $dataTable ?>
     //create Tabulator on DOM element with id "example-table"
     var table = new Tabulator("#posts-table", {
         width: "100%",

@@ -16,8 +16,8 @@ use function OpenFram\u;
 
         <?php foreach ($modules as $module => $actions) { ?>
             <li class="nav-item">
-                <a class="nav-link" href="#<?php echo htmlspecialchars(urlencode($module)) ?>" role="tab" data-toggle="tab" aria-selected="false">
-                    <i class="material-icons">person</i> <?php echo htmlspecialchars($module) ?>
+                <a class="nav-link" href="#<?= htmlspecialchars(urlencode($module)) ?>" role="tab" data-toggle="tab" aria-selected="false">
+                    <i class="material-icons">person</i> <?= htmlspecialchars($module) ?>
                 </a>
             </li>
         <?php } ?>
@@ -35,10 +35,10 @@ use function OpenFram\u;
                                         class="btn btn-lg btn-outline-primary"
                                         data-toggle="popover"
                                         data-container="body"
-                                        data-original-title=" <?php echo htmlspecialchars($module) . ': ' . htmlspecialchars($action[0]) ?>"
-                                        data-content="<?php echo htmlspecialchars($action[1]) ?>"
+                                        data-original-title=" <?= htmlspecialchars($module) . ': ' . htmlspecialchars($action[0]) ?>"
+                                        data-content="<?= htmlspecialchars($action[1]) ?>"
                                         data-color="primary">
-                                    <?php echo htmlspecialchars($module) . '_' . htmlspecialchars($action[0]) ?>
+                                    <?= htmlspecialchars($module) . '_' . htmlspecialchars($action[0]) ?>
                                 </button>
 
                             <?php } ?>
@@ -49,10 +49,10 @@ use function OpenFram\u;
         </div>
 
         <?php foreach ($modules as $module => $actions) { ?>
-            <div class=" tab-pane" id="<?php echo htmlspecialchars($module) ?>">
+            <div class=" tab-pane" id="<?= htmlspecialchars($module) ?>">
                 <div class="card">
                     <div class="card-header card-header-primary">
-                        <h3 class="text-center">Les permissions du module <?php echo htmlspecialchars($module) ?></h3>
+                        <h3 class="text-center">Les permissions du module <?= htmlspecialchars($module) ?></h3>
                     </div>
                     <div class="card-body">
 
@@ -61,10 +61,10 @@ use function OpenFram\u;
                                         class="btn btn-lg btn-outline-primary"
                                         data-toggle="popover"
                                         data-container="body"
-                                        data-original-title="<?php echo htmlspecialchars($module) . ': ' . htmlspecialchars($action[0]) ?>"
-                                        data-content="<?php echo htmlspecialchars($action[1]) ?>"
+                                        data-original-title="<?= htmlspecialchars($module) . ': ' . htmlspecialchars($action[0]) ?>"
+                                        data-content="<?= htmlspecialchars($action[1]) ?>"
                                         data-color="primary">
-                                    <?php echo htmlspecialchars($module) . '_' . htmlspecialchars($action[0]) ?>
+                                    <?= htmlspecialchars($module) . '_' . htmlspecialchars($action[0]) ?>
                                 </button>
 
                             <?php } ?>

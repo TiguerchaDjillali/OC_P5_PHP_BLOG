@@ -26,11 +26,11 @@ class InputRadioField extends InputField
             $widget .= "<label class=\"form-check-label px-4\">";
             $widget .= "<input type = \"radio\" class=\" form-check-input \" name = \"". $this->attributes["name"] ."\"";
             $widget .=" value = \"". htmlspecialchars($key)."\"";
-            if(isset($this->value)) {
+            if(isset($this->value)){
                 if ($this->value->getName() === $value) {
                     $widget .= 'checked';
                 }
-            }elseif($value === $this->checkedRadio) {
+            }elseif($value === $this->checkedRadio){
                 $widget .= 'checked';
             }
             $widget .=">";

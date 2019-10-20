@@ -32,7 +32,6 @@ abstract class Application
 
     /**
      * Application constructor.
-     *
      * @param $request
      */
     public function __construct($request)
@@ -78,11 +77,11 @@ abstract class Application
 
         } catch (\RuntimeException $e) {
             if ($e->getCode() == Router::NO_ROUTE) {
-                $this->redirect('/');
+               $this->redirect('/');
             }
         }
 
-        $this->request = $this->request->withQueryParams(array_merge($this->request->getQueryParams('GET'), $matchedRoute->getVars()));
+        $this->request = $this->request->withQueryParams( array_merge($this->request->getQueryParams('GET'), $matchedRoute->getVars()));
 
         $controllerClass = 'App\\'.$this->name.'\\Modules\\' . $matchedRoute->getModule() . '\\' . $matchedRoute->getModule() . 'Controller';
         return new $controllerClass($this, $matchedRoute->getModule(), $matchedRoute->getAction());
@@ -133,14 +132,14 @@ abstract class Application
         $page->addVar('pageType', 'Erreur 404');
         $page->setContentFile(__DIR__.'/../../Errors/404.php');
 
-        $response = (new Response())->withStatus(404, 'Not Fount');
+       $response = (new Response())->withStatus(404,'Not Fount');
         send($response->withBody(stream_for($page->getGeneratedPage())));
         exit;
     }
 
     public function redirect($url)
     {
-        send((new Response())->withStatus(301, 'redirection')->withHeader('Location', $url));
+        send((new Response())->withStatus(301,'redirection')->withHeader('Location', $url));
 
         exit;
     }

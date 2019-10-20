@@ -5,8 +5,8 @@ use function OpenFram\u;
 ?>
 <div class="col-12">
     <p class="bg-light rounded float-right p-2 mx-2 colored-shadow">En attente de
-        validation: <?php echo htmlspecialchars($nonValidCommentsNumber) ?? '' ?></p>
-    <p class="bg-light rounded float-right p-2 mx-2 colored-shadow">Commentaires: <?php echo htmlspecialchars($commentsNumber) ?? '' ?></p>
+        validation: <?= htmlspecialchars($nonValidCommentsNumber) ?? '' ?></p>
+    <p class="bg-light rounded float-right p-2 mx-2 colored-shadow">Commentaires: <?= htmlspecialchars($commentsNumber) ?? '' ?></p>
 
     <?php if ($currentUser->hasFlash()) { ?>
 
@@ -18,7 +18,7 @@ use function OpenFram\u;
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true"><i class="material-icons">clear</i></span>
                 </button>
-                <b>Success Alert:</b> <?php echo htmlspecialchars($currentUser->getFlash()) ?>
+                <b>Success Alert:</b> <?= htmlspecialchars($currentUser->getFlash()) ?>
             </div>
         </div>
 
@@ -32,7 +32,7 @@ use function OpenFram\u;
 
 <script>
 
-    var tabledata = <?php echo $dataTable ?>;
+    var tabledata = <?= $dataTable ?>;
     var table = new Tabulator("#comments-table", {
         width: "100%",
         autoResize: true,

@@ -19,7 +19,7 @@ abstract class CommentManager extends Manager
 
     public function save(Comment $comment)
     {
-        if($comment->isValid()) {
+        if($comment->isValid()){
             $comment->isNew() ? $this->add($comment) : $this->update($comment);
         }else{
             throw new RuntimeException('Le commentaire doit être valid pour être enregistré');

@@ -42,8 +42,8 @@ class User extends Entity
      */
     public function setFirstName($firstName)
     {
-        if(is_string($firstName)) {
-            $this->firstName = $firstName;
+        if(is_string($firstName)){
+        $this->firstName = $firstName;
         }
     }
 
@@ -60,7 +60,7 @@ class User extends Entity
      */
     public function setLastName($lastName)
     {
-        if(is_string($lastName)) {
+        if(is_string($lastName)){
             $this->lastName = $lastName;
         }
     }
@@ -78,8 +78,8 @@ class User extends Entity
      */
     public function setUserName($userName)
     {
-        if(is_string($userName)) {
-            $this->userName = $userName;
+        if(is_string($userName)){
+        $this->userName = $userName;
         }
     }
 
@@ -113,12 +113,11 @@ class User extends Entity
      */
     public function setHashedPassword()
     {
-        $this->hashedPassword = password_hash($this->password, PASSWORD_BCRYPT);
+        $this->hashedPassword = password_hash($this->password, PASSWORD_BCRYPT) ;
     }
 
 
-    public function verifyPassword($password)
-    {
+    public function verifyPassword($password) {
         return password_verify($password, $this->hashedPassword);
     }
 

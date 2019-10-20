@@ -12,25 +12,23 @@ class ConnectionController extends \OpenFram\BackController
 
     public function executeLogin(Request $request)
     {
-        if($request->getMethod() ==='POST') {
+        if($request->getMethod() ==='POST'){
 
             $userName = $request->getParsedBody()['userName'];
             $password = $request->getParsedBody()['password'];
 
-            $connection = new Connection(
-                [
+            $connection = new Connection([
                 'userName' => $userName,
                 'password' => $password
-                ]
-            );
+            ]);
 
 
             $user = $this->managers->getManagerOf('User')->getByAttribute('userName', $userName);
-            if($user !== null  &&  $user->verifyPassword($password)) {
+            if($user !== null  &&  $user->verifyPassword($password)){
 
                 $this->app->getCurrentUser()->setAuthenticated(true);
                 $this->app->getCurrentUser()->setAttribute('user', $user);
-                if($this->app->getCurrentUser()->hasAttribute('lastUrl')) {
+                if($this->app->getCurrentUser()->hasAttribute('lastUrl')){
                     $this->app->redirect($this->app->getCurrentUser()->getAttribute('lastUrl'));
 
                 }else{

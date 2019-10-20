@@ -44,7 +44,7 @@ class SelectField extends Field
             $widget .= "<option value=\"" . htmlspecialchars($key). "\">". htmlspecialchars($value) ."</option>";
         }
 
-        $widget .= "</select>";
+		$widget .= "</select>";
 
 
 

@@ -35,8 +35,7 @@ class UserFormBuilder extends FormBuilder
 
 
         $this->form->add(
-            new InputFileField(
-                [
+            new InputFileField([
                 'label' => 'Image du profil',
                 'attributes' => [
                     'name' => 'profileImage',
@@ -45,159 +44,121 @@ class UserFormBuilder extends FormBuilder
                 'validators' => [
                     new IsImage("Le fichier n'est pas une image")
                 ]
-                ]
-            )
-        )->add(
-            new InputField(
-                [
-                    'openingGroupTags' => '<div class="row"><div class="col-md-4">',
-                    'closingGroupTags' => '</div>',
-                    'label' => 'Votre prénom',
-                    'attributes' => [
+            ]))->add(
+            new InputField([
+                'openingGroupTags' => '<div class="row"><div class="col-md-4">',
+                'closingGroupTags' => '</div>',
+                'label' => 'Votre prénom',
+                'attributes' => [
                     'name' => 'firstName',
                     'type' => 'text',
                     'maxlength' => '255',
                     'minlength' => '2'
-                    ],
-                    'validators' => [
+                ],
+                'validators' => [
                     new IsNotBlank('Ce champs est obligatoire'),
-                    new HasLength(
-                        'Le champ doit avoir  entre 2 et 255 caractères',
-                        ['min' => 2, 'max' => 255]
-                    ),
-                    ]
-                    ]
-            )
-        )->add(
-            new InputField(
-                [
-                        'openingGroupTags' => '<div class="col-md-4">',
-                        'closingGroupTags' => '</div>',
-                        'label' => 'Votre Nom',
-                        'attributes' => [
-                        'name' => 'lastName',
-                        'type' => 'text',
-                        'maxlength' => '255',
-                        'minlength' => '2'
-                        ],
-                        'validators' => [
-                        new IsNotBlank('Ce champs est obligatoire'),
-                        new HasLength(
-                            'Le champ doit avoir  entre 2 et 255 caractères',
-                            ['min' => 2, 'max' => 255]
-                        ),
-                        ]
-                        ]
-            )
-        )->add(
-            new InputField(
-                [
-                        'openingGroupTags' => '<div class="col-md-4">',
-                        'closingGroupTags' => '</div>',
-                        'label' => 'Votre Pseudo',
-                        'attributes' => [
-                        'name' => 'userName',
-                        'type' => 'text',
-                        'maxlength' => '255',
-                        'minlength' => '2'
-                        ],
-                        'validators' => [
-                        new IsNotBlank('Ce champs est obligatoire'),
-                        new HasLength('Le champ doit avoir  entre 2 et 255 caractères', ['min' => 2, 'max' => 255]),
-                        ]
-                        ]
-            )
-        )->add(
-            new InputRadioField(
-                [
-                        'openingGroupTags' => '<div class="col-md-12">',
-                        'closingGroupTags' => '</div></div>',
-                        'checkedRadio' => 'Author',
-                        'label' => 'Role',
-                        'options' => $options,
-                        'attributes' => [
-                        'name' => 'role'
-                        ]
-                        ]
-            )
-        )->add(
-            new InputField(
-                [
-                        'openingGroupTags' => '<div class="row"><div class="col-md-6">',
-                        'closingGroupTags' => '</div>',
-                        'label' => 'Votre Email',
-                        'attributes' => [
-                        'type' => 'email',
-                        'name' => 'email',
-                        'pattern' => '/\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\Z/i',
-                        ],
-                        'validators' => [
-                        new IsNotBlank('Ce champs est obligatoire'),
-                        new HasValidEmailFormat('L\'email doit avoir un format valide')
-                        ]
-                        ]
-            )
-        )->add(
-            new InputField(
-                [
-                        'openingGroupTags' => '<div class="col-md-6">',
-                        'closingGroupTags' => '</div></div>',
-                        'label' => 'Confirmez votre Email',
-                        'attributes' => [
-                        'type' => 'email',
-                        'name' => 'confirmEmail',
-                        'pattern' => '/\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\Z/i',
-                        ],
-                        'validators' => [
-                        new IsConfirmed('Les emails  ne correspendent pas', $this->form->fields[5]->getValue())
-                        ]
-                        ]
-            )
-        )->add(
-            new InputField(
-                [
-                        'openingGroupTags' => '<div class="row"><div class="col-md-6">',
-                        'closingGroupTags' => '</div>',
-                        'label' => 'Mot de passe',
-                        'attributes' => [
-                        'name' => 'password',
-                        'type' => 'password'
-                        ],
-                        'validators' => ($this->form->getEntity()->isPasswordRequired()) ? [
-                        new IsNotBlank('Ce champs est obligatoire'),
-                        new HasLength('Le champ doit avoir  entre 2 et 255 caractères', ['min' => 2, 'max' => 255]),
-                        ] : []
-                        ]
-            )
-        )->add(
-            new InputField(
-                [
-                        'openingGroupTags' => '<div class="col-md-6">',
-                        'closingGroupTags' => '</div></div>',
-                        'label' => 'Confirmer le mot de passe',
-                        'attributes' => [
-                        'name' => 'confirmPassword',
-                        'type' => 'password'
-                        ],
-                        'validators' => ($this->form->getEntity()->isPasswordRequired()) ? [
-                        new IsConfirmed('Les mots de passes ne correspendent pas', $this->form->fields[7]->getValue())
-                        ] : []
-                        ]
-            )
-        )->add(
-            new TextAreaField(
-                [
-                        'label' => 'Description',
-                        'attributes' => [
-                        'name' => 'description',
-                        ],
-                        'validators' => [
-                        new IsNotBlank('Ce champs est obligatoire'),
-                        new HasLength('Le commentaire doit avoir au minimum 20 caractères', ['min' => 2])
-                        ]
-                        ]
-            )
-        );
+                    new HasLength('Le champ doit avoir  entre 2 et 255 caractères',
+                        ['min' => 2, 'max' => 255]),
+                ]
+            ]))->add(new InputField([
+            'openingGroupTags' => '<div class="col-md-4">',
+            'closingGroupTags' => '</div>',
+            'label' => 'Votre Nom',
+            'attributes' => [
+                'name' => 'lastName',
+                'type' => 'text',
+                'maxlength' => '255',
+                'minlength' => '2'
+            ],
+            'validators' => [
+                new IsNotBlank('Ce champs est obligatoire'),
+                new HasLength('Le champ doit avoir  entre 2 et 255 caractères',
+                    ['min' => 2, 'max' => 255]),
+            ]
+        ]))->add(new InputField([
+            'openingGroupTags' => '<div class="col-md-4">',
+            'closingGroupTags' => '</div>',
+            'label' => 'Votre Pseudo',
+            'attributes' => [
+                'name' => 'userName',
+                'type' => 'text',
+                'maxlength' => '255',
+                'minlength' => '2'
+            ],
+            'validators' => [
+                new IsNotBlank('Ce champs est obligatoire'),
+                new HasLength('Le champ doit avoir  entre 2 et 255 caractères', ['min' => 2, 'max' => 255]),
+            ]
+        ]))->add(new InputRadioField([
+            'openingGroupTags' => '<div class="col-md-12">',
+            'closingGroupTags' => '</div></div>',
+            'checkedRadio' => 'Author',
+            'label' => 'Role',
+            'options' => $options,
+            'attributes' => [
+                'name' => 'role'
+            ]
+        ]))->add(
+            new InputField([
+                'openingGroupTags' => '<div class="row"><div class="col-md-6">',
+                'closingGroupTags' => '</div>',
+                'label' => 'Votre Email',
+                'attributes' => [
+                    'type' => 'email',
+                    'name' => 'email',
+                    'pattern' => '/\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\Z/i',
+                ],
+                'validators' => [
+                    new IsNotBlank('Ce champs est obligatoire'),
+                    new HasValidEmailFormat('L\'email doit avoir un format valide')
+                ]
+            ]))->add(new InputField([
+            'openingGroupTags' => '<div class="col-md-6">',
+            'closingGroupTags' => '</div></div>',
+            'label' => 'Confirmez votre Email',
+            'attributes' => [
+                'type' => 'email',
+                'name' => 'confirmEmail',
+                'pattern' => '/\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\Z/i',
+            ],
+            'validators' => [
+                new IsConfirmed('Les emails  ne correspendent pas', $this->form->fields[5]->getValue())
+            ]
+        ]))->add(
+            new InputField([
+                'openingGroupTags' => '<div class="row"><div class="col-md-6">',
+                'closingGroupTags' => '</div>',
+                'label' => 'Mot de passe',
+                'attributes' => [
+                    'name' => 'password',
+                    'type' => 'password'
+                ],
+                'validators' => ($this->form->getEntity()->isPasswordRequired()) ? [
+                    new IsNotBlank('Ce champs est obligatoire'),
+                    new HasLength('Le champ doit avoir  entre 2 et 255 caractères', ['min' => 2, 'max' => 255]),
+                ] : []
+            ]))->add(new InputField([
+            'openingGroupTags' => '<div class="col-md-6">',
+            'closingGroupTags' => '</div></div>',
+            'label' => 'Confirmer le mot de passe',
+            'attributes' => [
+                'name' => 'confirmPassword',
+                'type' => 'password'
+            ],
+            'validators' => ($this->form->getEntity()->isPasswordRequired()) ? [
+                new IsConfirmed('Les mots de passes ne correspendent pas', $this->form->fields[7]->getValue())
+            ] : []
+        ]))->add(
+            new TextAreaField([
+                'label' => 'Description',
+                'attributes' => [
+                    'name' => 'description',
+                ],
+                'validators' => [
+                    new IsNotBlank('Ce champs est obligatoire'),
+                    new HasLength('Le commentaire doit avoir au minimum 20 caractères', ['min' => 2])
+                ]
+            ]));
 
     }
 

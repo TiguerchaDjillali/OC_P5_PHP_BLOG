@@ -10,8 +10,7 @@ use OpenFram\Managers;
 
 class HomeController extends BackController
 {
-    public function executeShow(Request $request)
-    {
+    public function executeShow(Request $request){
         $this->page->addVar('title', $this->getModule());
         $manager = $this->managers->getManagerOf('post');
         $postsList = $manager->getList(['limit'=> 4, 'visible'=> 1]);
@@ -24,10 +23,10 @@ class HomeController extends BackController
 
     public function executeContact(Request $request)
     {
-        $this->managers = new Managers('', '');
+        $this->managers = new Managers('','');
         $manager = $this->managers->getManagerOf('contact');
 
-        if($request->getMethod()=='POST') {
+        if($request->getMethod()=='POST'){
 
 
             $contact = new Contact(

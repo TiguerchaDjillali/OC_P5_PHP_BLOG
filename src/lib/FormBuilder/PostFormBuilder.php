@@ -21,8 +21,7 @@ class PostFormBuilder extends FormBuilder
     public function build()
     {
         $this->form->add(
-            new InputFileField(
-                [
+            new InputFileField([
                 'label' => 'Image de mise en avant',
                 'attributes' => [
                     'name' => 'featuredImage',
@@ -31,59 +30,44 @@ class PostFormBuilder extends FormBuilder
                 'validators' => [
                     new IsImage("Le fichier n'est pas une image")
                 ]
-                ]
-            )
-        )->add(
-            new InputField(
-                [
-                    'label' => 'Titre',
-                    'attributes' => [
+            ]))->add(
+            new InputField([
+                'label' => 'Titre',
+                'attributes' => [
                     'name' => 'title',
                     'type' => 'text',
                     'required' => ''
-                    ],
-                    'validators' => [
+                ],
+                'validators' => [
                     new IsNotBlank('Ce champs est obligatoire'),
-                    new HasLength(
-                        'Le champ doit avoir  entre 2 et 255 caractères',
-                        ['min' => 2, 'max' => 255]
-                    ),
-                    ]
-                    ]
-            )
-        )->add(
-            new InputField(
-                [
-                        'label' => 'Sous-titre',
-                        'attributes' => [
-                        'name' => 'subtitle',
-                        'type' => 'text',
-                        'maxlength' => '600',
-                        'minlength' => '2'
-                        ],
-                        'validators' => [
-                        new IsNotBlank('Ce champs est obligatoire'),
-                        new HasLength(
-                            'Le champ doit avoir  entre 2 et 255 caractères',
-                            ['min' => 2, 'max' => 600]
-                        ),
-                        ]
-                        ]
-            )
-        )->add(
-            new TextAreaField(
-                [
-                        'label' => 'Contenu',
-                        'attributes' => [
-                        'name' => 'content',
-                        'minlength' => '2'
-                        ],
-                        'validators' => [
-                        new IsNotBlank('Ce champs est obligatoire'),
-                        new HasLength('Le commentaire doit avoir au minimum 20 caractères', ['min' => 2])
-                        ]
-                        ]
-            )
-        );
+                    new HasLength('Le champ doit avoir  entre 2 et 255 caractères',
+                        ['min' => 2, 'max' => 255]),
+                ]
+            ]))->add(
+            new InputField([
+                'label' => 'Sous-titre',
+                'attributes' => [
+                    'name' => 'subtitle',
+                    'type' => 'text',
+                    'maxlength' => '600',
+                    'minlength' => '2'
+                ],
+                'validators' => [
+                    new IsNotBlank('Ce champs est obligatoire'),
+                    new HasLength('Le champ doit avoir  entre 2 et 255 caractères',
+                        ['min' => 2, 'max' => 600]),
+                ]
+            ]))->add(
+            new TextAreaField([
+                'label' => 'Contenu',
+                'attributes' => [
+                    'name' => 'content',
+                    'minlength' => '2'
+                ],
+                'validators' => [
+                    new IsNotBlank('Ce champs est obligatoire'),
+                    new HasLength('Le commentaire doit avoir au minimum 20 caractères', ['min' => 2])
+                ]
+            ]));
     }
 }

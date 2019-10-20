@@ -14,13 +14,13 @@ use function OpenFram\u;
         <div class="container">
             <div class="row">
 
-                <h3 class="col-md-4"><?php echo htmlspecialchars($post->getSubtitle()) ?></h3>
+                <h3 class="col-md-4"><?= htmlspecialchars($post->getSubtitle()) ?></h3>
 
-                <p class="col-md-8 pt-md-4"><?php echo htmlspecialchars($post->getContent()) ?> </p>
+                <p class="col-md-8 pt-md-4"><?= htmlspecialchars($post->getContent()) ?> </p>
                 <div class="col-12">
                     <p class="pt-3 float-right">
-                        Publié par <a href="#" class="font-italic"> <?php echo htmlspecialchars($post->getUser()->getUserName()) ?> </a>
-                        - Le <?php echo htmlspecialchars($post->getPublicationDate()->format('d/m/Y à H\hi\ ')) ?>
+                        Publié par <a href="#" class="font-italic"> <?= htmlspecialchars($post->getUser()->getUserName()) ?> </a>
+                        - Le <?= htmlspecialchars($post->getPublicationDate()->format('d/m/Y à H\hi\ ')) ?>
                     </p>
                 </div>
 

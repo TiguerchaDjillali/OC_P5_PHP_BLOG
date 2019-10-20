@@ -47,10 +47,10 @@ class RoleController extends BackController
         $modules = [];
         foreach($role->getPermissions() as $permission){
 
-            if(!array_key_exists($permission->getModule(), $modules)) {
+            if(!array_key_exists($permission->getModule(), $modules)){
                 $modules [$permission->getModule()] = [];
             }
-            if(array_key_exists($permission->getModule(), $modules)) {
+            if(array_key_exists($permission->getModule(), $modules)){
                 $modules[$permission->getModule()][] = [$permission->getAction(), $permission->getDescription()];
             }
         }
