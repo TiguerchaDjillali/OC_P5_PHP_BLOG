@@ -1,5 +1,6 @@
  <?php
  use function OpenFram\escape_to_html as h;
+ use function OpenFram\u;
 
  ?>
 
@@ -89,7 +90,7 @@
                             <div class="card-body">
 
                                 <p style="height:100px; overflow-y: hidden"><?php h($post->getSubTitle()) ?></p>
-                                <a href="/post-<?php h($post->getId()) ?>.html" class="btn btn-primary">Lire</a>
+                                <a href="/post-<?php h(u($post->getId())) ?>.html" class="btn btn-primary">Lire</a>
 
                                 <p class="float-right pt-3">Publié par <a href="#"
                                                                           class="font-italic"> <?= $post->getUser()->getUserName() ?> </a>

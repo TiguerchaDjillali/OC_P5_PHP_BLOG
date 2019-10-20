@@ -5,7 +5,7 @@ use function OpenFram\u;
 ?>
 <div class="small-header col-12 p-0 ">
     <div class="admin-header header-filter clear-filter purple-filter" data-parallax="true"
-         style="background-image: url( <?= $post->getFeaturedImage() ?>);">
+         style="background-image: url( <?php h($post->getFeaturedImage()) ?>);">
         <div class="container">
             <div class="row">
                 <div class="col-md-12 ml-auto mr-auto">

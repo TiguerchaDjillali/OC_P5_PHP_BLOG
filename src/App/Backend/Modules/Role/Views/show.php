@@ -1,4 +1,5 @@
 <?php
+
 use function OpenFram\escape_to_html as h;
 use function OpenFram\u;
 
@@ -16,7 +17,7 @@ use function OpenFram\u;
 
         <?php foreach ($modules as $module => $actions) { ?>
             <li class="nav-item">
-                <a class="nav-link" href="#<?php h(urlencode($module)) ?>" role="tab" data-toggle="tab" aria-selected="false">
+                <a class="nav-link" href="#<?php h(u($module)) ?>" role="tab" data-toggle="tab" aria-selected="false">
                     <i class="material-icons">person</i> <?php h($module) ?>
                 </a>
             </li>
@@ -29,20 +30,20 @@ use function OpenFram\u;
                     <h3 class="text-center">Toutes les permissions</h3>
                 </div>
                 <div class="card-body">
-                        <?php foreach ($modules as $module => $actions) { ?>
-                            <?php foreach ($actions as $action) { ?>
-                                <button type="button"
-                                        class="btn btn-lg btn-outline-primary"
-                                        data-toggle="popover"
-                                        data-container="body"
-                                        data-original-title=" <?php h($module) . ': ' . htmlspecialchars($action[0]) ?>"
-                                        data-content="<?php h($action[1]) ?>"
-                                        data-color="primary">
-                                    <?php h($module) . '_' . htmlspecialchars($action[0]) ?>
-                                </button>
+                    <?php foreach ($modules as $module => $actions) { ?>
+                        <?php foreach ($actions as $action) { ?>
+                            <button type="button"
+                                    class="btn btn-lg btn-outline-primary"
+                                    data-toggle="popover"
+                                    data-container="body"
+                                    data-original-title=" <?php h($module . ': ' . $action[0]) ?>"
+                                    data-content="<?php h($action[1]) ?>"
+                                    data-color="primary">
+                                <?php h($module . '_' . $action[0]) ?>
+                            </button>
 
-                            <?php } ?>
                         <?php } ?>
+                    <?php } ?>
                 </div>
             </div>
 
@@ -56,19 +57,19 @@ use function OpenFram\u;
                     </div>
                     <div class="card-body">
 
-                            <?php foreach ($actions as $action) { ?>
-                                <button type="button"
-                                        class="btn btn-lg btn-outline-primary"
-                                        data-toggle="popover"
-                                        data-container="body"
-                                        data-original-title="<?php h($module) . ': ' . htmlspecialchars($action[0]) ?>"
-                                        data-content="<?php h($action[1]) ?>"
-                                        data-color="primary">
-                                    <?php h($module) . '_' . htmlspecialchars($action[0]) ?>
-                                </button>
+                        <?php foreach ($actions as $action) { ?>
+                            <button type="button"
+                                    class="btn btn-lg btn-outline-primary"
+                                    data-toggle="popover"
+                                    data-container="body"
+                                    data-original-title="<?php h($module . ': ' . $action[0]) ?>"
+                                    data-content="<?php h($action[1]) ?>"
+                                    data-color="primary">
+                                <?php h($module. '_' . $action[0]) ?>
+                            </button>
 
-                            <?php } ?>
-                        </div>
+                        <?php } ?>
+                    </div>
 
                 </div>
             </div>

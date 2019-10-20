@@ -33,7 +33,7 @@ use function OpenFram\u;
                 <div class="card-body">
                     <h6 class="card-category text-gray"><?php h($user->getUserName()) ?></h6>
                     <h4 class="card-title"><?php h($user->getRole()->getName()) ?></h4>
-                    <p><?php h($user->getLastName()) . ' ' . htmlspecialchars($user->getFirstName()) ?></p>
+                    <p><?php h($user->getLastName() . ' ' . $user->getFirstName()) ?></p>
                     <p><?php h($user->getEmail()) ?></p>
                     <div class="card-description">
                         <?php h($user->getDescription()) ?>
@@ -51,7 +51,7 @@ use function OpenFram\u;
                     <p class="card-category">Complete your profile</p>
                 </div>
                 <div class="card-body">
-                    <form class="contact-form" action="/admin/user-edit-<?php h(urlencode($user->getId())) ?>.html" method="post"
+                    <form class="contact-form" action="/admin/user-edit-<?php h(u($user->getId())) ?>.html" method="post"
                           enctype="multipart/form-data">
 
                         <?= $form ?>

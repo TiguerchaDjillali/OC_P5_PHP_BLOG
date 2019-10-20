@@ -1,4 +1,5 @@
 <?php
+
 use function OpenFram\escape_to_html as h;
 use function OpenFram\u;
 
@@ -18,7 +19,7 @@ use function OpenFram\u;
         <div class="card-body">
             <h6 class="card-category text-gray"><?php h($user->getUserName()) ?></h6>
             <h4 class="card-title"><?php h($user->getRole()->getName()) ?></h4>
-            <p><?php h($user->getLastName()) . ' ' . htmlspecialchars($user->getFirstName()) ?></p>
+            <p><?php h($user->getLastName() . ' ' . $user->getFirstName()) ?></p>
             <p><?php h($user->getEmail()) ?></p>
 
             <form class="contact-form" action="" method="post">

@@ -65,7 +65,7 @@ use function OpenFram\u;
                             <p><?php h($comment->getContent()) ?></p>
                             <?php
                             if ($comment->getValid() == 0) { ?>
-                            <form action="/admin/comment-moderate-<?php h(urlencode($comment->getId())) ?>.html" method="post">
+                            <form action="/admin/comment-moderate-<?php h(u($comment->getId())) ?>.html" method="post">
                                 <div class="form-group">
                                     <button type="submit" name="valid" class="btn btn-primary"
                                             value="<?php h($comment->getId()) ?>">
@@ -73,7 +73,7 @@ use function OpenFram\u;
                                     </button>
 
                                     <?php } else { ?>
-                                    <form action="/admin/comment-moderate-<?php h(urlencode($comment->getId())) ?>.html" method="post">
+                                    <form action="/admin/comment-moderate-<?php h(u($comment->getId())) ?>.html" method="post">
                                         <div class="form-group">
                                             <button type="submit" name="invalid" class="btn btn-primary"
                                                     value="<?php h($comment->getId()) ?>">

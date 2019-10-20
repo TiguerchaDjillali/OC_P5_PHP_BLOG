@@ -33,7 +33,7 @@ use function OpenFram\u;
                 <div class="card-body">
                     <h6 class="card-category text-gray"><?php h($user->getUserName()) ?></h6>
                     <h4 class="card-title"><?php h($user->getRole()->getName()) ?></h4>
-                    <p><?php h($user->getLastName()) . ' ' . htmlspecialchars($user->getFirstName()) ?></p>
+                    <p><?php h($user->getLastName() . ' ' . $user->getFirstName()) ?></p>
                     <p><?php h($user->getEmail()) ?></p>
                     <div class="card-description">
                         <?php h($user->getDescription()) ?>
