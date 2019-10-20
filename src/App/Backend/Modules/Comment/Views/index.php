@@ -1,5 +1,6 @@
 <?php
 use function OpenFram\escape_to_html as h;
+use function OpenFram\escape_to_json as j;
 use function OpenFram\u;
 
 ?>
@@ -32,7 +33,7 @@ use function OpenFram\u;
 
 <script>
 
-    var tabledata = <?= $dataTable ?>;
+    var tabledata = <?php j($dataTable) ?>;
     var table = new Tabulator("#comments-table", {
         width: "100%",
         autoResize: true,

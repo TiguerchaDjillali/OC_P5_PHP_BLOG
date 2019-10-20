@@ -39,7 +39,7 @@ class CommentController extends \OpenFram\BackController
             }
         }
 
-        $this->page->addVar('dataTable', json_encode($dataTable) );
+        $this->page->addVar('dataTable', $dataTable );
         $this->page->addVar('commentsList', $manager->getList());
         $this->page->addVar('commentsNumber', $commentsNumber);
         $this->page->addVar('nonValidCommentsNumber', $nonValidCommentsNumber);

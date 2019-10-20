@@ -28,7 +28,7 @@ class RoleController extends BackController
 
 
         $this->page->addVar('rolesList', $rolesList);
-        $this->page->addVar('dataTable', json_encode($dataTable));
+        $this->page->addVar('dataTable', $dataTable);
         $this->page->addVar('rolesNumber', $manager->count());
     }
 

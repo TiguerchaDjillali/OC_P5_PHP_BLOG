@@ -92,7 +92,7 @@ class PostController extends BackController
         }
 
 
-        $this->page->addVar('dataTable', json_encode($dataTable));
+        $this->page->addVar('dataTable', $dataTable);
         $this->page->addVar('postsList', $postsList);
         $this->page->addVar('postsNumber', $postsNumber);
 
