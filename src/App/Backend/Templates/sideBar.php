@@ -28,7 +28,7 @@ use function OpenFram\u;
             </li>
 
             <li class="nav-item  <?= ($module == 'Profil') ? 'active' : ''?> ">
-                <a class="nav-link" href="/admin/user-<?= htmlspecialchars(urlencode($currentUser->getAttribute('user')->getId()))?>.html">
+                <a class="nav-link" href="/admin/user-<?php escape_to_html(urlencode($currentUser->getAttribute('user')->getId()))?>.html">
                     <i class="material-icons">Profil</i>
                     <p>Profil</p>
                 </a>

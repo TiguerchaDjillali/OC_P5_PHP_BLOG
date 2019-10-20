@@ -7,8 +7,8 @@ function u($string = "")
     return urlencode($string);
 }
 
-function h($string = "")
-{
-    return htmlspecialchars($string);
+function escape_to_html($dirty){
+    echo htmlspecialchars($dirty, ENT_QUOTES, 'UTF-8');
 }
+
 

@@ -64,8 +64,8 @@ use function OpenFram\h;
 
                     <li class="dropdown nav-item">
                         <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false">
-                            <img src="<?= htmlspecialchars($currentUser->getAttribute('user')->getProfileImage()) ?>" alt="Circle Image" class="rounded-circle img-fluid" style="height: 25px">
-                            <?= htmlspecialchars($currentUser->getAttribute('user')->getUserName()) ?>
+                            <img src="<?php escape_to_html($currentUser->getAttribute('user')->getProfileImage()) ?>" alt="Circle Image" class="rounded-circle img-fluid" style="height: 25px">
+                            <?php escape_to_html($currentUser->getAttribute('user')->getUserName()) ?>
                             <div class="ripple-container"></div></a>
                         <div class="dropdown-menu dropdown-with-icons">
                             <a href="/logout" class="dropdown-item">

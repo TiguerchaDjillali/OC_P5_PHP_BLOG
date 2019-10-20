@@ -18,7 +18,7 @@
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true"><i class="material-icons">clear</i></span>
                                 </button>
-                                <b>Alert:</b> <?= htmlspecialchars($currentUser->getFlash()) ?>
+                                <b>Alert:</b> <?php escape_to_html($currentUser->getFlash()) ?>
                             </div>
                         </div>
 
@@ -83,18 +83,18 @@
                         <div class="card">
                             <div class="card-header card-header-text card-header-primary">
                                 <div class="card-text">
-                                    <h4 class="card-title"><?= htmlspecialchars($post->getTitle()) ?></h4>
+                                    <h4 class="card-title"><?php escape_to_html($post->getTitle()) ?></h4>
                                 </div>
                             </div>
                             <div class="card-body">
 
-                                <p style="height:100px; overflow-y: hidden"><?= htmlspecialchars($post->getSubTitle()) ?></p>
-                                <a href="/post-<?= htmlspecialchars($post->getId()) ?>.html" class="btn btn-primary">Lire</a>
+                                <p style="height:100px; overflow-y: hidden"><?php escape_to_html($post->getSubTitle()) ?></p>
+                                <a href="/post-<?php escape_to_html($post->getId()) ?>.html" class="btn btn-primary">Lire</a>
 
                                 <p class="float-right pt-3">Publié par <a href="#"
                                                                           class="font-italic"> <?= $post->getUser()->getUserName() ?> </a>
                                     - Le
-                                    <?= htmlspecialchars($post->getPublicationDate()->format('d/m/Y à H\hi\ ')) ?>
+                                    <?php escape_to_html($post->getPublicationDate()->format('d/m/Y à H\hi\ ')) ?>
 
                                 </p>
 
@@ -123,7 +123,7 @@
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true"><i class="material-icons">clear</i></span>
                     </button>
-                    <b>Success Alert:</b> <?= htmlspecialchars($currentUser->getFlash()) ?>
+                    <b>Success Alert:</b> <?php escape_to_html($currentUser->getFlash()) ?>
                 </div>
             </div>
 

@@ -5,7 +5,7 @@ use function OpenFram\h;
 <div class="col-md-12">
     <div class="card">
         <div class="card-header card-header-primary">
-            <h4 class="card-title"><?= htmlspecialchars($title) ?></h4>
+            <h4 class="card-title"><?php escape_to_html($title) ?></h4>
             <p class="card-category">Exprimez vous</p>
         </div>
         <div class="card-body">

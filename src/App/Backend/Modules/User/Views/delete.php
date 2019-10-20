@@ -8,7 +8,7 @@ use function OpenFram\u;
         <div class="card-header card-header-primary">
             <div class="card-avatar">
                 <a href="#pablo">
-                    <img class="img" src="..<?= htmlspecialchars($user->getProfileImage()) ?>"/>
+                    <img class="img" src="..<?php escape_to_html($user->getProfileImage()) ?>"/>
                 </a>
             </div>
             <h4 class="card-title">Êtes vous sur de vouloir supprimer cet utlisateur ? </h4>
@@ -16,10 +16,10 @@ use function OpenFram\u;
 
 
         <div class="card-body">
-            <h6 class="card-category text-gray"><?= htmlspecialchars($user->getUserName()) ?></h6>
-            <h4 class="card-title"><?= htmlspecialchars($user->getRole()->getName()) ?></h4>
-            <p><?= htmlspecialchars($user->getLastName()) . ' ' . htmlspecialchars($user->getFirstName()) ?></p>
-            <p><?= htmlspecialchars($user->getEmail()) ?></p>
+            <h6 class="card-category text-gray"><?php escape_to_html($user->getUserName()) ?></h6>
+            <h4 class="card-title"><?php escape_to_html($user->getRole()->getName()) ?></h4>
+            <p><?php escape_to_html($user->getLastName()) . ' ' . htmlspecialchars($user->getFirstName()) ?></p>
+            <p><?php escape_to_html($user->getEmail()) ?></p>
 
             <form class="contact-form" action="" method="post">
 

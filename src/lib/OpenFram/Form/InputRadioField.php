@@ -34,7 +34,7 @@ class InputRadioField extends InputField
                 $widget .= 'checked';
             }
             $widget .=">";
-            $widget .= htmlspecialchars($value);
+            $widget .php escape_to_html($value);
 
              $widget .= "<span class=\"circle\"><span class=\"check\"></span></span>";
              $widget .= "</label>";
