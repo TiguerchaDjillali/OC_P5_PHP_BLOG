@@ -3,17 +3,16 @@
 namespace App\Backend\Modules\Permission;
 
 
+use GuzzleHttp\Psr7\Request;
 use OpenFram\BackController;
-use OpenFram\HTTPRequest;
 
 class PermissionController extends BackController
 {
 
 
-    public function executeIndex(HTTPRequest $request)
+    public function executeIndex(Request $request)
     {
         $this->page->addVar('title', 'Permissions');
-
 
         $manager = $this->managers->getManagerOf('Permission');
 
