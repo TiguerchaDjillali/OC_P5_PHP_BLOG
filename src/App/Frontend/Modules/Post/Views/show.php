@@ -14,7 +14,7 @@ use function OpenFram\u;
         <div class="container">
             <div class="row">
 
-                <h3 class="col-md-4"><?= htmlspecialchars($post->getSubtitle()) ?></h3>
+                <h3 class="col-md-4"><?= htmlspecialchars($post->getSubtitle(),ENT_QUOTES) ?></h3>
 
                 <p class="col-md-8 pt-md-4"><?= htmlspecialchars($post->getContent()) ?> </p>
                 <div class="col-12">
