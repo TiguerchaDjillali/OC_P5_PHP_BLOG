@@ -100,7 +100,6 @@ class PermissionManagerPDO extends PermissionManager
 
         $permissions = $query->fetchALL();
 
-
         $query->closeCursor();
 
         return $permissions;
