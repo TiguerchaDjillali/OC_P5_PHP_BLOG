@@ -5,8 +5,6 @@ use  function OpenFram\escape_to_html as h;
 <div class="col-12">
 
         <h2> Commentaires <small class="float-right"><?php h(count($comments)) ?> commentaires</small></h2>
-
-
     <?php foreach ($comments as $comment) { ?>
         <div class="media">
             <div class="media-body">
@@ -20,3 +18,4 @@ use  function OpenFram\escape_to_html as h;
 
     <?php } ?>
 </div>
+// test
