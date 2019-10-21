@@ -5,6 +5,7 @@ namespace Model;
 
 use Entity\Role;
 use MongoDB\Driver\Manager;
+use PDO;
 
 class RoleManagerPDO extends RoleManager
 {
@@ -32,16 +33,20 @@ class RoleManagerPDO extends RoleManager
         return $rolesList;
     }
 
-    public function getByAttribute($attribute, $value)
+    public function getById($value)
     {
-        $value = $value ?? 1;// TODO:
 
-        $sql = 'SELECT * FROM role ';
-        $sql .= 'WHERE ' . $attribute . ' = \'' . $value. '\' ';
+        $sql = 'SELECT * FROM Role ';
+        $sql .= 'WHERE id = :id ';
 
-        $query = $this->dao->query($sql);
+        $query = $this->dao->prepare($sql);
 
-        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Role');
+        $query->bindValue(':id', $value, PDO::PARAM_INT);
+
+        $query->execute();
+
+
+        $query->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, '\Entity\Role');
 
         $permissionsManager = new PermissionManagerPDO($this->dao);
         if ($role = $query->fetch()) {

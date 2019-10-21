@@ -38,7 +38,7 @@ class RoleController extends BackController
     {
         $manager = $this->managers->getManagerOf('Role');
 
-        $role = $manager->getByAttribute('id', $request->getQueryPArams()['id']);
+        $role = $manager->getById( $request->getQueryPArams()['id']);
 
         if (empty($role)) {
             $this->app->redirect404();

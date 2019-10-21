@@ -33,9 +33,6 @@ class BackendApplication extends \OpenFram\Application
         }
 
 
-       $var =  $controller->getManagers()->getManagerOf('permission');
-        var_dump($var->getList(['limit' => 4]));
-
         $controller->execute();
         $controller->getpage()->addVar('module', $controller->getModule());
 

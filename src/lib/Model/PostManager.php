@@ -12,7 +12,7 @@ abstract class PostManager extends Manager
 
     abstract public function getList($options = []);
 
-    abstract public function getByAttribute($attribute, $value);
+    abstract public function getById($value);
 
     abstract public function count();
 

@@ -11,7 +11,7 @@ abstract class RoleManager extends Manager
 {
     abstract public function getList($offset = -1, $limit = -1);
 
-    abstract public function getByAttribute($attribute, $value);
+    abstract public function getById($value);
 
     abstract public function count();
 

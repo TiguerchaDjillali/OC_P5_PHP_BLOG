@@ -50,7 +50,7 @@ class UserController extends BackController
     {
         $manager = $this->managers->getManagerOf('User');
 
-        $user = $manager->getByAttribute('id', $request->getQueryParams('GET')['id']);
+        $user = $manager->getById( $request->getQueryParams('GET')['id']);
 
         $currentUser = $this->app->getCurrentUser()->getAttribute('user');
         // access controle
@@ -76,7 +76,7 @@ class UserController extends BackController
     {
         $manager = $this->managers->getManagerOf('User');
 
-        $user = $manager->getByAttribute('id', $request->getQueryParams('GET')['id']);
+        $user = $manager->getById( $request->getQueryParams('GET')['id']);
 
         if (empty($user)) {
             $this->page->getApp()->redirect404("L'article n'existe pas");
@@ -114,7 +114,7 @@ class UserController extends BackController
                 'confirmEmail' => $request->getParsedBody()["confirmEmail"],
                 'password' => $request->getParsedBody()["password"],
                 'confirmPassword' => $request->getParsedBody()["confirmPassword"],
-                'role' => $roleManager->getByAttribute('id', $request->getParsedBody()["role"]),
+                'role' => $roleManager->getById( $request->getParsedBody()["role"]),
                 'description' => $request->getParsedBody()["description"],
                 'profileImage' => $file,
             ]);
@@ -129,7 +129,7 @@ class UserController extends BackController
             }
         } else {
             if (isset($request->getQueryParams()['id'])) {
-                $user = $this->managers->getManagerOf('user')->getByAttribute('id', $request->getQueryParams()['id']);
+                $user = $this->managers->getManagerOf('user')->getById( $request->getQueryParams()['id']);
             } else {
                 $user = new User;
             }
@@ -151,7 +151,7 @@ class UserController extends BackController
     public function executeDelete(Request $request)
     {
         $this->page->addVar('title', 'Supprimer un utlisateur');
-        $post = $this->managers->getManagerOf('user')->getByAttribute('id', $request->getQueryParams()['id']);
+        $post = $this->managers->getManagerOf('user')->getById( $request->getQueryParams()['id']);
         $this->page->addVar('user', $post);
 
 

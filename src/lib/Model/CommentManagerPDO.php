@@ -55,7 +55,7 @@ class CommentManagerPDO extends CommentManager
         $userManager = new UserManagerPDO($this->dao);
 
         foreach ($comments as $comment) {
-            $comment->setUser($userManager->getByAttribute('id', $comment->userId));
+            $comment->setUser($userManager->getById( $comment->userId));
             $comment->setPost($post);
             $comment->setPublicationDate(new \DateTime($comment->getPublicationDate()));
         }
@@ -92,9 +92,9 @@ class CommentManagerPDO extends CommentManager
         $postManager = new PostManagerPDO($this->dao);
 
         foreach ($commentsList as $comment) {
-            $comment->setUser($userManager->getByAttribute('id', $comment->userId));
+            $comment->setUser($userManager->getById( $comment->userId));
             $comment->setPublicationDate(new \DateTime($comment->getPublicationDate()));
-            $comment->setPost($postManager->getByAttribute('id', $comment->postId));
+            $comment->setPost($postManager->getById( $comment->postId));
         }
 
         return $commentsList;
@@ -136,7 +136,6 @@ class CommentManagerPDO extends CommentManager
 
         $query->execute();
 
-        $query->debugDumpParams();
 
 
         $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Comment');
@@ -148,9 +147,9 @@ class CommentManagerPDO extends CommentManager
             $userManager = new UserManagerPDO($this->dao);
             $postManager = new PostManagerPDO($this->dao);
 
-            $comment->setUser($userManager->getByAttribute('id', $comment->userId));
+            $comment->setUser($userManager->getById( $comment->userId));
             $comment->setPublicationDate(new \DateTime($comment->getPublicationDate()));
-            $comment->setPost($postManager->getByAttribute('id', $comment->postId));
+            $comment->setPost($postManager->getById( $comment->postId));
 
             return $comment;
         }

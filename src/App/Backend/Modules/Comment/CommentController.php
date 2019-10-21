@@ -51,7 +51,6 @@ class CommentController extends \OpenFram\BackController
         $postManager = $this->managers->getManagerOf('post');
 
         $targetComment = $commentManager->getById($request->getQueryParams()['id']);
-        var_dump( $request->getQueryParams()['id']);
 
         // access controle
         $currentUser = $this->app->getCurrentUser()->getAttribute('user');
@@ -62,7 +61,7 @@ class CommentController extends \OpenFram\BackController
         }
 
 
-        $post = $postManager->getByAttribute('id', $targetComment->getPost()->getId());
+        $post = $postManager->getById( $targetComment->getPost()->getId());
 
         $commentsList = $commentManager->getListOf($post);
 

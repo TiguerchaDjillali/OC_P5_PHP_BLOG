@@ -54,12 +54,12 @@ class PostController extends BackController
 
 
             if (in_array($control, $couple)) {
-                $post = $manager->getByAttribute('id', $request->getQueryParams('GET')['id']);
+                $post = $manager->getById( $request->getQueryParams('GET')['id']);
             } else {
-                $post = $manager->getByAttribute('id', $request->getQueryParams('GET')['id'], ['visible' => 1]);
+                $post = $manager->getById( $request->getQueryParams('GET')['id'], ['visible' => 1]);
             }
         } else {
-            $post = $manager->getByAttribute('id', $request->getQueryParams('GET')['id'], ['visible' => 1]);
+            $post = $manager->getById( $request->getQueryParams('GET')['id'], ['visible' => 1]);
         }
 
 
@@ -95,10 +95,7 @@ class PostController extends BackController
             $comment = new Comment(
                 [
                     'content' => $request->getParsedBody()['content'],
-                    'post' => $this->managers->getManagerOf('Post')->getByAttribute(
-                        'id',
-                        $request->getQueryParams('GET')['id']
-                    ),
+                    'post' => $this->managers->getManagerOf('Post')->getById($request->getQueryParams('GET')['id']),
                     'user' => $this->app->getCurrentUser()->getAttribute('user')
                 ]
             );

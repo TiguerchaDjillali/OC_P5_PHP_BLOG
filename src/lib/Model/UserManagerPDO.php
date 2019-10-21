@@ -5,6 +5,7 @@ namespace Model;
 
 use Entity\User;
 use GuzzleHttp\Psr7\ServerRequest;
+use PDO;
 use function OpenFram\escape_to_html as h;
 
 class UserManagerPDO extends UserManager
@@ -27,7 +28,7 @@ class UserManagerPDO extends UserManager
         $roleManager = new RoleManagerPDO($this->dao);
 
         foreach ($usersList as $user) {
-            $user->setRole($roleManager->getByAttribute('id', $user->roleId));
+            $user->setRole($roleManager->getById($user->roleId));
         }
 
         return $usersList;
@@ -42,28 +43,65 @@ class UserManagerPDO extends UserManager
     }
 
 
-    public function getByAttribute($attribute, $value)
+    public function getById($value)
     {
         $sql = 'SELECT * FROM User ';
-        $sql .= 'WHERE ' . $attribute . ' = \'' . $value . '\' ';
+        $sql .= 'WHERE id = :id ';
 
-        $query = $this->dao->query($sql);
+        $query = $this->dao->prepare($sql);
 
-        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\User');
+        $query->bindValue(':id', $value, PDO::PARAM_INT);
+
+        $query->execute();
+
+
+        $query->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, '\Entity\User');
 
         $roleManager = new RoleManagerPDO($this->dao);
 
         if ($user = $query->fetch()) {
             $query->closeCursor();
 
-            $user->setRole($roleManager->getByAttribute('id', $user->roleId));
-
+            $user->setRole($roleManager->getById($user->roleId));
 
 
             $imagePath = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/user/user-' . htmlspecialchars($user->getId()) . '.jpg';
             $url = file_exists($imagePath) ? '/images/user/user-' . htmlspecialchars($user->getId()) . '.jpg' : '/images/user/user-default.jpg';
             $user->setProfileImage($url);
 
+
+            return $user;
+        }
+
+        return null;
+    }
+
+    public function getByUserName($value)
+    {
+        $sql = 'SELECT * FROM User ';
+        $sql .= 'WHERE userName = :userName ';
+
+        $query = $this->dao->prepare($sql);
+
+
+        $query->bindValue(':userName', $value, PDO::PARAM_STR);
+
+        $query->execute();
+
+
+        $query->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, '\Entity\User');
+
+        $roleManager = new RoleManagerPDO($this->dao);
+
+        if ($user = $query->fetch()) {
+            $query->closeCursor();
+
+            $user->setRole($roleManager->getById($user->roleId));
+
+
+            $imagePath = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/user/user-' . htmlspecialchars($user->getId()) . '.jpg';
+            $url = file_exists($imagePath) ? '/images/user/user-' . htmlspecialchars($user->getId()) . '.jpg' : '/images/user/user-default.jpg';
+            $user->setProfileImage($url);
 
 
             return $user;
@@ -130,7 +168,7 @@ class UserManagerPDO extends UserManager
         $query->execute();
 
         if ($user->getProfileImage() !== null) {
-            $imageTarget = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/user/user-' .  $user->getId() . '.jpg';
+            $imageTarget = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/user/user-' . $user->getId() . '.jpg';
             $user->getProfileImage()->moveTo($imageTarget);
         }
     }
@@ -146,7 +184,7 @@ class UserManagerPDO extends UserManager
 
         $query->execute();
 
-        $imagePath = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/user/user-' .  htmlspecialchars($id) . '.jpg';
+        $imagePath = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/user/user-' . htmlspecialchars($id) . '.jpg';
 
 
         if (file_exists($imagePath)) {

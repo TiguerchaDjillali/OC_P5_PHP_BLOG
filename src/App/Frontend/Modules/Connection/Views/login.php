@@ -21,7 +21,7 @@ use function OpenFram\escape_to_html as h;
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true"><i class="material-icons">clear</i></span>
                                 </button>
-                                <b>Echec de connexion:</b> <?php escape_to_html($currentUser->getFlash()) ?>
+                                <b>Echec de connexion:</b> <?php h($currentUser->getFlash()) ?>
                             </div>
                         </div>
                     <?php } ?>

@@ -9,7 +9,9 @@ use OpenFram\Manager;
 
 abstract class UserManager extends Manager
 {
-    abstract public function getByAttribute($attribute, $value);
+    abstract public function getById($value);
+
+    abstract public function getByUserName($value);
 
     public function save(User $user)
     {
@@ -19,5 +21,6 @@ abstract class UserManager extends Manager
             throw new RuntimeException('L\'article doit être valid pour être enregistré');
         }
     }
+
     abstract public function add(User $post);
 }

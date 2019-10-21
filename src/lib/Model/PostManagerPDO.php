@@ -4,6 +4,7 @@ namespace Model;
 
 use Entity\Post;
 use GuzzleHttp\Psr7\ServerRequest;
+use PDO;
 use function OpenFram\escape_to_html as h;
 
 class PostManagerPDO extends PostManager
@@ -18,24 +19,28 @@ class PostManagerPDO extends PostManager
     {
         $sql = 'SELECT * FROM Post ';
 
-
-        if (isset($options['visible'])) {
-            $sql .= ' WHERE visible =' . $options['visible'] . ' ';
-        }
         if (isset($options['userId'])) {
-            $sql .= ' WHERE userId =' . $options['userId'] . ' ';
+            $sql .= ' WHERE userId = :userId ';
+            $sql .= (isset($options['visible'])) ?  ' AND visible = :visible ' : ' ';
+        } else {
+            $sql .= (isset($options['visible'])) ?  ' WHERE visible = :visible ' : ' ';
         }
         $sql .= 'ORDER BY publicationDate DESC ';
-        if (isset($options['limit'])) {
-            $sql .= ' LIMIT ' . (int)$options['limit'] . ' ';
-        }
-        if (isset($options['offset'])) {
-            $sql .= ' OFFSET ' . (int)$options['offset'] . ' ';
-        }
+        $sql .= (isset($options['limit'])) ? ' LIMIT :limit ' : ' ';
+        $sql .= (isset($options['offset'])) ? ' OFFSET :offset ' : ' ';
+
+        $query = $this->dao->prepare($sql);
+
+        (isset($options['userId'])) ? $query->bindValue(':userId', $options['userId'], PDO::PARAM_INT) : null;
+        (isset($options['visible'])) ? $query->bindValue(':visible', $options['visible'], PDO::PARAM_INT) : null;
+        (isset($options['offset'])) ? $query->bindValue(':offset', $options['offset'], PDO::PARAM_INT) : null;
+        (isset($options['limit'])) ? $query->bindValue(':limit', $options['limit'], PDO::PARAM_INT) : null;
 
 
-        $query = $this->dao->query($sql);
-        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Post');
+        $query->execute();
+
+
+        $query->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, '\Entity\Post');
 
 
         $postsList = $query->fetchAll();
@@ -44,7 +49,7 @@ class PostManagerPDO extends PostManager
         $userManager = new UserManagerPDO($this->dao);
 
         foreach ($postsList as $post) {
-            $post->setUser($userManager->getByAttribute('id', $post->userId));
+            $post->setUser($userManager->getById( $post->userId));
             $post->setPublicationDate(new \DateTime($post->getPublicationDate()));
             $post->setModificationDate(new \DateTime($post->getModificationDate()));
 
@@ -63,29 +68,32 @@ class PostManagerPDO extends PostManager
 
 
     /**
-     * @param $attribute
-     * @param $value
+     * @param $postId
      * @param array $options
      * @return Post | null
      * @throws \Exception
      */
-    public function getByAttribute($attribute, $value, $options = [])
+    public function getById($postId, $options = [])
     {
         $sql = 'SELECT * FROM Post ';
-        $sql .= 'WHERE ' . $attribute . ' = ' . $value . ' ';
-        if (isset($options['visible'])) {
-            $sql .= 'AND visible = ' . (int)$options['visible'];
-        }
+        $sql .= 'WHERE id = :id ';
+        $sql .= (isset($options['visible'])) ?  ' WHERE visible = :visible ' : ' ';
 
-        $query = $this->dao->query($sql);
 
-        $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Post');
+        $query = $this->dao->prepare($sql);
+
+        $query->bindValue(':id', $postId, PDO::PARAM_INT);
+        isset($options['visible']) ? $query->bingValue(':visible', $options['visible'], PDO::PARAM_INT) : null;
+
+        $query->execute();
+
+        $query->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, '\Entity\Post');
 
 
         if ($post = $query->fetch()) {
             $query->closeCursor();
 
-            $post->setUser((new UserManagerPDO($this->dao))->getByAttribute('id', $post->userId));
+            $post->setUser((new UserManagerPDO($this->dao))->getById( $post->userId));
             $post->setPublicationDate(new \DateTime($post->getPublicationDate()));
             $post->setModificationDate(new \DateTime($post->getModificationDate()));
 
@@ -126,8 +134,8 @@ class PostManagerPDO extends PostManager
         $query->bindValue(':title', $post->getTitle());
         $query->bindValue(':subtitle', $post->getSubTitle());
         $query->bindValue(':content', $post->getContent());
-        $query->bindValue(':visible', $post->isVisible(), \PDO::PARAM_INT);
-        $query->bindValue(':userId', $post->getUser()->getId(), \PDO::PARAM_INT);
+        $query->bindValue(':visible', $post->isVisible(), PDO::PARAM_INT);
+        $query->bindValue(':userId', $post->getUser()->getId(), PDO::PARAM_INT);
 
         $query->execute();
 
@@ -151,12 +159,12 @@ class PostManagerPDO extends PostManager
 
         $query = $this->dao->prepare($sql);
 
-        $query->bindValue(':id', $post->getId(), \PDO::PARAM_INT);
+        $query->bindValue(':id', $post->getId(), PDO::PARAM_INT);
         $query->bindValue(':title', $post->getTitle());
         $query->bindValue(':subtitle', $post->getSubTitle());
         $query->bindValue(':content', $post->getContent());
-        $query->bindValue(':userId', $post->getUser()->getId(), \PDO::PARAM_INT);
-        $query->bindValue(':visible', $post->isVisible(), \PDO::PARAM_INT);
+        $query->bindValue(':userId', $post->getUser()->getId(), PDO::PARAM_INT);
+        $query->bindValue(':visible', $post->isVisible(), PDO::PARAM_INT);
 
         $query->execute();
 
@@ -176,7 +184,7 @@ class PostManagerPDO extends PostManager
         $sql .= 'WHERE id=:id ';
 
         $query = $this->dao->prepare($sql);
-        $query->bindValue(':id', $id, \PDO::PARAM_INT);
+        $query->bindValue(':id', $id, PDO::PARAM_INT);
 
         $query->execute();
 

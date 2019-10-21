@@ -20,7 +20,7 @@ class PostController extends BackController
     public function executePreview(Request $request)
     {
         $id = $request->getQueryParams('GET')['id'];
-        $post = $this->managers->getManagerOf('Post')->getByAttribute('id', $id);
+        $post = $this->managers->getManagerOf('Post')->getById( $id);
         $currentUser = $this->app->getCurrentUser()->getAttribute('user');
 
         if ($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $post->getUser()->getId() && $post->isVisible() == 0) {
@@ -36,7 +36,7 @@ class PostController extends BackController
     {
         $manager = $this->managers->getManagerOf('Post');
 
-        $post = $manager->getByAttribute('id', $request->getQueryParams('GET')['id']);
+        $post = $manager->getById( $request->getQueryParams('GET')['id']);
 
         if (empty($post)) {
             $this->page->addVar('title', 'Erreur 404');
@@ -97,7 +97,7 @@ class PostController extends BackController
     public function executeDelete(Request $request)
     {
         $this->page->addVar('title', 'Supprimer un article');
-        $post = $this->managers->getManagerOf('post')->getByAttribute('id', $request->getQueryParams()['id']);
+        $post = $this->managers->getManagerOf('post')->getById($request->getQueryParams()['id']);
 
         if (empty($post)) {
             $this->page->addVar('title', 'Erreur 404');
@@ -164,7 +164,7 @@ class PostController extends BackController
             }
         } else {
             if (isset($request->getQueryParams()['id'])) {
-                $post = $this->managers->getManagerOf('post')->getByAttribute('id', $request->getQueryParams()['id']);
+                $post = $this->managers->getManagerOf('post')->getById($request->getQueryParams()['id']);
                 if (empty($post)) {
                     $this->page->addVar('title', 'Erreur 404');
                     $this->app->redirect404();

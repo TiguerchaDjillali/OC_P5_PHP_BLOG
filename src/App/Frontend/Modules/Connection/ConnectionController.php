@@ -22,7 +22,9 @@ class ConnectionController extends \OpenFram\BackController
             ]);
 
 
-            $user = $this->managers->getManagerOf('User')->getByAttribute('userName', $userName);
+            $user = $this->managers->getManagerOf('User')->getByUserName($userName);
+
+
             if ($user !== null  &&  $user->verifyPassword($password)) {
                 $this->app->getCurrentUser()->setAuthenticated(true);
                 $this->app->getCurrentUser()->setAttribute('user', $user);
