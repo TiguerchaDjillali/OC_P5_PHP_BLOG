@@ -113,13 +113,21 @@ class PostManagerPDO extends PostManager
     public function count($options = [])
     {
         $sql = 'SELECT count(*) FROM Post ';
-        if (isset($options['visible'])) {
-            $sql .= ' WHERE visible =' . $options['visible'] . ' ';
-        }
         if (isset($options['userId'])) {
-            $sql .= ' WHERE userId =' . $options['userId'] . ' ';
+            $sql .= ' WHERE userId = :userId ';
+            $sql .= (isset($options['visible'])) ?  ' AND visible = :visible ' : ' ';
+        } else {
+            $sql .= (isset($options['visible'])) ?  ' WHERE visible = :visible ' : ' ';
         }
-        $query = $this->dao->query($sql);
+
+        $query = $this->dao->prepare($sql);
+
+        (isset($options['userId'])) ? $query->bindValue(':userId', $options['userId'], PDO::PARAM_INT) : null;
+        (isset($options['visible'])) ? $query->bindValue(':visible', $options['visible'], PDO::PARAM_INT) : null;
+
+        $query->execute();
+
+
 
         return $query->fetchColumn();
     }

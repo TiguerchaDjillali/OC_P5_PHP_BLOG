@@ -9,7 +9,6 @@ class CommentController extends \OpenFram\BackController
 
     public function executeIndex(Request $request)
     {
-
         $this->page->addVar('title', 'Commentaires');
         $manager = $this->managers->getManagerOf('Comment');
 

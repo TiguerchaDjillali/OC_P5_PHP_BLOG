@@ -15,9 +15,16 @@ class UserManagerPDO extends UserManager
     {
         $sql = 'SELECT * FROM User ';
         if ($offset != -1 || $limit != -1) {
-            $sql .= ' LIMIT ' . (int)$limit . ' OFFSET ' . (int)$offset;
+            $sql .= ' LIMIT :limit  OFFSET :offset ';
         }
 
+        $query = $this->dao->prepare($sql);
+
+        if ($offset != -1 || $limit != -1) {
+            $query->bindValue(':limit', $limit, \PDO::PARAM_INT);
+            $query->bindValue(':offset', $offset, \PDO::PARAM_INT);
+        }
+        $query->execute();
         $query = $this->dao->query($sql);
         $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\User');
 
