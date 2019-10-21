@@ -14,12 +14,10 @@ abstract class CommentManager extends Manager
 
     abstract protected function getListOf(Post $post);
 
-    abstract protected function update(Comment $comment);
-
     public function save(Comment $comment)
     {
         if ($comment->isValid()) {
-            $comment->isNew() ? $this->add($comment) : $this->update($comment);
+            $this->add($comment);
         } else {
             throw new RuntimeException('Le commentaire doit être valid pour être enregistré');
         }

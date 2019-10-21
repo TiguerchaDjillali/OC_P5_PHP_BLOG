@@ -11,9 +11,9 @@ use OpenFram\Manager;
 abstract class PermissionManager extends Manager
 {
 
-    abstract public function getList($offset = -1, $limit = -1);
+    abstract public function getList($options = []);
 
-    abstract public function getByAttribute($attribute, $value);
+    abstract public function getById($value);
 
     abstract public function count();
 
@@ -25,6 +25,8 @@ abstract class PermissionManager extends Manager
             throw new RuntimeException('La pemission doit être valie  pour être enregistrée');
         }
     }
+
     abstract public function add(Permission $permission);
+
     abstract public function getListOf(Role $role);
 }

@@ -5,43 +5,55 @@ namespace Model;
 
 use Entity\Permission;
 use Entity\Role;
+use GuzzleHttp\Psr7\ServerRequest;
 
 class PermissionManagerPDO extends PermissionManager
 {
 
-
-    public function getList($offset = -1, $limit = -1)
+    public function getList($options = [])
     {
         $sql = 'SELECT * FROM Permission ';
-        if ($offset != -1 || $limit != -1) {
-            $sql .= ' LIMIT ' . (int)$limit . ' OFFSET ' . (int)$offset;
-        }
 
-        $query = $this->dao->query($sql);
+        $sql .= (isset($options['limit'])) ?  ' LIMIT :limit ' : ' ';
+        $sql .= (isset($options['offset'])) ?  ' OFFSET :offset ' : ' ';
+
+
+        $query = $this->dao->prepare($sql);
+
+        (isset($options['limit'])) ?   $query->bindValue(':limit', $options['limit'], \PDO::PARAM_INT) : null;
+        (isset($options['offset'])) ?  $query->bindValue(':offset', $options['offset'], \PDO::PARAM_INT) : null;
+
+        $query->execute();
+
+
         $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Permission');
 
         $permissionsList = $query->fetchAll();
 
         $query->closeCursor();
 
-
         return $permissionsList;
     }
 
-    public function getByAttribute($attribute, $value)
+
+
+    public function getById($value)
     {
-        $value = $value ?? 1;// TODO:
+        $sql = 'SELECT * FROM Permission ';
+        $sql .= 'WHERE id = :value ';
 
-        $sql = 'SELECT * FROM permission ';
-        $sql .= 'WHERE ' . $attribute . ' = \'' . $value . '\' ';
+        $query = $this->dao->prepare($sql);
 
-        $query = $this->dao->query($sql);
+        $query->bindValue(':value', $value, \PDO::PARAM_INT);
+
+        $query->execute();
+
 
         $query->setFetchMode(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, '\Entity\Permission');
 
+
         if ($permission = $query->fetch()) {
             $query->closeCursor();
-
             return $permission;
         }
 
@@ -93,4 +105,5 @@ class PermissionManagerPDO extends PermissionManager
 
         return $permissions;
     }
+
 }
