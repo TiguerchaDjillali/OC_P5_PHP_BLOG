@@ -77,13 +77,13 @@ class PostManagerPDO extends PostManager
     {
         $sql = 'SELECT * FROM Post ';
         $sql .= 'WHERE id = :id ';
-        $sql .= (isset($options['visible'])) ?  ' WHERE visible = :visible ' : ' ';
+        $sql .= (isset($options['visible'])) ?  ' AND visible = :visible ' : ' ';
 
 
         $query = $this->dao->prepare($sql);
 
         $query->bindValue(':id', $postId, PDO::PARAM_INT);
-        isset($options['visible']) ? $query->bingValue(':visible', $options['visible'], PDO::PARAM_INT) : null;
+        isset($options['visible']) ? $query->bindValue(':visible', $options['visible'], PDO::PARAM_INT) : null;
 
         $query->execute();
 

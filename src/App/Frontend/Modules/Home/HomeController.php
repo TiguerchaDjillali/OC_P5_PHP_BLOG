@@ -7,6 +7,7 @@ use GuzzleHttp\Psr7\Request;
 use OpenFram\BackController;
 use OpenFram\Form\FormHandler;
 use OpenFram\Managers;
+use OpenFram\RedirectException;
 
 class HomeController extends BackController
 {
@@ -47,7 +48,8 @@ class HomeController extends BackController
 
         if ($formHandler->process()) {
             $this->app->getCurrentUser()->setFlash('Votre Message a bien été envoyé , merci!');
-            $this->app->redirect('/#contactSection');
+            throw new RedirectException('/#contactSection', 301,'Redirection');
+
         }
 
 

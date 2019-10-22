@@ -3,6 +3,7 @@
 namespace App\Backend\Modules\Comment;
 
 use GuzzleHttp\Psr7\Request;
+use OpenFram\RedirectException;
 
 class CommentController extends \OpenFram\BackController
 {
@@ -56,7 +57,8 @@ class CommentController extends \OpenFram\BackController
 
         if ($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $targetComment->getPost()->getUser()->getId()) {
             $this->app->getCurrentUser()->setFlash('Accès refusé');
-            $this->app->redirect('/admin/comments');
+            throw new RedirectException('/admin/comments', 301,'Redirection');
+
         }
 
 
@@ -84,19 +86,21 @@ class CommentController extends \OpenFram\BackController
             if (isset($request->getParsedBody()['valid'])) {
                 $manager->validate($request->getParsedBody()['valid']);
                 $this->app->getCurrentUser()->setFlash('Le commentaire à été validé ');
-                $this->app->redirect('/admin/comments');
+                throw new RedirectException('/admin/comments', 301,'Redirection');
+
             }
 
             if (isset($request->getParsedBody()['invalid'])) {
                 $manager->invalidate($request->getParsedBody()['invalid']);
                 $this->app->getCurrentUser()->setFlash('Le commentaire à été caché ');
-                $this->app->redirect('/admin/comments');
+                throw new RedirectException('/admin/comments', 301,'Redirection');
+
             }
 
             if (isset($request->getParsedBody()['delete'])) {
                 $manager->delete($request->getParsedBody()['delete']);
                 $this->app->getCurrentUser()->setFlash('Le commentaire à été supprimé ');
-                $this->app->redirect('/admin/comments');
+                throw new RedirectException('/admin/comments', 301,'Redirection');
             }
         } else {
             return;

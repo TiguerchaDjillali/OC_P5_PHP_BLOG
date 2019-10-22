@@ -11,6 +11,7 @@ use OpenFram\BackController;
 use OpenFram\Form\Form;
 use OpenFram\Form\FormHandler;
 use GuzzleHttp\Psr7\Response;
+use OpenFram\RedirectException;
 use function OpenFram\escape_to_html as h;
 use function OpenFram\u;
 
@@ -88,7 +89,8 @@ class PostController extends BackController
                 $this->app->getCurrentUser()->setAttribute('lastUrl', $this->app->getRequest()->getUri()->getPath());
                 $this->app->getCurrentUser()->setAttribute('commentContent', $request->getParsedBody()['content']);
 
-                $this->app->redirect('/connection');
+                throw new RedirectException('/connection', 301,'Redirection');
+
             }
 
 
@@ -117,7 +119,8 @@ class PostController extends BackController
 
         if ($formHandler->process()) {
             $this->app->getCurrentUser()->setFlash('Votre commentaitre a bien été ajouté, merci!');
-            $this->app->redirect('post-' . htmlspecialchars(urlencode($request->getQueryParams('GET')['id'])) . '.html#commentForm');
+            throw new RedirectException('post-' . htmlspecialchars(urlencode($request->getQueryParams()['id'])) . '.html#commentForm', 301,'Redirection');
+
         }
 
 

@@ -9,6 +9,7 @@ use FormBuilder\UserFormBuilder;
 use GuzzleHttp\Psr7\Request;
 use OpenFram\BackController;
 use OpenFram\Form\FormHandler;
+use OpenFram\RedirectException;
 use function OpenFram\escape_to_html as h;
 use function OpenFram\u;
 
@@ -56,7 +57,8 @@ class UserController extends BackController
         // access controle
         if ($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $user->getId()) {
             $this->app->getCurrentUser()->setFlash('Accès refusé');
-            $this->app->redirect('/admin/user-edit-'.htmlspecialchars(urlencode($currentUser->getId())).'.html');
+            throw new RedirectException('/admin/user-edit-'.htmlspecialchars(urlencode($currentUser->getId())).'.html', 301,'Redirection');
+
         }
 
 
@@ -142,7 +144,7 @@ class UserController extends BackController
 
         if ($formHandler->process()) {
             $this->app->getCurrentUser()->setFlash($user->isNew() ? 'L\'utlisateur a bien été ajouté' : 'L\'utlisateur a bien été mis à jour');
-            $this->app->redirect('/admin/user-'. htmlspecialchars(urlencode($user->getId())) .'.html');
+            throw new RedirectException('/admin/user-'. htmlspecialchars(urlencode($user->getId())) .'.html', 301,'Redirection');
         }
 
         $this->page->addVar('form', $form->createView());
@@ -161,7 +163,8 @@ class UserController extends BackController
             $this->managers->getManagerOf('user')->delete($id);
 
             $this->app->getCurrentUser()->setFlash('L\'utlisateur a bien été supprimé');
-            $this->app->redirect('/admin/users');
+            throw new RedirectException('/admin/users', 301,'Redirection');
+
         }
     }
 }

@@ -6,6 +6,7 @@ use Entity\Connection;
 use FormBuilder\ContactFormBuilder;
 use FormBuilder\LoginFormBuilder;
 use GuzzleHttp\Psr7\Request;
+use OpenFram\RedirectException;
 
 class ConnectionController extends \OpenFram\BackController
 {
@@ -29,9 +30,11 @@ class ConnectionController extends \OpenFram\BackController
                 $this->app->getCurrentUser()->setAuthenticated(true);
                 $this->app->getCurrentUser()->setAttribute('user', $user);
                 if ($this->app->getCurrentUser()->hasAttribute('lastUrl')) {
-                    $this->app->redirect($this->app->getCurrentUser()->getAttribute('lastUrl'));
+                    throw new RedirectException($this->app->getCurrentUser()->getAttribute('lastUrl'), 301,'Redirection');
                 } else {
-                    $this->app->redirect('/admin/');
+
+                    throw new RedirectException('/admin/', 301,'Redirection');
+
                 }
             } else {
                 $this->app->getCurrentUser()->setFlash('Le userName ou le mot de passe est incorrect');
@@ -58,6 +61,6 @@ class ConnectionController extends \OpenFram\BackController
         $this->page->addVar('user', $this->app->getCurrentUser()->getAttribute('user'));
 
         $this->getApp()->getCurrentUser()->setFlash('Déconnexion réussie');
-        $this->app->redirect('/');
+        throw new RedirectException('/', 301,'Redirection');
     }
 }

@@ -123,7 +123,6 @@ abstract class Application
 
     public function redirect404(string $message = "")
     {
-        //TODO: redirection to not found page
         $page = new Page($this);
         $page->addVar('title', 'Erreur 404');
         $page->addVar('message', $message);
@@ -135,10 +134,4 @@ abstract class Application
         exit;
     }
 
-    public function redirect($url)
-    {
-        send((new Response())->withStatus(301, 'redirection')->withHeader('Location', $url));
-
-        exit;
-    }
 }

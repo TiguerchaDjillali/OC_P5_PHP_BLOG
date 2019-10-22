@@ -13,6 +13,7 @@ use http\Client;
 use http\Encoding\Stream;
 use OpenFram\BackController;
 use OpenFram\Form\FormHandler;
+use OpenFram\RedirectException;
 use function GuzzleHttp\Psr7\stream_for;
 
 class PostController extends BackController
@@ -25,10 +26,12 @@ class PostController extends BackController
 
         if ($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $post->getUser()->getId() && $post->isVisible() == 0) {
             $this->app->getCurrentUser()->setFlash('Accès refusé');
-            $this->app->redirect('/admin/posts');
+            throw new RedirectException('/admin/posts', 301,'Redirection');
+
         }
 
-        $this->app->getResponse()->redirect('/post-' . urlencode($id) . '.html');
+        throw new RedirectException('/post-' . urlencode($id) . '.html', 301,'Redirection');
+
     }
 
 
@@ -48,7 +51,9 @@ class PostController extends BackController
         // access controle
         if ($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $post->getUser()->getId()) {
             $this->app->getCurrentUser()->setFlash('Accès refusé');
-            $this->app->redirect('/admin/posts');
+            throw new RedirectException('/admin/posts', 301,'Redirection');
+
+
         }
 
         $comments = $this->managers->getManagerOf('Comment')->getListOF($post);
@@ -110,7 +115,8 @@ class PostController extends BackController
        // access controle
         if ($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $post->getUser()->getId()) {
             $this->app->getCurrentUser()->setFlash('Accès refusé');
-            $this->app->redirect('/admin/posts');
+            throw new RedirectException('/admin/posts', 301,'Redirection');
+
         }
 
             $this->page->addVar('post', $post);
@@ -122,7 +128,8 @@ class PostController extends BackController
             $this->managers->getManagerOf('post')->delete($id);
 
             $this->app->getCurrentUser()->setFlash('L\'article a bien été supprimé');
-            $this->app->redirect('/admin/posts');
+            throw new RedirectException('/admin/posts', 301,'Redirection');
+
         }
     }
 
@@ -170,10 +177,11 @@ class PostController extends BackController
                     $this->app->redirect404();
                 }
                 $currentUser = $this->app->getCurrentUser()->getAttribute('user');
-                // access controle
+                // access control
                 if ($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $post->getUser()->getId()) {
                     $this->app->getCurrentUser()->setFlash('Accès refusé');
-                    $this->app->redirect('/admin/posts');
+                    throw new RedirectException('/admin/posts', 301,'Redirection');
+
                 }
             } else {
                 $post = new Post;
@@ -188,7 +196,8 @@ class PostController extends BackController
 
         if ($formHandler->process()) {
             $this->app->getCurrentUser()->setFlash($post->isNew() ? 'L\'article a bien été ajouté' : 'L\'article a bien été mis à jour');
-            $this->app->redirect('/admin/posts');
+            throw new RedirectException('/admin/posts', 301,'Redirection');
+
         }
 
         $this->page->addVar('form', $form->createView());
