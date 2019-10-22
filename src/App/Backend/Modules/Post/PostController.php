@@ -7,10 +7,10 @@ use FormBuilder\PostFormBuilder;
 use GuzzleHttp\Psr7\LazyOpenStream;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\ServerRequest;
 use GuzzleHttp\Psr7\UploadedFile;
-use http\Client;
-use http\Encoding\Stream;
+
 use OpenFram\BackController;
 use OpenFram\Form\FormHandler;
 use OpenFram\RedirectException;
@@ -26,11 +26,21 @@ class PostController extends BackController
 
         if ($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $post->getUser()->getId() && $post->isVisible() == 0) {
             $this->app->getCurrentUser()->setFlash('Accès refusé');
-            throw new RedirectException('/admin/posts', 301,'Redirection');
+
+            $url = '/admin/posts';
+            $redirectionResponse = (new Response())
+                ->withStatus(301, 'redirection')
+                ->withHeader('Location', $url);
+            throw new RedirectException($redirectionResponse,'Redirection');
 
         }
 
-        throw new RedirectException('/post-' . urlencode($id) . '.html', 301,'Redirection');
+        $url = '/post-' . urlencode($id) . '.html' ;
+        $redirectionResponse = (new Response())
+            ->withStatus(301, 'redirection')
+            ->withHeader('Location', $url);
+        throw new RedirectException($redirectionResponse,'Redirection');
+
 
     }
 
@@ -42,8 +52,9 @@ class PostController extends BackController
         $post = $manager->getById( $request->getQueryParams('GET')['id']);
 
         if (empty($post)) {
-            $this->page->addVar('title', 'Erreur 404');
-            $this->app->redirect404();
+            $redirectionResponse = (new Response())
+                ->withStatus(404, 'Not found');
+            throw new RedirectException($redirectionResponse,'Redirection');
         }
 
         $currentUser = $this->app->getCurrentUser()->getAttribute('user');
@@ -51,7 +62,11 @@ class PostController extends BackController
         // access controle
         if ($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $post->getUser()->getId()) {
             $this->app->getCurrentUser()->setFlash('Accès refusé');
-            throw new RedirectException('/admin/posts', 301,'Redirection');
+            $url = '/admin/posts';
+            $redirectionResponse = (new Response())
+                ->withStatus(301, 'redirection')
+                ->withHeader('Location', $url);
+            throw new RedirectException($redirectionResponse,'Redirection');
 
 
         }
@@ -105,8 +120,9 @@ class PostController extends BackController
         $post = $this->managers->getManagerOf('post')->getById($request->getQueryParams()['id']);
 
         if (empty($post)) {
-            $this->page->addVar('title', 'Erreur 404');
-            $this->app->redirect404();
+            $redirectionResponse = (new Response())
+                ->withStatus(404, 'Not found');
+            throw new RedirectException($redirectionResponse,'Redirection');
         }
 
         $currentUser = $this->app->getCurrentUser()->getAttribute('user');
@@ -115,7 +131,12 @@ class PostController extends BackController
        // access controle
         if ($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $post->getUser()->getId()) {
             $this->app->getCurrentUser()->setFlash('Accès refusé');
-            throw new RedirectException('/admin/posts', 301,'Redirection');
+
+            $url = '/admin/posts';
+            $redirectionResponse = (new Response())
+                ->withStatus(301, 'redirection')
+                ->withHeader('Location', $url);
+            throw new RedirectException($redirectionResponse,'Redirection');
 
         }
 
@@ -128,7 +149,12 @@ class PostController extends BackController
             $this->managers->getManagerOf('post')->delete($id);
 
             $this->app->getCurrentUser()->setFlash('L\'article a bien été supprimé');
-            throw new RedirectException('/admin/posts', 301,'Redirection');
+
+            $url = '/admin/posts';
+            $redirectionResponse = (new Response())
+                ->withStatus(301, 'redirection')
+                ->withHeader('Location', $url);
+            throw new RedirectException($redirectionResponse,'Redirection');
 
         }
     }
@@ -173,14 +199,20 @@ class PostController extends BackController
             if (isset($request->getQueryParams()['id'])) {
                 $post = $this->managers->getManagerOf('post')->getById($request->getQueryParams()['id']);
                 if (empty($post)) {
-                    $this->page->addVar('title', 'Erreur 404');
-                    $this->app->redirect404();
+                    $redirectionResponse = (new Response())
+                        ->withStatus(404, 'Not found');
+                    throw new RedirectException($redirectionResponse,'Redirection');
                 }
                 $currentUser = $this->app->getCurrentUser()->getAttribute('user');
                 // access control
                 if ($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $post->getUser()->getId()) {
                     $this->app->getCurrentUser()->setFlash('Accès refusé');
-                    throw new RedirectException('/admin/posts', 301,'Redirection');
+
+                    $url = '/admin/posts';
+                    $redirectionResponse = (new Response())
+                        ->withStatus(301, 'redirection')
+                        ->withHeader('Location', $url);
+                    throw new RedirectException($redirectionResponse,'Redirection');
 
                 }
             } else {
@@ -196,7 +228,12 @@ class PostController extends BackController
 
         if ($formHandler->process()) {
             $this->app->getCurrentUser()->setFlash($post->isNew() ? 'L\'article a bien été ajouté' : 'L\'article a bien été mis à jour');
-            throw new RedirectException('/admin/posts', 301,'Redirection');
+
+            $url = '/admin/posts';
+            $redirectionResponse = (new Response())
+                ->withStatus(301, 'redirection')
+                ->withHeader('Location', $url);
+            throw new RedirectException($redirectionResponse,'Redirection');
 
         }
 

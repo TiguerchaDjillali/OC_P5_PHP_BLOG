@@ -4,6 +4,7 @@ namespace App\Frontend\Modules\Home;
 use Entity\Contact;
 use FormBuilder\ContactFormBuilder;
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
 use OpenFram\BackController;
 use OpenFram\Form\FormHandler;
 use OpenFram\Managers;
@@ -48,7 +49,11 @@ class HomeController extends BackController
 
         if ($formHandler->process()) {
             $this->app->getCurrentUser()->setFlash('Votre Message a bien été envoyé , merci!');
-            throw new RedirectException('/#contactSection', 301,'Redirection');
+            $url = '/#contactSection';
+            $redirectionResponse = (new Response())
+                ->withStatus(301, 'redirection')
+                ->withHeader('Location', $url);
+            throw new RedirectException($redirectionResponse, 301,'Redirection');
 
         }
 

@@ -65,7 +65,10 @@ class PostController extends BackController
 
 
         if (empty($post)) {
-            $this->page->getApp()->redirect404("L'article n'existe pas");
+            $redirectionResponse = (new Response())
+                ->withStatus(404, 'Not found');
+            throw new RedirectException($redirectionResponse,'Redirection');
+
         }
 
         //___________________________
@@ -88,9 +91,11 @@ class PostController extends BackController
             if (isset($request->getParsedBody()['loginForComment'])) {
                 $this->app->getCurrentUser()->setAttribute('lastUrl', $this->app->getRequest()->getUri()->getPath());
                 $this->app->getCurrentUser()->setAttribute('commentContent', $request->getParsedBody()['content']);
-
-                throw new RedirectException('/connection', 301,'Redirection');
-
+                $url = '/connection';
+                $redirectionResponse = (new Response())
+                    ->withStatus(301, 'redirection')
+                    ->withHeader('Location', $url);
+                throw new RedirectException($redirectionResponse,'Redirection');
             }
 
 
@@ -119,8 +124,11 @@ class PostController extends BackController
 
         if ($formHandler->process()) {
             $this->app->getCurrentUser()->setFlash('Votre commentaitre a bien été ajouté, merci!');
-            throw new RedirectException('post-' . htmlspecialchars(urlencode($request->getQueryParams()['id'])) . '.html#commentForm', 301,'Redirection');
-
+            $url = 'post-' . htmlspecialchars(urlencode($request->getQueryParams()['id'])) . '.html#commentForm';
+            $redirectionResponse = (new Response())
+                ->withStatus(301, 'redirection')
+                ->withHeader('Location', $url);
+            throw new RedirectException($redirectionResponse,'Redirection');
         }
 
 

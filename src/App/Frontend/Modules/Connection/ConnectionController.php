@@ -6,6 +6,7 @@ use Entity\Connection;
 use FormBuilder\ContactFormBuilder;
 use FormBuilder\LoginFormBuilder;
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
 use OpenFram\RedirectException;
 
 class ConnectionController extends \OpenFram\BackController
@@ -30,10 +31,18 @@ class ConnectionController extends \OpenFram\BackController
                 $this->app->getCurrentUser()->setAuthenticated(true);
                 $this->app->getCurrentUser()->setAttribute('user', $user);
                 if ($this->app->getCurrentUser()->hasAttribute('lastUrl')) {
-                    throw new RedirectException($this->app->getCurrentUser()->getAttribute('lastUrl'), 301,'Redirection');
-                } else {
+                    $url = $this->app->getCurrentUser()->getAttribute('lastUrl');
+                    $redirectionResponse = (new Response())
+                        ->withStatus(301, 'redirection')
+                        ->withHeader('Location', $url);
 
-                    throw new RedirectException('/admin/', 301,'Redirection');
+                    throw new RedirectException($redirectionResponse ,'Redirection');
+                } else {
+                    $url = '/admin/';
+                    $redirectionResponse = (new Response())
+                        ->withStatus(301, 'redirection')
+                        ->withHeader('Location', $url);
+                    throw new RedirectException($redirectionResponse,'Redirection');
 
                 }
             } else {
@@ -61,6 +70,10 @@ class ConnectionController extends \OpenFram\BackController
         $this->page->addVar('user', $this->app->getCurrentUser()->getAttribute('user'));
 
         $this->getApp()->getCurrentUser()->setFlash('Déconnexion réussie');
-        throw new RedirectException('/', 301,'Redirection');
+        $url = '/';
+        $redirectionResponse = (new Response())
+            ->withStatus(301, 'redirection')
+            ->withHeader('Location', $url);
+        throw new RedirectException($redirectionResponse,'Redirection');
     }
 }

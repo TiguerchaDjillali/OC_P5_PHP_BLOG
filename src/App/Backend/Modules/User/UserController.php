@@ -7,6 +7,7 @@ use Entity\User;
 use FormBuilder\PostFormBuilder;
 use FormBuilder\UserFormBuilder;
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
 use OpenFram\BackController;
 use OpenFram\Form\FormHandler;
 use OpenFram\RedirectException;
@@ -51,21 +52,22 @@ class UserController extends BackController
     {
         $manager = $this->managers->getManagerOf('User');
 
-        $user = $manager->getById( $request->getQueryParams('GET')['id']);
+        $user = $manager->getById($request->getQueryParams('GET')['id']);
 
         $currentUser = $this->app->getCurrentUser()->getAttribute('user');
         // access controle
         if ($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $user->getId()) {
             $this->app->getCurrentUser()->setFlash('Accès refusé');
-            throw new RedirectException('/admin/user-edit-'.htmlspecialchars(urlencode($currentUser->getId())).'.html', 301,'Redirection');
+            throw new RedirectException('/admin/user-edit-' . htmlspecialchars(urlencode($currentUser->getId())) . '.html',
+                301, 'Redirection');
 
         }
 
 
-
-
         if (empty($user)) {
-            $this->page->getApp()->redirect404("L'article n'existe pas");
+            $redirectionResponse = (new Response())
+                ->withStatus(404, 'Not found');
+            throw new RedirectException($redirectionResponse, 'Redirection');
         }
 
         $this->page->addVar('title', $user->getUserName());
@@ -78,10 +80,12 @@ class UserController extends BackController
     {
         $manager = $this->managers->getManagerOf('User');
 
-        $user = $manager->getById( $request->getQueryParams('GET')['id']);
+        $user = $manager->getById($request->getQueryParams('GET')['id']);
 
         if (empty($user)) {
-            $this->page->getApp()->redirect404("L'article n'existe pas");
+            $redirectionResponse = (new Response())
+                ->withStatus(404, 'Not found');
+            throw new RedirectException($redirectionResponse, 'Redirection');
         }
 
         $this->page->addVar('title', $user->getUserName());
@@ -116,7 +120,7 @@ class UserController extends BackController
                 'confirmEmail' => $request->getParsedBody()["confirmEmail"],
                 'password' => $request->getParsedBody()["password"],
                 'confirmPassword' => $request->getParsedBody()["confirmPassword"],
-                'role' => $roleManager->getById( $request->getParsedBody()["role"]),
+                'role' => $roleManager->getById($request->getParsedBody()["role"]),
                 'description' => $request->getParsedBody()["description"],
                 'profileImage' => $file,
             ]);
@@ -125,13 +129,13 @@ class UserController extends BackController
 
             if (isset($request->getQueryParams()['id'])) {
                 $user->setId($request->getQueryParams()['id']);
-                if ($request->getParsedBody()["password"] =='') {
+                if ($request->getParsedBody()["password"] == '') {
                     $user->setPasswordRequired(false);
                 }
             }
         } else {
             if (isset($request->getQueryParams()['id'])) {
-                $user = $this->managers->getManagerOf('user')->getById( $request->getQueryParams()['id']);
+                $user = $this->managers->getManagerOf('user')->getById($request->getQueryParams()['id']);
             } else {
                 $user = new User;
             }
@@ -144,7 +148,11 @@ class UserController extends BackController
 
         if ($formHandler->process()) {
             $this->app->getCurrentUser()->setFlash($user->isNew() ? 'L\'utlisateur a bien été ajouté' : 'L\'utlisateur a bien été mis à jour');
-            throw new RedirectException('/admin/user-'. htmlspecialchars(urlencode($user->getId())) .'.html', 301,'Redirection');
+            $url = '/admin/user-' . htmlspecialchars(urlencode($user->getId())) . '.html';
+            $redirectionResponse = (new Response())
+                ->withStatus(301, 'redirection')
+                ->withHeader('Location', $url);
+            throw new RedirectException($redirectionResponse, 'Redirection');
         }
 
         $this->page->addVar('form', $form->createView());
@@ -153,7 +161,7 @@ class UserController extends BackController
     public function executeDelete(Request $request)
     {
         $this->page->addVar('title', 'Supprimer un utlisateur');
-        $post = $this->managers->getManagerOf('user')->getById( $request->getQueryParams()['id']);
+        $post = $this->managers->getManagerOf('user')->getById($request->getQueryParams()['id']);
         $this->page->addVar('user', $post);
 
 
@@ -163,7 +171,11 @@ class UserController extends BackController
             $this->managers->getManagerOf('user')->delete($id);
 
             $this->app->getCurrentUser()->setFlash('L\'utlisateur a bien été supprimé');
-            throw new RedirectException('/admin/users', 301,'Redirection');
+            $url = '/admin/users';
+            $redirectionResponse = (new Response())
+                ->withStatus(301, 'redirection')
+                ->withHeader('Location', $url);
+            throw new RedirectException($redirectionResponse, 'Redirection');
 
         }
     }

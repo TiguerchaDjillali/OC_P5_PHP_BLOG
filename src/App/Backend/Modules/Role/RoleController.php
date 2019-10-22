@@ -3,7 +3,9 @@
 namespace App\Backend\modules\Role;
 
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
 use OpenFram\BackController;
+use OpenFram\RedirectException;
 
 class RoleController extends BackController
 {
@@ -41,8 +43,9 @@ class RoleController extends BackController
         $role = $manager->getById( $request->getQueryPArams()['id']);
 
         if (empty($role)) {
-            $this->app->redirect404();
-        }
+            $redirectionResponse = (new Response())
+                ->withStatus(404, 'Not found');
+            throw new RedirectException($redirectionResponse,'Redirection');        }
 
         $modules = [];
         foreach ($role->getPermissions() as $permission) {

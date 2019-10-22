@@ -3,6 +3,7 @@
 namespace App\Backend\Modules\Comment;
 
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Response;
 use OpenFram\RedirectException;
 
 class CommentController extends \OpenFram\BackController
@@ -57,8 +58,11 @@ class CommentController extends \OpenFram\BackController
 
         if ($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $targetComment->getPost()->getUser()->getId()) {
             $this->app->getCurrentUser()->setFlash('Accès refusé');
-            throw new RedirectException('/admin/comments', 301,'Redirection');
-
+            $url = '/admin/comments';
+            $redirectionResponse = (new Response())
+                ->withStatus(301, 'redirection')
+                ->withHeader('Location', $url);
+            throw new RedirectException($redirectionResponse,'Redirection');
         }
 
 
@@ -86,21 +90,33 @@ class CommentController extends \OpenFram\BackController
             if (isset($request->getParsedBody()['valid'])) {
                 $manager->validate($request->getParsedBody()['valid']);
                 $this->app->getCurrentUser()->setFlash('Le commentaire à été validé ');
-                throw new RedirectException('/admin/comments', 301,'Redirection');
+                $url = '/admin/comments';
+                $redirectionResponse = (new Response())
+                    ->withStatus(301, 'redirection')
+                    ->withHeader('Location', $url);
+                throw new RedirectException($redirectionResponse,'Redirection');
 
             }
 
             if (isset($request->getParsedBody()['invalid'])) {
                 $manager->invalidate($request->getParsedBody()['invalid']);
                 $this->app->getCurrentUser()->setFlash('Le commentaire à été caché ');
-                throw new RedirectException('/admin/comments', 301,'Redirection');
+                $url = '/admin/comments';
+                $redirectionResponse = (new Response())
+                    ->withStatus(301, 'redirection')
+                    ->withHeader('Location', $url);
+                throw new RedirectException($redirectionResponse,'Redirection');
 
             }
 
             if (isset($request->getParsedBody()['delete'])) {
                 $manager->delete($request->getParsedBody()['delete']);
                 $this->app->getCurrentUser()->setFlash('Le commentaire à été supprimé ');
-                throw new RedirectException('/admin/comments', 301,'Redirection');
+                $url = '/admin/comments';
+                $redirectionResponse = (new Response())
+                    ->withStatus(301, 'redirection')
+                    ->withHeader('Location', $url);
+                throw new RedirectException($redirectionResponse,'Redirection');
             }
         } else {
             return;

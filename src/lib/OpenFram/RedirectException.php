@@ -5,46 +5,31 @@ namespace OpenFram;
 
 
 use GuzzleHttp\Psr7\Response;
+use function GuzzleHttp\Psr7\stream_for;
 use function Http\Response\send;
 
 class RedirectException extends \Exception
 {
-    const PERMANENT = 301;
-    const FOUND = 302;
-    const SEE_OTHER = 303;
-    const PROXY = 305;
-    const TEMPORARY = 307;
 
-    private static $messages = array(
-        301 => 'Moved Permanently',
-        302 => 'Found',
-        303 => 'See Other',
-        305 => 'Use Proxy',
-        307 => 'Temporary Redirect',
-    );
+    protected $response;
 
-    protected $url;
-
-    public function __construct($url, $code = 301, $message = null)
+    public function __construct(Response $response , ?string $message)
     {
-        parent::__construct($message
-            ? (string)$message
-            : static::$messages[$code], (int)$code
+        parent::__construct(
+            $message ? (string)$message :  $response->getReasonPhrase(),
+            $response->getStatusCode()
         );
 
-        $this->url = (string)$url;
+        $this->response = $response;
     }
 
-    public function getURL()
+    public function getResponse()
     {
-        return $this->url;
+        return $this->response;
     }
 
-    public function run()
+    public function run($page = null)
     {
-        $response = ( new Response())
-            ->withStatus($this->getCode(), static::$messages[$this->getCode()])
-            ->withHeader('Location', $this->url);
-        send($response);
+        send($this->response->withBody(stream_for($page)));
     }
 }

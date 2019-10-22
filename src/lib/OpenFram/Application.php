@@ -75,7 +75,11 @@ abstract class Application
             $matchedRoute = $router->getRoute($this->request->getUri()->getPath());
         } catch (\RuntimeException $e) {
             if ($e->getCode() == Router::NO_ROUTE) {
-                $this->redirect('/');
+                $url = '/';
+                $redirectionResponse = (new Response())
+                    ->withStatus(301, 'redirection')
+                    ->withHeader('Location', $url);
+                throw new RedirectException($redirectionResponse, 301,'Redirection');
             }
         }
 
@@ -121,17 +125,5 @@ abstract class Application
         return $this->name;
     }
 
-    public function redirect404(string $message = "")
-    {
-        $page = new Page($this);
-        $page->addVar('title', 'Erreur 404');
-        $page->addVar('message', $message);
-        $page->addVar('pageType', 'Erreur 404');
-        $page->setContentFile(__DIR__.'/../../Errors/404.php');
-
-        $response = (new Response())->withStatus(404, 'Not Fount');
-        send($response->withBody(stream_for($page->getGeneratedPage())));
-        exit;
-    }
 
 }
