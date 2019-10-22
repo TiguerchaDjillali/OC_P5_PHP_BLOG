@@ -23,7 +23,7 @@ class HomeController extends BackController
         $this->executeContact($request);
     }
 
-    public function executeContact(Request $request)
+    private function executeContact(Request $request)
     {
         $this->managers = new Managers('', '');
         $manager = $this->managers->getManagerOf('contact');

@@ -84,7 +84,7 @@ class PostController extends BackController
         $this->executeInsertComment($request);
     }
 
-    public function executeInsertComment(Request $request)
+    private function executeInsertComment(Request $request)
     {
 
         if ($request->getMethod() == 'POST') {

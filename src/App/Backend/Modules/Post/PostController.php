@@ -174,7 +174,7 @@ class PostController extends BackController
     }
 
 
-    public function processForm(Request $request)
+    private function processForm(Request $request)
     {
         if ($request->getMethod() == 'POST') {
             $file = $request->getUploadedFiles()["featuredImage"];
