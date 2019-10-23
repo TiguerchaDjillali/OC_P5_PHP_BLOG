@@ -8,6 +8,7 @@ use FormBuilder\PostFormBuilder;
 use FormBuilder\UserFormBuilder;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\ServerRequest;
 use OpenFram\BackController;
 use OpenFram\Form\FormHandler;
 use OpenFram\RedirectException;
@@ -70,6 +71,11 @@ class UserController extends BackController
             throw new RedirectException($redirectionResponse, 'Redirection');
         }
 
+        $imagePath = $this->app->getRequest()->getServerParams()['DOCUMENT_ROOT'] . '/images/user/user-' . u($user->getId()) . '.jpg';
+        $url = file_exists($imagePath) ? '/images/user/user-' . u($user->getId()) . '.jpg' : '/images/user/user-default.jpg';
+        $user->setProfileImage($url);
+
+
         $this->page->addVar('title', $user->getUserName());
         $this->page->addVar('user', $user);
 
@@ -88,8 +94,18 @@ class UserController extends BackController
             throw new RedirectException($redirectionResponse, 'Redirection');
         }
 
+
+
+        $imagePath = $this->app->getRequest()->getServerParams()['DOCUMENT_ROOT'] . '/images/user/user-' . u($user->getId()) . '.jpg';
+        $url = file_exists($imagePath) ? '/images/user/user-' . u($user->getId()) . '.jpg' : '/images/user/user-default.jpg';
+        $user->setProfileImage($url);
+
+
+
         $this->page->addVar('title', $user->getUserName());
         $this->page->addVar('user', $user);
+
+
 
         $this->processForm($request);
     }
@@ -98,6 +114,8 @@ class UserController extends BackController
     public function executeInsert(Request $request)
     {
         $this->processForm($request);
+
+
         $this->page->addVar('title', 'Ajouter un utilisateur');
     }
 
@@ -146,7 +164,16 @@ class UserController extends BackController
         $form = $formBuilder->getFrom();
         $formHandler = new FormHandler($form, $this->managers->getManagerOf('user'), $request);
 
-        if ($formHandler->process()) {
+        if (false !== $formHandler->process()) {
+
+            $id = $formHandler->process();
+
+            if ($user->getProfileImage() !== null) {
+                $imageTarget = $this->app->getRequest()->getServerParams()['DOCUMENT_ROOT'] . '/images/user/user-' . u($id) . '.jpg';
+               $user->getProfileImage()->moveTo($imageTarget);
+            }
+
+
             $this->app->getCurrentUser()->setFlash($user->isNew() ? 'L\'utlisateur a bien été ajouté' : 'L\'utlisateur a bien été mis à jour');
             $url = '/admin/user-' . htmlspecialchars(urlencode($user->getId())) . '.html';
             $redirectionResponse = (new Response())
@@ -169,6 +196,13 @@ class UserController extends BackController
             $id = $this->app->getRequest()->getQueryParams('GET')['id'];
 
             $this->managers->getManagerOf('user')->delete($id);
+
+            $imagePath = $this->app->getRequest()->getServerParams()['DOCUMENT_ROOT'] . '/images/user/user-' . u($id) . '.jpg';
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+
+
 
             $this->app->getCurrentUser()->setFlash('L\'utlisateur a bien été supprimé');
             $url = '/admin/users';

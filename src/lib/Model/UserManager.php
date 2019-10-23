@@ -16,7 +16,7 @@ abstract class UserManager extends Manager
     public function save(User $user)
     {
         if ($user->isValid()) {
-            $user->isNew() ? $this->add($user) : $this->update($user);
+           return $user->isNew() ? $this->add($user) : $this->update($user);
         } else {
             throw new RuntimeException('L\'article doit être valid pour être enregistré');
         }

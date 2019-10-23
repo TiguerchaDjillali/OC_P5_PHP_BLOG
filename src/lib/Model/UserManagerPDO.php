@@ -71,9 +71,6 @@ class UserManagerPDO extends UserManager
 
             $user->setRole($roleManager->getById($user->roleId));
 
-            $imagePath = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/user/user-' . htmlspecialchars($user->getId()) . '.jpg';
-            $url = file_exists($imagePath) ? '/images/user/user-' . htmlspecialchars($user->getId()) . '.jpg' : '/images/user/user-default.jpg';
-            $user->setProfileImage($url);
 
 
             return $user;
@@ -104,12 +101,6 @@ class UserManagerPDO extends UserManager
 
             $user->setRole($roleManager->getById($user->roleId));
 
-
-            $imagePath = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/user/user-' . htmlspecialchars($user->getId()) . '.jpg';
-            $url = file_exists($imagePath) ? '/images/user/user-' . htmlspecialchars($user->getId()) . '.jpg' : '/images/user/user-default.jpg';
-            $user->setProfileImage($url);
-
-
             return $user;
         }
 
@@ -132,13 +123,7 @@ class UserManagerPDO extends UserManager
 
         $query->execute();
 
-        $user->setId($this->dao->lastInsertId());
-
-
-        if ($user->getProfileImage() !== null) {
-            $imageTarget = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/user/user-' . $this->dao->lastInsertId() . '.jpg';
-            $user->getProfileImage()->moveTo($imageTarget);
-        }
+        return  $this->dao->lastInsertId();
     }
 
 
@@ -173,10 +158,7 @@ class UserManagerPDO extends UserManager
 
         $query->execute();
 
-        if ($user->getProfileImage() !== null) {
-            $imageTarget = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/user/user-' . $user->getId() . '.jpg';
-            $user->getProfileImage()->moveTo($imageTarget);
-        }
+        return $user->getId();
     }
 
     public function delete($id)
@@ -190,11 +172,6 @@ class UserManagerPDO extends UserManager
 
         $query->execute();
 
-        $imagePath = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/user/user-' . htmlspecialchars($id) . '.jpg';
-
-
-        if (file_exists($imagePath)) {
-            unlink($imagePath);
-        }
+        return $id;
     }
 }
