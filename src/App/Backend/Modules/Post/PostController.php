@@ -229,6 +229,7 @@ class PostController extends BackController
         if ($formHandler->process()) {
             $this->app->getCurrentUser()->setFlash($post->isNew() ? 'L\'article a bien été ajouté' : 'L\'article a bien été mis à jour');
 
+
             $url = '/admin/posts';
             $redirectionResponse = (new Response())
                 ->withStatus(301, 'redirection')

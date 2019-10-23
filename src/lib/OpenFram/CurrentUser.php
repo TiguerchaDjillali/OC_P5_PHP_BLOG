@@ -2,10 +2,25 @@
 
 namespace OpenFram;
 
+use OpenFram\Session\Session;
+
 session_start();
 
 class CurrentUser extends ApplicationComponent
 {
+
+    protected $session;
+
+
+    public function __construct(Application $app)
+    {
+        $this->session = new Session();
+        $this->session->strat();
+        parent::__construct($app);
+
+    }
+/*
+
     public function hasFlash()
     {
         return isset($_SESSION['flash']);
@@ -22,6 +37,7 @@ class CurrentUser extends ApplicationComponent
     {
         $_SESSION['flash'] = $flash;
     }
+
 
     public function getAttribute($attr)
     {
@@ -80,4 +96,5 @@ class CurrentUser extends ApplicationComponent
         }
         return true;
     }
+*/
 }

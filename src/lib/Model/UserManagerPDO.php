@@ -71,7 +71,6 @@ class UserManagerPDO extends UserManager
 
             $user->setRole($roleManager->getById($user->roleId));
 
-
             $imagePath = ServerRequest::fromGlobals()->getServerParams()['DOCUMENT_ROOT'] . '/images/user/user-' . htmlspecialchars($user->getId()) . '.jpg';
             $url = file_exists($imagePath) ? '/images/user/user-' . htmlspecialchars($user->getId()) . '.jpg' : '/images/user/user-default.jpg';
             $user->setProfileImage($url);
