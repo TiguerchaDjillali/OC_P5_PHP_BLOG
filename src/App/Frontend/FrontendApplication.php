@@ -22,7 +22,6 @@ class FrontendApplication extends Application
      */
     public function run(): void
     {
-
         try {
             $controller = $this->getController($this->request->getUri()->getPath());
             $controller->execute();

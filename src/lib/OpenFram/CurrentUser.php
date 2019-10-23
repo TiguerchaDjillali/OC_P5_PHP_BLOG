@@ -9,9 +9,6 @@ session_start();
 class CurrentUser extends ApplicationComponent
 {
 
-    protected $session;
-
-
     public function hasFlash()
     {
         return isset($_SESSION['flash']);
