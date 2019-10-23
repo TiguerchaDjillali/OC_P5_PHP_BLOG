@@ -17,7 +17,6 @@
       "Entity\\": "src/lib/Entity/",
       "FormBuilder\\": "src/lib/FormBuilder/",
       "OpenFram\\Form\\": "src/lib/OpenFram/Form/",
-      "OpenFram\\Session\\": "src/lib/OpenFram/Session/",
       "OpenFram\\Form\\Validators\\": "src/lib/OpenFram/Form/Validators/"
     },
     "files": [
