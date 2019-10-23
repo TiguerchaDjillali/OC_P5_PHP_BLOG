@@ -36,7 +36,6 @@ class Role extends Entity
 
     public function isValid()
     {
-        //TODO:
         return true;
     }
 

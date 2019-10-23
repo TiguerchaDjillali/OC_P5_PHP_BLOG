@@ -28,7 +28,6 @@ class CommentManagerPDO extends CommentManager
 
     public function getListOf(Post $post)
     {
-        // TODO: Implement getListOf() method.
         if (!ctype_digit($post->getId())) {
             throw new \InvalidArgumentException('L\'identifiant de l\'article doit d\'$etre un entier');
         }

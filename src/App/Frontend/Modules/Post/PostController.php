@@ -43,7 +43,6 @@ class PostController extends BackController
     public function executeShow(Request $request)
     {
         $manager = $this->managers->getManagerOf('Post');
-        //__________________________
 
         if ($this->app->getCurrentUser()->isAuthenticated()) {
             $permissions = $this->app->getCurrentUser()->getAttribute('user')->getRole()->getPermissions();
@@ -71,7 +70,6 @@ class PostController extends BackController
 
         }
 
-        //___________________________
 
 
         $this->page->addVar('title', $post->getTitle());

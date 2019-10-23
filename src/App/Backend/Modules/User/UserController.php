@@ -55,7 +55,7 @@ class UserController extends BackController
         $user = $manager->getById($request->getQueryParams('GET')['id']);
 
         $currentUser = $this->app->getCurrentUser()->getAttribute('user');
-        // access controle
+
         if ($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $user->getId()) {
             $this->app->getCurrentUser()->setFlash('Accès refusé');
             throw new RedirectException('/admin/user-edit-' . htmlspecialchars(urlencode($currentUser->getId())) . '.html',

@@ -15,7 +15,6 @@ class ContactFormBuilder extends FormBuilder
 
     public function build()
     {
-        // TODO: Implement build() method.
         $this->form->add(
             new InputField([
                 'openingGroupTags' => '<div class="row"><div class="col-md-6">',
@@ -54,7 +53,6 @@ class ContactFormBuilder extends FormBuilder
                 'attributes' => [
                     'name' => 'object',
                     'type' => 'text',
-                   // 'required' => 'required',
                     'maxlength' => '255'
                 ],
                 'validators' => [

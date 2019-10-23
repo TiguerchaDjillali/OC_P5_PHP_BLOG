@@ -12,7 +12,6 @@ class CommentFormBuilder extends FormBuilder
 {
     public function build()
     {
-        // TODO: Implement build() method.
         $this->form->add(
             new TextAreaField([
                 'label' => 'Contenu',

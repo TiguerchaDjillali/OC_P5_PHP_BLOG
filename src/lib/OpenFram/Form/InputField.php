@@ -32,7 +32,6 @@ class InputField extends field
         if (!empty($this->value)) {
             $widget .= 'value ="'. htmlspecialchars($this->value) . '" ';
         }
-        // input tag attributes
 
         foreach ($this->attributes as $attribute => $value) {
             $widget .= $attribute . ' = "' . $value . '" ';

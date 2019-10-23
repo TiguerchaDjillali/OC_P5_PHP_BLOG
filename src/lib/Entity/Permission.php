@@ -61,7 +61,7 @@ class Permission extends Entity
 
     public function isValid()
     {
-        //TODO:
+        
         return true;
     }
 }

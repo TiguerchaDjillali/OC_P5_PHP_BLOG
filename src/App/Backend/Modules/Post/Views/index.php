@@ -33,13 +33,13 @@ use function OpenFram\u;
     var table = new Tabulator("#posts-table", {
         width: "100%",
         autoResize: true,
-        data: tabledata, //assign data to table
+        data: tabledata,
         layout: "fitColumns",
         pagination: "local",
         paginationSize: 6,
         paginationSizeSelector: [3, 6, 8, 10],
         movableColumns: true,
-        columns: [ //Define Table Columns
+        columns: [
             {title: "Id", field: "id", width: 70},
             {title: "Titre", field: "title", minWidth: 160},
             {title: "Auteur", field: "author", width: 120},
@@ -64,7 +64,7 @@ use function OpenFram\u;
                 headerSort: false,
                 frozen: true,
                 cssClass:"bg-light",
-                formatter: function (cell, formatterParams, onRendered) { //plain text value
+                formatter: function (cell, formatterParams, onRendered) {
                     return "<a href='" + cell.getValue() + "'><i class=\"material-icons\">\n" + "pageview\n" + "</i></a>";
                 }
             },
@@ -75,7 +75,7 @@ use function OpenFram\u;
                 headerSort: false,
                 frozen: true,
                 cssClass:"bg-light",
-                formatter: function (cell, formatterParams, onRendered) { //plain text value
+                formatter: function (cell, formatterParams, onRendered) {
                     return "<a href='" + cell.getValue() + "'><i class=\"material-icons\">\n" + "edit\n" + "</i></a>";
                 }
 
@@ -86,7 +86,7 @@ use function OpenFram\u;
                 headerSort: false,
                 frozen: true,
                 cssClass:"bg-light",
-                formatter: function (cell, formatterParams, onRendered) { //plain text value
+                formatter: function (cell, formatterParams, onRendered) {
                     return "<a href='" + cell.getValue() + "'><i class=\"material-icons\">\n" + "delete\n" + "</i></a>";
                 }
 

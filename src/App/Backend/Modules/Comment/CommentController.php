@@ -53,7 +53,6 @@ class CommentController extends \OpenFram\BackController
 
         $targetComment = $commentManager->getById($request->getQueryParams()['id']);
 
-        // access controle
         $currentUser = $this->app->getCurrentUser()->getAttribute('user');
 
         if ($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $targetComment->getPost()->getUser()->getId()) {

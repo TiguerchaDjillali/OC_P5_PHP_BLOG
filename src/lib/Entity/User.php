@@ -101,7 +101,6 @@ class User extends Entity
      */
     public function setEmail($email)
     {
-        //TODO: Validation
         $this->email = $email;
     }
 

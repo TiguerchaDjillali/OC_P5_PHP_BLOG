@@ -59,7 +59,6 @@ class PostController extends BackController
 
         $currentUser = $this->app->getCurrentUser()->getAttribute('user');
 
-        // access controle
         if ($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $post->getUser()->getId()) {
             $this->app->getCurrentUser()->setFlash('Accès refusé');
             $url = '/admin/posts';
@@ -128,7 +127,7 @@ class PostController extends BackController
         $currentUser = $this->app->getCurrentUser()->getAttribute('user');
 
 
-       // access controle
+
         if ($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $post->getUser()->getId()) {
             $this->app->getCurrentUser()->setFlash('Accès refusé');
 
@@ -145,7 +144,6 @@ class PostController extends BackController
         if ($request->getMethod() == 'POST') {
             $id = $this->app->getRequest()->getQueryParams('GET')['id'];
 
-            // Suppression des commentaire est prise en charge par la base de données
             $this->managers->getManagerOf('post')->delete($id);
 
             $this->app->getCurrentUser()->setFlash('L\'article a bien été supprimé');
@@ -204,7 +202,7 @@ class PostController extends BackController
                     throw new RedirectException($redirectionResponse,'Redirection');
                 }
                 $currentUser = $this->app->getCurrentUser()->getAttribute('user');
-                // access control
+
                 if ($currentUser->getRole()->getId() != 1 && $currentUser->getId() !== $post->getUser()->getId()) {
                     $this->app->getCurrentUser()->setFlash('Accès refusé');
 
