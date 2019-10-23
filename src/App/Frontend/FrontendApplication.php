@@ -5,7 +5,6 @@ namespace App\Frontend;
 use OpenFram\Application;
 use OpenFram\Page;
 use OpenFram\RedirectException;
-use OpenFram\Session\Session;
 use function GuzzleHttp\Psr7\stream_for;
 use function Http\Response\send;
 
@@ -23,6 +22,7 @@ class FrontendApplication extends Application
      */
     public function run(): void
     {
+
         try {
             $controller = $this->getController($this->request->getUri()->getPath());
             $controller->execute();
@@ -41,6 +41,7 @@ class FrontendApplication extends Application
             }else{
             $e->run();
             }
+
 
 
         }
