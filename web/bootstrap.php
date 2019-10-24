@@ -17,3 +17,4 @@ $appClass = 'App\\' . $get . '\\' . $get . 'Application';
 $app = new $appClass(ServerRequest::fromGlobals());
 
 $app->run();
+
